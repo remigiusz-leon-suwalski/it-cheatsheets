@@ -1,0 +1,14 @@
+\subsection{os -- miscellaneous operating system interfaces}
+A dict-like object with global variables:
+\begin{minted}{python}
+import os
+os.environ
+# environ({'SHELL': '/bin/bash', 'EDITOR': 'vim'})
+
+os.environ["PATH"]
+# '/usr/local/bin:/usr/bin:/bin'
+\end{minted}
+
+% os.path.isfile(filename):
+% os.path.join(..., ...)
+% not here - in os.path!

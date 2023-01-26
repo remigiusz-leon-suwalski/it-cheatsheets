@@ -1,0 +1,230 @@
+\textbf{Changing file attributes}:
+\begin{compactenum}
+	\item [\symbolcoreutils] \commandcoreutils{chgrp} changes group ownership:
+	\item [\texttt{h}] affects symlinks instead of referenced files,
+
+	\item [\symbolcoreutils] \commandcoreutils{chmod} changes permissions of a file:
+	\item [\texttt{ugoa}] of the owner, group, other or all users,
+	\item [\texttt{+-=}] adds, removes or sets selected file mode bits,
+	\item [\texttt{rwx}] selects file mode bits: read 4/write 2/execute 1.
+	
+	\item [\symbolcoreutils] \commandcoreutils{chown} changes owner of a file:
+	\item [\texttt{R}] recursively (applies for chgrp, chmod, chown).
+
+	\item [\symbolcoreutils] \commandcoreutils{touch} changes file timestamps:
+	\item [\texttt{a}] only the access time,
+	\item [\texttt{m}] only the modification time,
+	\item [\texttt{c}] creates no new files,
+	\item [\texttt{r}] uses another file's times as a reference,
+	\item [\texttt{t}] uses custom stamp instead of current time.
+\end{compactenum}
+
+\textbf{SELinux}:
+\begin{compactenum}
+	\item [\symbolcoreutils] \commandcoreutils{chcon}: \dotfill ????
+	\item [\symbolcoreutils] \commandcoreutils{runcon}: \dotfill ????
+\end{compactenum}
+
+\textbf{Summarizing files}:
+\begin{compactenum}
+	\item [\symbolcoreutils] \commandcoreutils{wc}: counts...
+	\item [\texttt{l}] lines,
+	\item [\texttt{w}] words,
+	\item [\texttt{c}] bytes,
+	\item [\texttt{m}] characters,
+	\item [\texttt{L}] characters in longest line.
+	\item [\symbolcoreutils] \commandcoreutils{b2sum}: \dotfill ????
+	\item [\symbolcoreutils] \commandcoreutils{cksum}: CRC checksums \dotfill ????
+	\item [\symbolcoreutils] \commandcoreutils{md5sum}: \dotfill ????
+	\item [\symbolcoreutils] \commandcoreutils{sha1sum}: \dotfill ????
+	\item [\symbolcoreutils] \commandcoreutils{sha224sum}: \dotfill ????
+	\item [\symbolcoreutils] \commandcoreutils{sha256sum}: \dotfill ????
+	\item [\symbolcoreutils] \commandcoreutils{sha384sum}: \dotfill ????
+	\item [\symbolcoreutils] \commandcoreutils{sha512sum}: \dotfill ????
+	\item [???] \textbf{shasum} prints or checks SHA message digests:
+	\item [\texttt{a}] algorithm: 1/224/256/384/512/512224/512256,
+	\item [\texttt{b}] reads in binary mode,
+	\item [\texttt{c}] verifies SHA sums read from a file.
+	\item [\symbolcoreutils] \commandcoreutils{sum}: \dotfill ????
+\end{compactenum}
+
+\textbf{Basic operations}:
+\begin{compactenum}
+	\item [\symbolcoreutils] \commandcoreutils{cp} copies files and directories:
+	\item [\texttt{b}] makes a backup of existing destination files,
+	\item [\texttt{f}] removes existing destination files if needed,
+	\item [\texttt{i}] prompts before overwriting,
+	\item [\texttt{n}] does not overwrite existing files,
+%	\item [\texttt{a}] never follows symlinks, preserves all attributes,
+	\item [\texttt{L}] always follows symlinks in ``source'',
+	\item [\texttt{P}] never follows symlinks in ``source'',
+	\item [\texttt{p}] preserves timestamps, mode, ownership,
+	\item [\texttt{r}] copies directories recursively,
+	\item [\texttt{l}] hard links files instead,
+	\item [\texttt{s}] makes symbolic links instead,
+	\item [\texttt{t}] copies all ``source'' arguments into ``directory'',
+	\item [\texttt{T}] treats ``destination'' as a normal file,
+	\item [\texttt{u}] copies only newer source files,
+	\item [\texttt{v}] explains what is being done.
+
+	\item [\symbolcoreutils] \commandcoreutils{dd} converts and copies files (non-std syntax!):
+	\item [] \texttt{if=} reads from a file,
+	\item [] \texttt{of=} writes to a file,
+	\item [] \texttt{bs=} up to ... bytes at a time,
+	\item [] \texttt{count=} copies only ... input blocks.
+
+	\item [\symbolcoreutils] \commandcoreutils{install}: \dotfill ????
+
+	\item [\symbolcoreutils] \commandcoreutils{tee} duplicates pipe content: % (named after the T-splitter used in plumbing) 
+	\item [\texttt{a}] appends to the given files, does not overwrite,
+	\item [\texttt{i}] ignores interrupts.
+	
+	\item [\symbolcoreutils] \commandcoreutils{mv} moves (renames) files:
+	\item [\texttt{f}] does not prompt before overwriting,
+	\item [] Some cp options are allowed: \texttt{b}, \texttt{i}, \texttt{n}, \texttt{t}, \texttt{T}, \texttt{u}, \texttt{v}.
+
+	\item [\symbolcoreutils] \commandcoreutils{rm} removes files or directories:
+	\item [\texttt{f}] never prompts,
+	\item [\texttt{i}] always prompts,
+	\item [\texttt{r}] removes directories and their contents.
+
+	\item [\symbolcoreutils] \commandcoreutils{shred}: overwrites repeatedly.
+\end{compactenum}
+
+\textbf{Working with special file types}:
+\begin{compactenum}
+	\item [\symbolcoreutils] \commandcoreutils{mkdir} makes directories:
+	\item [\texttt{p}] with parents as needed,
+	\item [\texttt{v}] verbosely.
+
+	\item [\symbolcoreutils] \commandcoreutils{rmdir} removes empty directories.
+
+	\item [\symbolcoreutils] \commandcoreutils{mktemp} creates temporary files:
+	\item [\texttt{d}] creates directory instead.
+
+	\item [\symbolcoreutils] \commandcoreutils{ln} makes hard links between files:
+	\item [\texttt{s}] makes soft (symbolic) links instead.
+
+	\item [\symbolcoreutils] \commandcoreutils{unlink} \dotfill ????
+	% \item [???] \textbf{unlink} calls the unlink function. USE RM INSTEAD!
+
+	\item [\symbolcoreutils] \commandcoreutils{readlink} resolves canonical file names
+	\item [\texttt{m}] by following every symlink recursively,
+	\item [\texttt{f}] same and all but last part of path must exist,
+	\item [\texttt{e}] same and all parts of path must exist.
+	
+	\item [\symbolcoreutils] \commandcoreutils{link} \dotfill ????
+
+	\item [\symbolcoreutils] \commandcoreutils{mkfifo} \dotfill ????
+
+	\item [\symbolcoreutils] \commandcoreutils{mknod} \dotfill ????
+\end{compactenum}
+
+\textbf{Disk usage}:
+\begin{compactenum}
+	\item [\symbolcoreutils] \commandcoreutils{df} reports file system disk space usage:
+	\item [\texttt{h}] prints size in powers of 1024,
+	\item [\texttt{i}] list inode information instead of block usage,
+	\item [\texttt{t}] limits listing to file systems of given type,
+	\item [\texttt{x}] limits listing to file systems not of given type,
+	\item [\texttt{T}] prints file systems types.
+
+	\item [\symbolcoreutils] \commandcoreutils{du} estimates file space usage:
+	\item [\texttt{a}] writes counts for all files, not just directories,
+	\item [\texttt{c}] produces a grand total,
+	\item [\texttt{d}] the depth at which summing should occur,
+	\item [\texttt{h}] prints sizes in human readable format,
+	\item [\texttt{s}] diplays only a total,
+	\item [\texttt{X}] excludes files that match pattern from pattern.
+
+	\item [\symbolcoreutils] \commandcoreutils{stat} displays file status:
+	\item [\texttt{L}] following links,
+	\item [\texttt{t}] in terse form.
+
+	\item [\symbolcoreutils] \commandcoreutils{sync} \dotfill ????
+
+	\item [\symbolcoreutils] \commandcoreutils{truncate} \dotfill ????
+\end{compactenum}
+
+\begin{compactenum}
+	\item [???] \textbf{file} determines file type.
+	\item [\texttt{b}] doesn't prepend filenames to output (brief),
+	\item [\texttt{i}] prints MIME, not human-readable types,
+	\item [\texttt{k}] doesn't stop at the first match (keep going).
+\end{compactenum}
+
+\begin{compactenum}
+	\item [???] \textbf{find} searches for files in a directory hierarchy.
+	% TODO!
+	[???] See also: \textbf{whereis}.
+	[???] See also: \textbf{locate}, whose database can be updated with \textbf{updatedb}.
+\end{compactenum}
+
+\begin{compactenum}
+	\item [???] \textbf{fsck} checks and repairs a Linux filesystem:
+	\item [\texttt{a}] automatically repairs (without any question!),
+	\item [\texttt{A}] tries to check all filesystems in one run,
+	\item [\texttt{M}] skips mounted filesystems,
+	\item [\texttt{R}] skips the root filesystem.
+	\item [\texttt{t}] specifies the type(s) of filesystem to be checked,
+\end{compactenum}
+
+\textbf{Directory listing}:
+\begin{compactenum}
+	\item [\symbolcoreutils] \commandcoreutils{ls} lists directory contents:
+	\item [\texttt{a}] does not ignore entries starting with dot, 
+	\item [\texttt{F}] appends indicator to entries, 
+	\item [\texttt{h}] prints human readable sizes, 
+	\item [\texttt{i}] prints the index number of each file, 
+	\item [\texttt{l}] prints permissions, number of hard links, owner, group, size, last-modified date as well, 
+	\item [\texttt{r}] reverses order while sorting,
+	\item [\texttt{R}] lists subdirectories recursively, 
+	\item [\texttt{S}] sorts by file size (largest first), 
+	\item [\texttt{t}] sorts by modification time (newest first), 
+
+	\item [\symbolcoreutils] \commandcoreutils{pwd} is also a Bash builtin.
+
+	\item [\symbolcoreutils] \commandcoreutils{dir}: \dotfill ???
+
+	\item [\symbolcoreutils] \commandcoreutils{vdir}: \dotfill ???
+
+	\item [\symbolcoreutils] \commandcoreutils{dircolors}: \dotfill ???
+
+	\item [???] \textbf{tree} lists tree-like contents of directories.
+	\item [\texttt{d}] skips files
+	\item [\texttt{L}] limits search depth
+	\item [\texttt{s}] prints sizes as well
+	% stty tty???
+\end{compactenum}
+
+\textbf{Filename manipulation}:
+\begin{compactenum}
+	\item [\symbolcoreutils] \commandcoreutils{basename} prints path without parent directory
+
+	\item [\symbolcoreutils] \commandcoreutils{dirname} prints only parent directory
+
+	\item [\symbolcoreutils] \commandcoreutils{pathchk}: \dotfill ???
+
+	\item [\symbolcoreutils] \commandcoreutils{realpath}: \dotfill ???
+\end{compactenum}
+
+\begin{compactenum}
+	\item [???] \textbf{mount} mounts a filesystem.
+	\item [\texttt{t}] indicates filesystem type (ext4, xfs, btrfs, ...)
+\end{compactenum}
+
+\begin{compactenum}
+	\item [???] \textbf{tar} manipulates archives (``Tape ARchive''):
+	\item [\texttt{f}] archive to manipulate,
+	\item [\texttt{v}] verbosely lists files processed,
+	\item [\texttt{c}] creates a new archive,
+	\item [\texttt{r}] appends files to the end of an archive,
+	\item [\texttt{t}] lists the contents of an archive,
+	\item [\texttt{x}] extracts files,
+	\item [\texttt{k}] doesn't replace existing files when extracting,
+	\item [\texttt{a}] guesses compression program from filename,
+	\item [\texttt{j}] uses compression program bzip2,
+	\item [\texttt{J}] uses compression program xz,
+	\item [\texttt{z}] uses compression program gzip,
+	\item [\texttt{C}] changes directory before operations.
+\end{compactenum}

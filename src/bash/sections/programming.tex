@@ -1,0 +1,242 @@
+\section{Programming in Bash}
+\subsection{Shebang}
+The shebang (\mintinline{bash}{#!}) at the head of a script indicates an interpreter for execution, as in \mintinline{bash}{#!/bin/bash}.
+Lines starting with a \mintinline{bash}{#} (with the exception of shebang) are comments and thus won't be executed.
+Even better is \mintinline{bash}{#!/usr/bin/env bash} (overflow-16365130).
+
+\subsection{Quoting and literals}
+Inside \textbf{single quotes} \mintinline{bash}{' '} nothing is interpreted: they preserve literal values of characters enclosed within them.
+A single (strong) quote may not appear between single quotes, even when escaped, but it may appear between \textbf{double (weak) quotes} \mintinline{bash}{""}.
+
+They work quite similarly, with an exception that the shell expands any variables that appear within them (pathname expansion, process substitution and word splitting are disabled, everything else works!).
+
+It is a very important concept: without them Bash splits lines into words at whitespace characters -- tabs and spaces.
+See also: \mintinline{bash}{IFS} variable and \mintinline{bash}{$'...'} and \mintinline{bash}{$"..."} (both are Bash extensions, to be done).
+
+Avoid backticks \mintinline{bash}{`code`} at all cost!
+
+\subsection{Variables}
+\textbf{Variable} names are case sensitive.
+They can contain digits and underscores as well,
+but a name starting with a digit is not allowed.
+Example:
+\begin{minted}{bash}
+var="kind"
+echo ${var}ness # kindness
+\end{minted}
+
+Special variables:
+\begin{compactenum}
+    \item \mintinline{bash}{$0}: name of the script itself.
+    \item \mintinline{bash}{$1}, \mintinline{bash}{$2}, \ldots: the first, second, etc. argument.
+    \mintinline{bash}{shift} removes first argument and advances rest of them forward.
+    \item \mintinline{bash}{$*} and \mintinline{bash}{$@} denote all positional parameters (\mintinline{bash}{$*}: as a single word, \mintinline{bash}{$@}: as separate strings).
+    \item \mintinline{bash}{$#}: the number of positional parameters.
+    \item \mintinline{bash}{$?}: exit status of last executed command.
+    \item \mintinline{bash}{$$}: the process ID of the shell.
+    \item \mintinline{bash}{$!}: the process ID of last executed command.
+\end{compactenum}
+
+\subsection{Expansions}
+Eight expansions happen after splitting command into tokens, in the order that they are expanded.
+
+\subsubsection{Brace expansion}
+Brace expansion is used when we need to generate all possible string combinations.
+Both of the commands produce the same output:
+\begin{minted}{bash}
+echo {I,really,love,dots}.
+echo I. really. love. dots.
+\end{minted}
+
+\textbf{Warning}: it does not expand the variables (\texttt{\$var}), which is done later, but supports ranges (sequences) of characters:
+\begin{minted}{bash}
+echo {a..t}
+a b c d e f g h i j k l m n o p q r s t
+\end{minted}
+
+and (maybe zero paded or with an increment rate) integers, assuming the Bash version is 4 or newer:
+
+\begin{minted}{bash}
+echo {01..10..1}.
+01. 02. 03. 04. 05. 06. 07. 08. 09. 10.
+\end{minted}
+
+\subsubsection{Tilde expansion}
+There is a \textbf{tilde expansion} as well.
+The expression \mintinline{bash}{~[user]} expands to the home directory of the current (or given) user.
+
+\subsubsection{Parameter expansion}
+\begin{enumerate}
+\item \mintinline{bash}{${var^}}, \mintinline{bash}{${var,}}, \mintinline{bash}{${var~}} convert first character to upper, lower or reverse case (every, when caret/comma/tilde are doubled).
+This has an impact on every array element.
+
+\item \mintinline{bash}{${var#pattern}}, \mintinline{bash}{${var%pattern}} remove the pattern from the beginning, end of variable (greedy when hash, percent sign are doubled).
+Application: extracting parts of a filename.
+
+\item \mintinline{bash}{${var/pattern/string}} performs a single (when first slash is doubled: full) search and replace operation.
+
+\item \mintinline{bash}{${#var}} returns length of the string.
+
+\item \mintinline{bash}{${var:offset:length}} skips first \texttt{offset} characters from \texttt{var} and truncates the output to given length.
+\texttt{:length} may be skipped.
+
+Negative values separated with extra space are accepted.
+
+\item \mintinline{bash}{${var:-value}} uses a default value, if \texttt{var} is empty or unset.
+
+\mintinline{bash}{${var:=value}} does the same, but performs an assignment as well.
+
+\mintinline{bash}{${var:+value}} uses an alternative value if \texttt{var} isn't empty or unset!
+\end{enumerate}
+
+\subsubsection{Command substitution}
+To execute commands in a subshell and then pass their stdout (but not stderr!), use \mintinline{bash}{$( commands )}.
+
+(To group them without new shell, use \mintinline{bash}{{ cmds }}.)
+
+\subsubsection{Arithmetic expansion}
+The arithmetic expression \mintinline{bash}{$(( ... ))} is evaluated and expands to the result.
+Bash guarantees that the output will be a one-word integer.
+Exit code is zero $\iff$ output is nonzero.
+
+\subsubsection{Process substitution}
+This kind of substitution: \mintinline{bash}{<( ... )} and \mintinline{bash}{>( ... )} (not specified by POSIX!), where input or output of a command appears as a temporary file, is performed simultaneously with the following: arithmetic and parameter expansions, command substitution.
+
+\subsubsection{Word splitting}
+
+\subsubsection{File name expansion}
+Glob patterns (composed of normal characters and \texttt{*}, \texttt{?}, \texttt{[...]}) are not regular expressions!
+Bash supports extended globs too (\texttt{X(list)} where X is one from \texttt{?*+@!}).
+
+\subsection{Streams}
+There are always three default files open:
+\begin{compactenum}
+\item \emph{stdin} (the keyboard, file descriptor 0),
+\item \emph{stdout} (the screen, file descriptor 1) and
+\item \emph{stderr} (error messages, file descriptor 2).
+\end{compactenum}
+
+These \textbf{streams} can be \textbf{redirected}:
+\begin{compactenum}
+\item \mintinline{bash}{cmd > file} redirects to a file (overwrites),
+\item \mintinline{bash}{cmd >> file} appends instead,
+\item \mintinline{bash}{m>n} (\mintinline{bash}{m>&n}) redirects a file descriptor to a file
+(or another file descriptor),
+\item \mintinline{bash}{&>file} redirects stdout and stderr to a file,
+% \item \texttt{:> file} truncates file to zero length,
+\item \mintinline{bash}{|} (pipe) serves as a command chaining tool.
+\end{compactenum}
+
+\textbf{Here document} is a section of a source code file that is treated as if it were a separate file:
+
+\begin{minted}{bash}
+cat <<EOF > /path/to/your/file
+   Line to be written in your file.
+EOF
+\end{minted}
+
+Using \mintinline{bash}{'EOF'} instead prevents variable expansion.
+
+\subsection{Control flow statements}
+The one-line constructs \texttt{\&\&} and \texttt{||} work not like and, or ($\wedge$, $\vee$), but the \emph{if -- then -- else} statement.
+Nonzero exit status denotes (usually) a failure.
+
+\subsubsection{Loops}
+\begin{minted}{bash}
+while read myline; do
+  echo "It says ${myline}"
+done < some_file
+
+for var in "the first" "the second"; do
+  echo "${var}"
+done
+for (( i = 1; i <= 10; i++ )); do
+  echo "i = ${i}."
+done # C-style
+\end{minted}
+\subsubsection{Conditionals}
+Here at least one statement must be specified inside every block,
+but one can use a single colon (:) as a null statement to avoid
+rewriting the code.
+
+\begin{minted}{bash}
+if condition; then
+  commands
+elif second_condition; then
+  some_commands
+else
+  other_commands
+fi
+
+select word in "Bash" "Haskell" "Python"
+do
+  echo "Your language is $word".
+done
+\end{minted}
+
+There is also a case instruction:
+\begin{minted}{bash}
+case $language in
+  bash)
+    echo "Bourne Again Shell!"
+  ;;
+  python|haskell)
+    echo "Python or Haskell!"
+  ;;
+  *)
+    echo "Unknown language!"
+  ;; # optional
+esac
+\end{minted}
+
+\subsubsection{Single versus double square brackets}
+The \texttt{[} command is defined by POSIX, \texttt{]} prevents its further arguments from being used.
+Double brackets, the \texttt{[[} command, are a Bash extension that changes the way text ist being parsed:
+\begin{compactenum}
+\item \texttt{<} and \texttt{>} compare lexicographically instead of redirecting streams (inside \texttt{[ ]} they have to be escaped: \texttt{\textbackslash{}<}, \texttt{\textbackslash{}>})
+\item \texttt{||} and \texttt{\&\&} are true logical operators.
+\item \texttt{( )} groups commands (not a subshell!)
+\item \texttt{==} without quotes does pattern matching
+\item \texttt{=$\sim$} matches extended regex (no \texttt{[]}-alternative)
+\end{compactenum}
+
+\subsubsection{Testing conditions}
+All of these tests but \texttt{-h} follow symlinks (!), beware.
+
+\begin{compactenum}
+\item \textbf{File tests}:
+\begin{compactenum}
+    \item \texttt{-e} file exists,
+    \texttt{-s} file is nonempty,
+    \item \texttt{-d} directory,
+    \texttt{-f} regular file,
+    \texttt{-h} symlink,
+    \item \texttt{-b} block device,
+    \texttt{-c} character device,
+    \item \texttt{-p} named pipe,
+    \texttt{-S} socket.
+\end{compactenum}
+\item \textbf{File permissions}:
+\begin{compactenum}
+    \item \texttt{-r} readable,
+    \texttt{-w} writable,
+    \texttt{-x} executable,
+    \item \texttt{-u} setuid,
+    \texttt{-g} setgid,
+    \texttt{-k} sticky bit.
+\end{compactenum}
+\item \textbf{String tests}: \texttt{-z} empty, \texttt{-n} nonempty.
+\item \textbf{Arithmetic tests}:
+  \texttt{-eq} $=$,
+  \texttt{-lt} $<$,
+  \texttt{-gt} $>$,
+  \texttt{-ne} $\neq$,
+  \texttt{-le} $\le$,
+  \texttt{-ge} $\ge$.
+\end{compactenum}
+
+Both \texttt{break} and \texttt{continue} are accepted.
+
+\input{sections/builtins}
+
+%

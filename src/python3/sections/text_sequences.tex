@@ -1,0 +1,23 @@
+\subsection{str -- a text sequence type}
+
+Don't use printf-style \mintinline{python}{%} syntax.
+Good -- string \mintinline{latex}{.format()} method:
+\begin{minted}{python}
+a = "Hello"
+b = "world"
+c = f"{a} {b}!"
+c = "{1} {0}!".format(b, a)
+
+d = {"name": "John", "age": 37}
+"Hello {name}-{age}!".format(name=d["name"], age=d["age"])
+"Hello {name}-{age}!".format(**d)
+\end{minted}
+
+Better -- formatted string literals (also called f-strings for short).
+Require Python 3.6+.
+\begin{minted}{python}
+f"Pi is approximately {math.pi:.3f}."
+f"2 + 2 = {2 + 2}"
+\end{minted}
+Because f-strings are evaluated at runtime, you can put any and all valid Python expressions in them.
+In order to make a brace appear in your string, you must use double braces.

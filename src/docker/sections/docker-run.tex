@@ -1,0 +1,37 @@
+\section{Run a command in a new container}
+\important{Start a container} (process with its own file system, its own networking, and its own isolated process tree):
+\begin{bashcode}
+$ docker run busybox
+\end{bashcode}
+
+(Docker generates names for containers from notable scientists and hackers.)
+Some of the useful switches:
+\begin{compactitem}
+    \item [d] \textbf{\mintinline{bash}{--detach}} runs in background,
+    \item [i] \textbf{\mintinline{bash}{--interactive}}: keeps standard input open, even if not attached,
+    \item \textbf{\mintinline{bash}{--name=...}} assigns a custom name,
+    \item [p] \textbf{\mintinline{bash}{--publish hostPort:containerPort}} publishes a single port (or range of ports) to the host,
+    \item [P] \textbf{\mintinline{bash}{--publish-all}} publishes exposed ports to random ports on the host interfaces,
+    \item \textbf{\mintinline{bash}{--rm}} automatically removes the container when it exits,
+    \item [t] \textbf{\mintinline{bash}{--tty}} allocate a pseudo-TTY,
+    \item [v] \textbf{\mintinline{bash}{--volume hostDir:containerDir}} creates a bind mount.
+\end{compactitem}
+
+Example.
+Applications can be made more secure by running them in read-only mode.
+Read only containers may still need to write temporary data:
+\begin{bashcode}
+$ docker run --read-only --tmpfs /run --tmpfs /tmp \
+>     -it fedora /bin/bash
+\end{bashcode}
+
+Example.
+If you want messages that are logged in your container to show up in the host's syslog/journal:
+\begin{bashcode}
+$ docker run -v /dev/log:/dev/log -it fedora /bin/bash
+(bash) # logger "Hello from my container"; exit
+
+$ journalctl -b | grep Hellp
+\end{bashcode}
+
+%

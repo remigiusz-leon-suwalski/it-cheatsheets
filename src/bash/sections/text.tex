@@ -1,0 +1,151 @@
+\textbf{Printing text}:
+\begin{compactenum}
+	\item [\symbolcoreutils] \commandcoreutils{echo} is also a Bash builtin.
+	\item [\symbolcoreutils] \commandcoreutils{printf} is also a Bash builtin.
+	\item [\symbolcoreutils] \commandcoreutils{yes} outputs a string repeatedly until killed.
+\end{compactenum}
+
+\textbf{Output of entire files}:
+\begin{compactenum}
+	\item [\symbolcoreutils] \commandcoreutils{cat} concatenates and prints files:
+	\item [\texttt{A}] shows all nonprinting characters,
+	\item [\texttt{n}] numbers all output lines (compare with nl!),
+	\item [\texttt{s}] suppresses repeated empty output lines.
+    % tac -r -s 'x|[^x]'
+	\item [\symbolcoreutils] \commandcoreutils{tac} reverses order of input lines.
+	\item [???] \textbf{rev} reverses order of characters in each line.
+	\item [???] \textbf{less} enhances (primitive) more pager:
+	\item [\texttt{+F}] monitors the tail of a file which is growing.
+	\item [\symbolcoreutils] \commandcoreutils{nl} numbers lines of files:
+	\item [\texttt{s}] adds ``string'' after line number,
+	\item [\texttt{w}] uses ``number'' columns for line numbers.
+	\item [\symbolcoreutils] \commandcoreutils{base32} encodes data:
+	\item [\texttt{w}] characters per line -- 0 disables wrapping,
+	\item [\texttt{d}] decodes data instead.
+	\item [\symbolcoreutils] \commandcoreutils{base64} works similarly.
+	\item [\symbolcoreutils] \commandcoreutils{od} dumps files in octal.
+\end{compactenum}
+
+\textbf{Formatting}:
+\begin{compactenum}
+	\item [\symbolcoreutils] \commandcoreutils{fmt}: \dotfill ????
+
+	\item [\symbolcoreutils] \commandcoreutils{pr}: \dotfill ????
+
+	\item [\symbolcoreutils] \commandcoreutils{fold}: \dotfill ????
+\end{compactenum}
+
+\textbf{Comparing file content}:
+\begin{compactenum}
+	\item [\symbolcoreutils] \commandcoreutils{comm} compares two sorted files line by line:
+	\item [\texttt{1}] skips lines unique to 1st file,
+	\item [\texttt{2}] skips lines unique to 2nd file,
+	\item [\texttt{3}] skips common lines.
+
+	\item [???] \textbf{diff} compares files line by line:
+	\item [\texttt{y}] outputs in two columns,
+	\item [\texttt{i}] ignores case differences,
+	\item [\texttt{E}] ignores tab expansions,
+	\item [\texttt{b}] ignores changes in amount of white space,
+	\item [\texttt{B}] ignores changes where lines are all blank,
+	\item [\texttt{w}] ignores trailing white space,
+	\item [\texttt{w}] ignores all white space.
+\end{compactenum}
+
+\textbf{Operating on fields}:
+\begin{compactenum}
+	\item [\symbolcoreutils] \commandcoreutils{join} merges two sorted files on a field:
+	\item [\texttt{1}] join on this field of file 1 (1st by default),
+	\item [\texttt{2}] join on this field of file 2 (1st by default),
+	\item [\texttt{t}] use custom input/output field separator.
+
+	\item [\symbolcoreutils] \commandcoreutils{paste} merges lines of files.
+	\item [\texttt{d}] reuses characters from ``list'' instead of tabs,
+	\item [\texttt{s}] interchanges rows and columns.
+\end{compactenum}
+
+\textbf{Replacing text}:
+\begin{compactenum}
+	\item [???] \textbf{sed} has been described earlier.
+
+	\item [\symbolcoreutils] \commandcoreutils{tr} translates/deletes characters (find+replace):
+	\item [\texttt{c}] uses complement of character set,
+	\item [\texttt{d}] deletes characters, does not translate,
+	\item [\texttt{s}] squeezes repeated character occurrences.
+
+	\item [\symbolcoreutils] \commandcoreutils{expand}: \dotfill ????
+
+	\item [\symbolcoreutils] \commandcoreutils{unexpand}: \dotfill ????
+\end{compactenum}
+
+\textbf{Output of parts of files}:
+\begin{compactenum}
+	\item [???] \textbf{cut} prints selected parts of lines:
+	\item [\texttt{c}] selects (positional) range of characters,
+	\item [\texttt{f}] selects range of fields,
+	\item [\texttt{d}] using custom field delimeter,
+	\item [\texttt{s}] skips lines without delimeters.
+
+	\item [???] \textbf{head} outputs the first part of files:
+	\item [\texttt{c}] first ... bytes,
+	\item [\texttt{n}] first ... lines,
+	\item [\texttt{v}] with headers giving file names.
+
+	\item [???] \textbf{tail} outputs the last part of files:
+	\item [\texttt{f}] output appended data as the file grows,
+	\item [\texttt{n}] ... (a number) last ... lines,
+	\item [\texttt{n}] +... (a number) starting with line ...,
+	\item [\texttt{-}] \texttt{c}, \texttt{v} work like for head.
+
+	\item [\symbolcoreutils] \commandcoreutils{split} splits files into chunks:
+	\item [\texttt{a}] with custom filename suffix length (default: 2),
+	\item [\texttt{b}] with custom number of bytes per chunk,
+	\item [\texttt{l}] with custom number of lines per chunk,
+	\item [\texttt{d}] uses numeric (not alphabetic) suffixes,
+	\item [\texttt{n}] generates custom amount of chunks.
+
+	\item [\symbolcoreutils] \commandcoreutils{csplit}: \dotfill ????
+\end{compactenum}
+
+\textbf{Reordering lines}:
+\begin{compactenum}
+	\item [\symbolcoreutils] \commandcoreutils{shuf} generates random permutations:
+	\item [\texttt{e}] treats arguemnts as input lines,
+	\item [\texttt{i}] uses range of numbers as input, 
+	\item [\texttt{n}] limits number of output lines,
+	\item [\texttt{r}] repeats (with \texttt{-n}) some of the output lines.
+
+	\item [\symbolcoreutils] \commandcoreutils{sort} sorts lines of text files:
+	\item [\texttt{r}] reverses output order,
+	\item [\texttt{u}] outputs only first occurrence of duplicates,
+	\item [\texttt{n}] like numbers,
+	\item [\texttt{g}] like numbers in scientific notation,
+	\item [\texttt{h}] like file sizes (1K, 2M, 3G, ..., 8Y),
+	\item [\texttt{V}] like Debian package names + versions
+	\item [\texttt{b}] ignoring leading blanks,
+	\item [\texttt{f}] ignoring upper/lower case,
+	\item [\texttt{c}] does not sort, checks for sorted input,
+	\item [\texttt{k}] via part between two fields, not whole line
+	\item [\texttt{s}] stably -- no more comparisons in case of ties
+	\item [\texttt{t}] using custom field separator,
+	% \item [\texttt{R}] shuffle but group identical keys
+
+	\item [\symbolcoreutils] \commandcoreutils{tsort} performs topological sort.
+
+	\item [\symbolcoreutils] \commandcoreutils{uniq} omits repeated lines:
+	\item [\texttt{c}] prefixes lines by the number of occurences,
+	\item [\texttt{i}] ignores differences in case,
+	\item [\texttt{d}] only prints duplicate lines, one for each group,
+	\item [\texttt{u}] skips duplicated lines,
+	\item [\texttt{f}] avoids comparing first ... fields,
+	\item [\texttt{s}] avoids comparing first ... characters,
+	\item [\texttt{w}] compares no more than ... characters.
+\end{compactenum}
+
+\begin{compactenum}
+	\item [???] \textbf{xargs} builds and executes command lines:
+	\item [\texttt{0}] accepts null-terminated items,
+	\item [\texttt{I}] with custom argument placeholder (\texttt{\{\}}),
+	\item [\texttt{n}] with at most that many arguments per line,
+	\item [\texttt{r}] doesn't run if stdin empty.
+\end{compactenum}

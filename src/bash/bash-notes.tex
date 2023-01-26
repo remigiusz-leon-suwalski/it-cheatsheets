@@ -1,0 +1,72 @@
+\documentclass{charun}
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\newcommand{\commandcoreutils}[1]{\textbf{#1}}
+\newcommand{\symbolcoreutils}{$\blacksquare\blacksquare$} % TODO
+
+\newcommand{\commandbash}[1]{\textbf{#1}}
+\newcommand{\symbolbash}{$\blacksquare\blacksquare$} % TODO
+
+\newcommand{\cmdcore}{$\blacksquare$}
+\newcommand{\cmdutil}{$\square\blacksquare$}
+\newcommand{\cmdvar}{$\square$}
+
+\title{Bash 5.1.0 notes, version 0.2.209}
+\author{Remigiusz Suwalski}
+
+\begin{document}
+\begin{multicols*}{3}
+\maketitle
+\raggedright
+
+\textbf{Bash}, a command line interface for interacting with the operating system, was created in the 1980s.
+
+% SECTION 1
+\input{sections/style_guide}
+
+% SECTION 2
+\input{sections/programming}
+
+% SECTION 3
+
+\input{sections/shortcuts}
+
+\input{sections/grep_sed_awk}
+\input{sections/regex}
+
+% SECTION 5
+\newpage
+\section{Unix utilities and shell builtins}
+\subsection{File system}
+\input{sections/files}
+
+\subsection{Processes}
+\input{sections/processes}
+
+\subsection{User environment}
+\input{sections/environment}
+
+\subsection{Text processing}
+\input{sections/text}
+
+\subsection{Networking}
+\input{sections/network}
+
+\subsection{Hardware}
+\input{sections/hardware}
+
+\subsection{Miscellaneous}
+\input{sections/miscellaneous}
+
+\end{multicols*}
+\end{document}
+
+Add: whatis, man.
+
+To break a column:
+\vfill\null\columnbreak

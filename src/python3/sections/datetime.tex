@@ -1,0 +1,17 @@
+\subsection{datetime -- basic date and time types}
+Converting string into datetime objects:
+\begin{minted}{python}
+from datetime import datetime
+
+datetime_object = datetime.strptime(
+    'Jun 1 2005  1:33PM', '%b %d %Y %I:%M%p'
+)
+\end{minted}
+
+Current date and time: \mintinline{python}{datetime.now()}, just the time: \mintinline{python}{datetime.now().time()}
+
+% date_time_obj = datetime.datetime.strptime(raw_date, '%Y-%m-%d')
+% datetime.datetime.now()
+% datetime.datetime.now() - date_time_obj).days
+% .total_seconds()
+% datetime.fromtimestamp

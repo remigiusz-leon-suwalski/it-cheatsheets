@@ -1,0 +1,47 @@
+\begin{compactenum}
+\item [???] \textbf{bc} is an arbitrary precision calculator language.
+\item \texttt{echo 'obase=16;255' | bc} prints \texttt{FF},
+\item \texttt{echo 'ibase=2;obase=A;10' | bc} prints \texttt{2},
+\item \texttt{scale=10} (after \texttt{bc -l}) sets working precision.
+\item [???] \textbf{dc} is a reverse-polish desk calculator.
+One of the oldest Unix utilities, 
+predating even the invention of the C programming language.
+% hexdump -C, xxd
+\item [\symbolcoreutils] \commandcoreutils{ptx} produces permuted index of file contents.
+\end{compactenum}
+
+\textbf{Date/time operations}:
+\begin{compactenum}
+\item [\symbolcoreutils] \commandcoreutils{date} prints/sets system date and time:
+\item [\texttt{d}] displays time described by ..., not now,
+\item [\texttt{s}] sets the date instead.
+
+\item [\symbolcoreutils] \commandcoreutils{sleep} pauses for ... seconds.
+
+\item [???] \textbf{cal}, displays a calendar for current month:
+\item [\texttt{j}] displays Julian days,
+\item [\texttt{w}] prints the numbers of the weeks,
+\item [\texttt{y}] displays a calendar for a whole year,
+\item [\texttt{3}] displays the previous, current and next month.
+\end{compactenum}
+
+\textbf{Numeric operations}:
+\begin{compactenum}
+\item [\symbolcoreutils] \commandcoreutils{factor} \dotfill ????
+
+\item [\symbolcoreutils] \commandcoreutils{numfmt} \dotfill ????
+
+\item [\symbolcoreutils] \commandcoreutils{seq} prints a sequence of numbers:
+\item [\texttt{w}] equalizes width by padding with leading zeroes.
+\end{compactenum}
+
+\textbf{Conditionals}:
+\begin{compactenum}
+\item [\symbolcoreutils] \commandcoreutils{false} does nothing unsuccessfully.
+
+\item [\symbolcoreutils] \commandcoreutils{true} does nothing successfully.
+
+\item [\symbolcoreutils] \commandcoreutils{test} \dotfill ???
+
+\item [\symbolcoreutils] \commandcoreutils{expr} \dotfill ???
+\end{compactenum}

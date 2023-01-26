@@ -1,0 +1,57 @@
+\subsection{logging -- logging facility for Python}
+Default logging levels (from least important):
+\begin{minted}{python}
+import logging
+
+logging.debug('This is a debug message')
+logging.info('This is an info message')
+logging.warning('This is a warning message')
+logging.error('This is an error message')
+logging.critical('This is a critical message')
+\end{minted}
+
+Simple configuration:
+\begin{minted}{python}
+logging.basicConfig(
+    level=logging.DEBUG,
+    datefmt='%d-%b-%y %H:%M:%S',
+    filename='app.log',
+    filemode='w',
+    format='==> %(message)s'
+)
+\end{minted}
+
+Available attributes:
+\begin{itemize}
+	\item \textbf{asctime} human-readable time like ‘2003-07-08 16:49:45,896’
+	\item \textbf{relativeCreated} milliseconds, relative to '\mintinline{python}{import logging}' time
+	\item \textbf{levelname} text logging level for the message like 'CRITICAL'
+	\item \textbf{lineno} source line number if available
+	\item \textbf{message} the logged message
+	\item \textbf{name} name of the logger
+	\item \textbf{process}, \textbf{processName} process ID and name, if available
+	\item \textbf{thread}, \textbf{threadName} thread ID and name, if available
+\end{itemize}
+
+Capturing the full stack trace:
+\begin{minted}{python}
+try:
+    c = a / b
+except Exception as e:
+    logging.exception("Exception occurred")
+    # if other level is desired than error:
+    logging.debug("Exception occurred", exc_info=True)
+\end{minted}
+
+Multiple loggers:
+\begin{minted}{python}
+logger = logging.getLogger('example_logger')
+logger.setLevel(logging.INFO)
+logger.warning('This is a warning')
+# setting format: stackoverflow 11581794 :(
+\end{minted}
+
+Todo:
+\begin{minted}{python}
+.Formatter()
+\end{minted}

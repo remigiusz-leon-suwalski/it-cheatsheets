@@ -1,0 +1,16 @@
+\subsection{json -- JSON encoder and decoder}
+Converting plaintext to JSON:
+\begin{minted}{python}
+x = '{"name": "John", "age": 30}'
+y = json.loads(x)
+with open("response.json", "r") as f:
+    z = json.load(f)
+\end{minted}
+
+Converting JSON to plaintext:
+\begin{minted}{python}
+# dump and dumps use the same keyword arguments
+x = json.dumps(y, indent=4, sort_keys=True)
+with open("response.json", "w") as f:
+    json.dump(z, f)
+\end{minted}

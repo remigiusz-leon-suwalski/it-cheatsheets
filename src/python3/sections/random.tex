@@ -1,0 +1,10 @@
+\subsection{random -- generate pseudo-random numbers}
+To randomly select an item from a list:
+\begin{minted}{python}
+import random
+
+foo = random.choice(['a', 'b', 'c', 'd', 'e'])
+\end{minted}
+For cryptographically secure random choices use \mintinline{python}{secrets.choice()} (requires Python 3.6).
+
+% randint, seed, sample

@@ -1,0 +1,28 @@
+\section{Build an image from a Dockerfile}
+\important{Build an image from a Dockerfile}:
+\begin{bashcode}
+$ docker build -t my_image .
+\end{bashcode}
+
+Last argument is path to the directory that contains the Dockerfile.
+
+Useful switches:
+\begin{compactitem}
+    \item \mintinline{bash}{--tag}: applies a repository name (and optionally tag) to the resulting image.
+\end{compactitem}
+
+Sample content of the Dockerfile:
+\begin{bashcode}
+FROM nginx
+COPY html /usr/share/nginx/html
+\end{bashcode}
+
+From \url{https://dmitryfrank.com/projects/docker-quick-ref} you can obtain a  nice printable quick reference for Dockerfile syntax, available on the MIT license from Dmitry Frank.
+
+To \important{upload an image} to the Docker Hub, authenticate first and then push:
+\begin{bashcode}
+$ docker login
+$ docker push <name>:<tag>
+\end{bashcode}
+
+%

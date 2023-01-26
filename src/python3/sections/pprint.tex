@@ -1,0 +1,11 @@
+\subsection{pprint -- Data pretty printer}
+\begin{minted}{python}
+from pprint import pprint
+coordinates = [{'name': 'Location 1',
+'gps': (29, 111)},
+{'name': 'Location 2',
+'gps': (40, 44)}]
+pprint(coordinates)
+# [{'gps': (29, 111), 'name': 'Location 1'},
+#  {'gps': (40, 44), 'name': 'Location 2'}]
+\end{minted}

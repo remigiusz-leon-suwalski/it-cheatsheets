@@ -1,0 +1,56 @@
+\section{Manage images}
+\important{Download an image} from the Docker registry (this is done by \mintinline{bash}{docker run ...} if any image wasn't pulled manually):
+\begin{bashcode}
+$ docker image pull busybox
+\end{bashcode}
+
+\important{List images} (only top level, their repository, tags and their size):
+\begin{bashcode}
+$ docker image ls
+REPOSITORY  TAG    IMAGE ID     CREATED      SIZE
+busybox     latest c55b0f125dc6 13 days ago  1.24MB
+ubuntu      latest 7e0aa2d69a15 3 weeks ago  72.7MB
+hello-world latest d1165f221234 2 months ago 13.3kB
+\end{bashcode}
+
+Useful switches:
+\begin{compactitem}
+    \item \textbf{\mintinline{bash}{--all}}: including intermediate images,
+    \item \textbf{\mintinline{bash}{--digests}}: including SHA256 digests,
+    \item \textbf{\mintinline{bash}{--filter=}} \dotfill TO BE DONE,
+    \item \textbf{\mintinline{bash}{--format=""}} \dotfill TO BE DONE.
+\end{compactitem}
+
+\important{Push a local image} to a registry:
+\begin{bashcode}
+$ docker image push NAME[:TAG]
+\end{bashcode}
+
+Useful switches:
+\begin{compactitem}
+    \item \mintinline{bash}{--all-tags}: pushes all tagged images in the repository.
+\end{compactitem}
+
+Example.
+To push a new image to a registry, first save the new image by finding the container ID (using \mintinline{bash}{docker container ls}) and then committing it to a new image name.
+Now, push the image to the registry using the image ID. 
+\begin{bashcode}
+$ docker container commit c16378f943fe rhel-httpd:latest
+$ docker image tag rhel-httpd:latest \
+>     registry-host:5000/myadmin/rhel-httpd:latest
+$ docker image push registry-host:5000/myadmin/rhel-httpd:latest
+\end{bashcode}
+
+\important{Delete an image}: you need to delete the containers that use given image before deleting image.
+Then:
+\begin{bashcode}
+$ docker image rm d1165f221234
+\end{bashcode}
+
+Example.
+To delete all dangling images:
+\begin{bashcode}
+$ docker image rm $(docker images -qf dangling=true)
+\end{bashcode}
+
+%

@@ -1,0 +1,33 @@
+\documentclass{charun}
+\title{Docker notes, version 0.7.209}
+\author{Remigiusz Suwalski}
+
+\usepackage{xcolor}
+\newcommand{\important}[1]{\textbf{\color{blue}#1}}
+
+\newminted{bash}{firstnumber=last}
+\renewcommand{\theFancyVerbLine}{\sffamily \textcolor[rgb]{0.5,0.5,1.0}{\oldstylenums{\arabic{FancyVerbLine}}}}
+% copied from https://tex.stackexchange.com/questions/132849/how-can-i-change-the-font-size-of-the-number-in-minted-environment
+
+\usepackage[scaled=0.85]{beramono}
+% copied from https://tex.stackexchange.com/questions/484273/textbf-in-mintinline
+
+\usepackage{hyperref}
+\usepackage{paralist}
+
+\begin{document}
+\begin{multicols*}{2}
+\maketitle
+\raggedright
+\input{sections/docker-run}
+\input{sections/docker-image}
+\input{sections/docker-container}
+\input{sections/docker-system}
+\input{sections/docker-build}
+\input{sections/docker-login}
+
+\section{Aliases}
+\input{sections/aliases}
+
+\end{multicols*}
+\end{document}

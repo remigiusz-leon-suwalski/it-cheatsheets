@@ -1,0 +1,66 @@
+\textbf{Modified command invocation}:
+\begin{compactenum}
+	\item [\symbolcoreutils] \commandcoreutils{chroot} changes the root directory of the calling process and their children.
+
+	\item [\symbolcoreutils] \commandcoreutils{env} \dotfill ????
+
+	\item [\symbolcoreutils] \commandcoreutils{printenv} \dotfill ????
+
+	\item [\symbolcoreutils] \commandcoreutils{nice} adjusts process priority.
+
+	\item [\symbolcoreutils] \commandcoreutils{nohup} \dotfill ????
+
+	\item [\symbolcoreutils] \commandcoreutils{stdbuf} \dotfill ????
+
+	\item [\symbolcoreutils] \commandcoreutils{timeout} \dotfill ????
+\end{compactenum}
+
+\begin{compactenum}
+	\item [???] \textbf{at} schedules commands to be executed once in the future, accepts times of many forms:
+	\texttt{HH:MM}, \texttt{midnight}, \texttt{noon}, \texttt{now} (time);
+	\texttt{today}, \texttt{tomorrow} or \texttt{[CC]YY-MM-DD} (date)
+	or \texttt{2pm + 1 week} (increment) to name few.
+\end{compactenum}
+
+\begin{compactenum}
+	\item [Bash] \textbf{bg} resumes suspended jobs in the background.
+	\item [Bash] \textbf{fg} resumes suspended jobs in the foreground.
+	\item [Bash] \textbf{jobs} lists the active jobs.
+\end{compactenum}
+
+\textbf{Process control}:
+\begin{compactenum}
+	\item [???] \textbf{kill} terminates a process by PID, sends \texttt{TERM}:
+	\item [9] sends \texttt{KILL} instead.
+	\item [???] \textbf{killall} kills processes by name.
+	\item [o] only older than, float + unit (smhdwMy)
+	\item [y] only younger than, float + unit (smhdwMy)
+\end{compactenum}
+
+\begin{compactenum}
+	\item [???] \textbf{ps} prints a snapshot of the current processes:
+	\item [\texttt{e}?] selects all processes,
+	\item [\texttt{f}?] does full-format listing,
+	\item [\texttt{m}?] shows threads (see also: \texttt{H}, \texttt{-L}, \texttt{-T})
+	\item [\texttt{C}?] selects processes by command name,
+	\item [\texttt{p}?] selects processes by PID,
+	\item [\texttt{u}?] selects processes by EUID or name. 
+	\item [] Warning: \texttt{aux} (BSD) $\approx$ \texttt{-eF} (standard syntax).
+	\item [???] \textbf{pstree} displays a tree of processes.
+	% TODO: top here...
+\end{compactenum}
+
+\begin{compactenum}
+	\item [???] \textbf{pgrep}, \textbf{pkill}, \textbf{pwait} look up, signal or wait for processes (based on name by default).
+\end{compactenum}
+
+\begin{compactenum}
+	\item [???] \textbf{time} runs programs with timing statistics.
+\end{compactenum}
+
+\begin{compactenum}
+	\item [???] \textbf{vmstat} monitors memory usage.
+	% sar - historical analysis, -q -r -P
+	\item [???] \textbf{top} displays Linux processes.
+	\item [???] See also: \textbf{htop} (Hisham top based on ncurses).
+\end{compactenum}

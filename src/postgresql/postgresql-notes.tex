@@ -1,0 +1,124 @@
+\documentclass{charun}
+\title{PostgreSQL 13.3 notes, version 0.0.209}
+\author{Remigiusz Suwalski}
+\begin{document}
+\begin{multicols*}{2}
+\maketitle
+\raggedright
+
+% based on https://www.postgresqltutorial.com/postgresql-select/
+
+\textbf{SELECT} retrieves rows from zero or more tables.
+\begin{minted}{sql}
+SELECT * FROM customer;
+\end{minted}
+
+To retrieve only some columns (AS keyword is optional):
+\begin{minted}{sql}
+SELECT name FROM customer;
+SELECT name, email AS mail FROM customer;
+\end{minted}
+
+\hrule
+
+Only unique values:
+\begin{minted}{sql}
+SELECT DISTINCT name FROM customer;
+
+SELECT DISTINCT ON (column1) column_alias, column2
+FROM table_name ORDER BY column1, column2;
+\end{minted}
+
+It's a good idea to specify order when using DISTINCT ON.
+
+\hrule
+
+Concatenation of two strings:
+\begin{minted}{sql}
+SELECT name || ' ' || email FROM customer;
+\end{minted}
+
+\hrule
+
+Sorting rows (\mintinline{sql}{ASC} is the default):
+\begin{minted}{sql}
+SELECT email FROM customer ORDER BY email DESC;
+\end{minted}
+
+There are also \mintinline{sql}{NULLS FIRST} and \mintinline{sql}{NULLS LAST} options.
+
+Sorting by expression:
+\begin{minted}{sql}
+SELECT name, LENGTH(name) len
+FROM customer ORDER BY len DESC;
+\end{minted}
+
+\hrule
+
+Filtering:
+\begin{minted}{sql}
+SELECT email FROM customer WHERE name = 'Julia';
+\end{minted}
+
+Available operators.
+Boolean:
+\mintinline{sql}{AND},
+\mintinline{sql}{OR},
+\mintinline{sql}{NOT}.
+Comparisons:
+\mintinline{sql}{=},
+\mintinline{sql}{>},
+\mintinline{sql}{<},
+\mintinline{sql}{>=},
+\mintinline{sql}{<=},
+\mintinline{sql}{<>} (or \mintinline{sql}{!=}) -- not equal.
+Others:
+\begin{minted}{sql}
+SELECT email FROM customer WHERE name IN ('Julia', 'Ann');
+SELECT email FROM customer WHERE name LIKE 'Ann%';
+-- % any amount, _ one character
+SELECT email FROM customer WHERE age BETWEEN 20 AND 25;
+SELECT email FROM customer WHERE job IS NULL;
+\end{minted}
+
+\hrule
+
+Constraining number of rows: skipping first 5, taking next 7:
+\begin{minted}{sql}
+SELECT * FROM customer LIMIT 7 OFFSET 5;
+\end{minted}
+
+LIMIT is widely used but does not belong to the SQL standard, for portability use FETCH instead.
+
+\hrule
+
+Joins:
+\begin{minted}{sql}
+SELECT * FROM bookings
+INNER JOIN members ON members.id = bookings.id;
+-- or one from:
+LEFT JOIN members ON members.id = bookings.id;
+RIGHT JOIN members ON members.id = bookings.id;
+FULL OUTER JOIN members ON members.id = bookings.id;
+\end{minted}
+
+There are self-joins and Cartesian product (cross join) as well.
+
+\hrule
+
+Aggregating result form multiple rows:
+\begin{minted}{sql}
+SELECT customer_id, SUM (amount) FROM payment
+GROUP BY customer_id;
+\end{minted}
+
+HAVING is to groups what WHERE is to rows:
+\begin{minted}{sql}
+SELECT customer_id, SUM (amount) FROM payment
+GROUP BY customer_id HAVING SUM (amount) > 200;
+\end{minted}
+
+\hrule
+
+\end{multicols*}
+\end{document}

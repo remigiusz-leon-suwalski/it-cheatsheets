@@ -1,0 +1,110 @@
+\section{Manage containers}
+\important{Create container}, don't start it:
+\begin{bashcode}
+$ docker container create ...
+\end{bashcode}
+
+\important{List running containers}:
+\begin{bashcode}
+$ docker container ls
+CONTAINER ID IMAGE   COMMAND CREATED       STATUS
+94f6cf532af9 busybox "sh"    3 seconds ago Up 2 seconds
+
+# PORTS, NAMES were truncated :)
+\end{bashcode}
+
+Useful switches:
+\begin{compactitem}
+    \item \mintinline{bash}{--all}: show all, not just running containers
+\end{compactitem}
+
+\important{Rename container}
+\begin{bashcode}
+$ docker container rename ...
+\end{bashcode}
+
+\important{Display running processes} of a container:
+\begin{bashcode}
+$ docker container top bold_cerf
+UID  PID   PPID  C STIME TTY   TIME     CMD
+root 16433 16412 0 00:42 pts/0 00:00:00 bash
+\end{bashcode}
+
+\important{Fetch the logs} of a container:
+\begin{bashcode}
+$ docker run --name test -d busybox sh -c \
+    "while true; do $(echo date); sleep 1; done"
+$ docker container logs -f --until=2s test
+\end{bashcode}
+
+This command is only functional for containers that are started with the json-file or journald logging driver.
+
+Useful switches:
+\begin{compactitem}
+    \item \mintinline{bash}{--follow}: follows log output,
+    \item \mintinline{bash}{--since}: only logs since timestamp (like 2013-01-02T13:23:37Z) or relative (like 42m),
+    \item \mintinline{bash}{--until}: only logs until a timestamp or relative (see above).
+\end{compactitem}
+
+\important{Run a command} in a running container:
+\begin{bashcode}
+$ docker container exec -it bold_cerf bash
+\end{bashcode}
+
+By default it's executed in the working directory that was set during container creation.
+Does not work for paused containers.
+
+Useful switches:
+\begin{compactitem}
+    \item \mintinline{bash}{--workdir}: custom working directory inside the container.
+\end{compactitem}
+
+\important{Stop containers} (send SIGTERM first and SIGKILL after grace period -- to the main process inside the container):
+\begin{bashcode}
+$ docker container stop bold_cerf
+\end{bashcode}
+
+Useful switches:
+\begin{compactitem}
+    \item \mintinline{bash}{--time}: seconds to wait before killing
+\end{compactitem}
+
+\important{Start a stopped container} again:
+\begin{bashcode}
+$ docker container start bold_cerf
+\end{bashcode}
+
+\important{Kill a cointainer}
+\begin{bashcode}
+$ docker container kill bold_cerf
+\end{bashcode}
+
+You can kill them all too:
+\begin{bashcode}
+$ docker kill $(docker ps -q)
+\end{bashcode}
+
+\important{Remove containers}:
+\begin{bashcode}
+$ docker container rm bold_cerf
+\end{bashcode}
+
+All stopped:
+\begin{bashcode}
+$ docker rm $(docker ps -a -q)
+\end{bashcode}
+
+Useful switches:
+\begin{compactitem}
+    \item \mintinline{bash}{--force}: uses SIGKILL,
+    \item \mintinline{bash}{--volumes}: removes anonymous volumes associated with the container.
+\end{compactitem}
+
+You can't remove a running container, need to stop it first.
+Remove all exited containers:
+\begin{bashcode}
+$ docker rm $(docker ps -a -q -f status=exited)
+$ docker container prune # requires API >= 1.25
+\end{bashcode}
+
+%

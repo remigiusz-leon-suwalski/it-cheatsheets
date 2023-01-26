@@ -1,0 +1,11 @@
+\subsection{subprocess -- Subprocess management}
+Call an external command:
+\begin{minted}{python}
+import subprocess
+subprocess.run(["ls", "-l"])  # >= Python 3.5
+subprocess.call(["ls", "-l"]) # <= Python 3.4
+\end{minted}
+
+The advantage of subprocess.run over os.system is that it is more flexible: you can get the stdout, stderr, the real status code, better error handling, etc.
+
+%

@@ -1,0 +1,160 @@
+\section{Built-in Functions}
+\begin{itemize}
+% \item \mintinline{python}{__import__()},
+
+\item \mintinline{python}{abs()}: absolute value (of a number).
+
+\item \mintinline{python}{all()}: \mintinline{python}{True}, unless some element is \mintinline{python}{False}.
+
+\item \mintinline{python}{any()}: \mintinline{python}{True}, unless all elements are \mintinline{python}{False} or the iterable is empty.
+
+\item
+\mintinline{python}{ascii()},
+\mintinline{python}{bin()},
+\dotfill not implemented yet.
+
+\item \mintinline{python}{bool()}: \mintinline{python}{False} for empty sequences and collections, zero of any numeric type, \mintinline{python}{None} and \mintinline{python}{False}; otherwise \mintinline{python}{True}.
+
+\item
+\mintinline{python}{breakpoint()},
+\mintinline{python}{bytearray()},
+\mintinline{python}{bytes()},
+\mintinline{python}{callable()},
+\dotfill not implemented yet.
+
+\item \mintinline{python}{chr()}: converts integer to character, for example \mintinline{python}{chr(97) == 'a'}.
+
+\item \mintinline{python}{ord()}: converts character into integer, for example \mintinline{python}{ord('a') == 97}.
+
+\item
+\mintinline{python}{classmethod()},
+\mintinline{python}{compile()},
+\dotfill not implemented yet.
+
+\item \mintinline{python}{complex()}: convert string or pair of numbers into; for example \mintinline{python}{complex("3+4j") == complex(3,4)}.
+
+\item \mintinline{python}{float()}: converts a number or string to a floating point number.
+
+\item \mintinline{python}{hex()}: converts an integer to a lowercase hexadecimal string prefixed with "0x".
+
+\item \mintinline{python}{int()}: converts a number or string to an integer.
+
+\item \mintinline{python}{oct()}: converts an integer to an octal string prefixed with "0o".
+
+\item
+\mintinline{python}{delattr()},
+\dotfill not implemented yet.
+%
+
+\item \mintinline{python}{dict()}: converts to a dictionary.
+
+\item \mintinline{python}{list()}: converts to a list.
+
+\item \mintinline{python}{frozenset()}, \mintinline{python}{set()}: converts to a (frozen) set.
+
+\item \mintinline{python}{str()}: converts to a string.
+
+\item \mintinline{python}{tuple()}: converts to a tuple.
+%
+
+\item
+\mintinline{python}{dir()},
+\dotfill not implemented yet.
+
+\item \mintinline{python}{divmod()}: quotient and remainder.
+
+\item \mintinline{python}{enumerate()}: returns tuples containing a count (from 0) and consecutive values of a sequence or iterator.
+
+\item
+\mintinline{python}{eval()},
+\mintinline{python}{exec()},
+\dotfill not implemented yet.
+
+\item \mintinline{python}{filter(function, iterable)}: returns only those elements for which function returns true.
+
+\item \mintinline{python}{map(function, iterable)}: applies function to every item of iterable.
+
+\item
+\mintinline{python}{format()},
+\mintinline{python}{getattr()},
+\mintinline{python}{globals()},
+\mintinline{python}{hasattr()},
+\mintinline{python}{hash()},
+\mintinline{python}{help()},
+\mintinline{python}{id()},
+\mintinline{python}{input()},
+\mintinline{python}{isinstance()},
+\mintinline{python}{issubclass()},
+\mintinline{python}{iter()},
+\dotfill not implemented yet.
+
+\item \mintinline{python}{len()}: length (number of items) of an object.
+
+\item
+\mintinline{python}{locals()},
+\dotfill not implemented yet.
+\mintinline{python}{max()}: the largest item.
+\mintinline{python}{min()}: the smallest item.
+
+\item
+\mintinline{python}{memoryview()},
+\mintinline{python}{next()},
+\mintinline{python}{object()},
+\dotfill not implemented yet.
+
+\item \mintinline{python}{open()}: opens a file and then closes matching file descriptor.
+\begin{minted}{python}
+with open("path/to/file") as f:
+	for line in f:
+		# do something
+
+with open("path/to/file", "w") as f:
+	f.write("some string")
+\end{minted}
+
+\item \mintinline{python}{pow()}: exponentiation, with optional parameter for modulus.
+
+\item \mintinline{python}{print()}: :)
+
+\item
+\mintinline{python}{property()},
+\dotfill not implemented yet.
+
+\item \mintinline{python}{range()}: immutable sequence type...
+
+\item
+\mintinline{python}{repr()},
+\dotfill not implemented yet.
+
+\item \mintinline{python}{reversed()}: returns a reverse iterator.
+
+\item \mintinline{python}{round()}: rounds to given precision (to integer by default).
+
+\item
+\mintinline{python}{setattr()},
+\mintinline{python}{slice()},
+\dotfill not implemented yet.
+
+\item \mintinline{python}{sorted()}: returns a new sorted list.
+
+\item
+\mintinline{python}{staticmethod()},
+\dotfill not implemented yet.
+
+\item \mintinline{python}{sum()}: sums items of an iterable from left to right.
+For some use cases, there are good alternatives: \mintinline{python}{"".join(sequence)} for strings; \mintinline{python}{math.fsum()} for floating numbers and \mintinline{python}{itertools.chain()} for a series of iterables.
+
+\item
+\mintinline{python}{super()},
+\dotfill not implemented yet.
+
+\item \mintinline{python}{type()}: returns the type of an object.
+
+\item
+\mintinline{python}{vars()},
+\dotfill not implemented yet.
+
+\item \mintinline{python}{zip()}: aggregates (into tuples) elements from each of the iterables.
+\end{itemize}
+
+%

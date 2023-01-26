@@ -1,0 +1,55 @@
+\subsection{Sequence types}
+Common sequence operations include:
+\begin{itemize}
+    \item
+    \mintinline{python}{x in s} (true iff some item of s is equal to x),
+    \mintinline{python}{x not in s},
+
+    \item
+    \mintinline{python}{x + s} (concatenation),
+    \mintinline{python}{s * n},
+    \mintinline{python}{n * s} (iterated concatenation),
+
+    \item
+    \mintinline{python}{s[i]},
+    \mintinline{python}{s[i:j]} (slice),
+    \mintinline{python}{s[i:j:k]} (slice with custom step),
+
+    \item
+    \mintinline{python}{len(s)},
+    \mintinline{python}{min(s)},
+    \mintinline{python}{max(s)},
+
+    \item
+    \mintinline{python}{s.index(x[, i[, j]])} index of first occurence of x in s (at or after index i and before index j),
+
+    \item
+    \mintinline{python}{s.count(x)} (total number of occurrences).
+\end{itemize}
+
+Mutable sequence types implement as well:
+\begin{itemize}
+    \item
+    \mintinline{python}{del s[i:j]},
+    \mintinline{python}{s.clear()} (removes all items),
+    \mintinline{python}{s.pop([i])} (retrieves and removes element),
+    \mintinline{python}{s.remove(x)} (removes element),
+
+    \item
+    \mintinline{python}{s.copy()} (creates shallow copy),
+
+    \item
+    \mintinline{python}{s.append(x)} (adds one element to the end),
+    \mintinline{python}{s.insert(i, x)}, (adds in specified position),
+    \mintinline{python}{s.extend(t)} (adds many elements to the end),
+
+    \item
+    \mintinline{python}{s.reverse()} (reverses in place).
+\end{itemize}
+
+Lists are mutable.
+Tuples and ranges are not.
+
+\input{sections/text_sequences}
+
+%

@@ -1,0 +1,144 @@
+\section{Text processing (grep, sed, awk)}
+This is an expanded description of three powerful text processing tools:
+\texttt{grep}, \texttt{sed} and \texttt{awk}.
+
+See also \texttt{ack}, an optimized for programmers tool like grep, at \url{https://beyondgrep.com/} or learn Perl.
+
+\subsection{grep -- pattern search enginge}
+The ed command \texttt{g/re/p} was used to \textbf{g}lobally search a \textbf{r}egular \textbf{e}xpression and \textbf{p}rint.
+\begin{compactenum}
+\item [???] \textbf{grep} prints lines matching a pattern:
+\item [\texttt{E}] interprets pattern as an extended regexp,
+\item [\texttt{F}] does not recognize regexps,
+\item [\texttt{P}] interprets pattern as a Perl regexp,
+\item []
+\item [\texttt{c}] prints a count of matching lines instead,
+\item [\texttt{m}] exits after finding \ldots{} matches,
+\item [\texttt{o}] prints only matched parts of lines,
+\item [\texttt{n}] prints line numbers as well,
+\item [\texttt{r}] reads all files under each directory.
+\item []
+\item [\texttt{e}] uses a ``regexp'' pattern,
+\item [\texttt{f}] obtains patterns from a file,
+\item [\texttt{i}] ignores case disctinctions,
+\item [\texttt{v}] inverts the sense of matching,
+\item [\texttt{w}] selects only lines with whole words matches,
+\item [\texttt{x}] selects matches exactly matching whole line.
+\item []
+\item [\texttt{A}] prints \ldots{} lines of trailing content,
+\item [\texttt{B}] prints \ldots{} lines of leading content,
+\item [\texttt{C}] prints \ldots{} lines of both contents.
+\end{compactenum}
+
+\subsection{sed -- stream editor}
+\begin{compactenum}
+	\item [???] \textbf{sed} filters and transforms text:
+	\item [\texttt{-e}] adds a script to the commands to be executed,
+	\item [\texttt{-i}] edits files in place. With suffix supplied, makes backup (\texttt{sed -i[suffix] ...}), 
+	\item [\texttt{-n}] suppresses auto- printing of pattern space,
+  \item [\texttt{-r}] accepts extended regular expressions.
+\end{compactenum}
+
+The simplest usage is \mintinline{bash}{sed 's/foo/bar/g'}
+which substitutes (\texttt{s}) strings globally (\texttt{g}).
+There are other options, including:
+\begin{compactenum}
+\item [\texttt{a}] appends line before,
+\item [\texttt{d}] deletes line,
+\item [\texttt{i}] inserts line before,
+\item [\texttt{p}] prints line,
+\item [\texttt{w}] writes pattern space to a file.
+\end{compactenum}
+
+Default delimiter \texttt{/} can be replaced by any other.
+This is useful when regular expression already contains \texttt{/}.
+Addresses allow limiting to given line numbers:
+\begin{compactenum}
+\item \texttt{1-10} first ten lines
+\item \texttt{\$} the last line
+\item \texttt{10\textasciitilde 2} even lines starting from the 10th.
+\end{compactenum}
+
+One can also use regular expressions:
+\begin{minted}{bash}
+sed -e '/:/s/ /_/g'
+\end{minted}
+replaces spaces with underscores in lines containing a colon.
+Negation may be obtained with \texttt{!s}.
+
+% # d 1d 1,10d
+
+\subsection{awk -- Aho, Weinberger, Kernighan}
+\begin{compactenum}
+\item [???] \textbf{awk} is a language used as a data extraction and reporting tool.
+General form of its code:
+\end{compactenum}
+
+\begin{minted}{bash}
+#! /bin/awk
+pattern {actions} # comment
+\end{minted}
+
+Supported types of pattern are
+\begin{compactenum}
+\item \mintinline{bash}{BEGIN} for initialization,
+\item regular expressions (enclosed in \texttt{/ /}, single slashes): for example \texttt{/[a-z0-9\_-]\{3,16\}/},
+\item awk expressions, comparison operators (\texttt{<}, \texttt{>}, \texttt{<=}, \texttt{>=}, \texttt{==}, \texttt{!=}, tilde: matches, \texttt{!} negates),
+\item \mintinline{bash}{END} for final actions.
+\end{compactenum}
+
+Awk is weakly typed: variables can be treated either as numeric values or strings, which are not represented as one-dimensional arrays of characters!
+Important variables include:
+\begin{compactenum}
+\item \textbf{FS}: field separator (tab and space by default),
+\item \textbf{OFS}: output field separator,
+\item \textbf{RS}: record separator (new line),
+\item \textbf{NR}: number of the current record,
+\item \textbf{NF}: number of fields in the current record,
+\item \textbf{\$0}: the entire input record,
+\item \textbf{\$1}, \textbf{\$2}, \ldots: fields in the current record.
+\end{compactenum}
+
+Available numerical functions:
+\begin{compactenum}
+\item \texttt{int},
+\item \texttt{sqrt}, \texttt{exp}, \texttt{log},
+\item \texttt{sin}, \texttt{cos}, \texttt{atan2},
+\item \texttt{rand} (uniformly distributed value from $[0, 1)$), \texttt{srand} (sets the seed (by default, time of day) for random number generator).
+\end{compactenum}
+
+String/text functions:
+\begin{compactenum}
+\item \texttt{length} returns number of characters.
+\item \texttt{split} divides string into pieces separated by a separator.
+\item \texttt{sprintf} returns string printed by \texttt{printf} (which is C-like function) without printing.
+\item \texttt{gsub} searches for all of the longest, leftmost, nonoverlapping substrings and replaces them (globally). \texttt{sub} replaces only first match.
+\item \texttt{index} searches for the first occurrence of a string. \texttt{match} accepts regexes too.
+\item \texttt{tolower}, \texttt{toupper} convert case.
+\end{compactenum}
+
+
+find
+
+Tests:
+
+[$\to$]  \texttt{-iname}, \texttt{-name}\hfill (case insensitive) file name,
+
+[$\to$]  \texttt{-path}, \texttt{-regex}\hfill shell pattern or regular expr.
+
+[$\to$] \texttt{-group}, \texttt{-user} \hfill ownership
+
+[$\to$] \texttt{-perm 755}, \texttt{-perm /u=x} \hfill permissions
+
+[$\to$] \texttt{-size +5M -1G} \hfill size between 5MB and 1GB
+
+[$\to$] \texttt{-amin}, \texttt{-cmin}, \texttt{-mmin} accessed, created, \\modified in last\dots minutes (\texttt{-atime}, \dots: days)
+
+[$\to$] \texttt{-type d} (\texttt{f}) \hfill directories (files) only,
+
+[$\to$] \texttt{-empty} \hfill empty files or directories only,
+
+Example (deletes files larger than 5 megabytes): 
+
+[$\to$] \texttt{find / -size +5M -exec rm -f \{\} \textbackslash{};}
+

@@ -1,0 +1,51 @@
+\begin{compactenum}
+\item [???] \textbf{curl} transfers data to/from a server:
+\item [\texttt{I}] fetches the headers only,
+\item [\texttt{i}] includes HTTP response headers,
+\item [\texttt{L}] redoes requests to relocated pages,
+\item [\texttt{o}] writes to a file, not stdin,
+\item [\texttt{u}] specifies user name and password,
+\item [\texttt{x}] uses proxy,
+\item [\texttt{X}] specifies custom request method.
+\item [???] \textbf{sftp} is similar to ftp but uses SSH.
+\item [???] \textbf{wget} is a network downloader:
+\item [\texttt{A}, \texttt{R}] specifies lists of file suffixes or patterns (when wildcard characters appear) to accept/reject,
+\item [\texttt{b}] goes to background immediately,
+\item [\texttt{c}] continues getting a partially-downloaded file,
+\item [\texttt{m}] turns on  mirroring options: infinite recursion and time-stamping,
+\item [\texttt{np}] disallows ascension to parent directories,
+\item [\texttt{U}] identifies as a different agent to the server.
+\item [\texttt{w}] waits specified number of seconds between the retrievals (check: \texttt{--random-wait} too).
+\item [???] \textbf{rlogin} starts an unencrypted terminal session on a remote host.
+\item [???] \textbf{ssh} executes commands remotely:
+\item [\texttt{C}] requests compression of all data,
+%\item [\texttt{D}] specifies a local ''dynamic'' application-level port forwarding,
+\item [\texttt{i}] uses custom key for authentication,
+\item [\texttt{p}] selects a port to connect to on the remote host,
+\item [\texttt{X}] enables X11 forwarding.
+\end{compactenum}
+
+\begin{compactenum}
+\item [???] \textbf{ping} tests reachability of a network host:
+\item [\texttt{c}] stops after sending ... packets,
+\item [\texttt{n}] no DNS name resolution.
+\item [???] \textbf{route} shows and manipulates the IP routing table.
+\end{compactenum}
+
+\begin{compactenum}
+\item [???] \textbf{rsync} copies (remote or local) files fast:
+\item [\texttt{a}] in archive mode, equivalent to:
+\item [\texttt{g}] preserves group,
+\item [\texttt{o}] preserves owner (super-user only)
+\item [\texttt{p}] preserves permissions,
+\item [\texttt{t}] preserves modification times,
+\item [\texttt{l}] copies symlinks as symlinks,
+\item [\texttt{b}] make backups, 
+\item [\texttt{c}] skip based on checksum, 
+\item [\texttt{n}] performs a dry run without changes made, 
+\item [\texttt{r}] resursively,  %%%
+\item [\texttt{u}] skip newer files on the receiver, 
+\item [\texttt{v}] increases verbosity, %%%
+\item [\texttt{z}] compresses file data during the transfer, %%%
+\item [???] \textbf{scp} copies files securely (with SSH).
+\end{compactenum}

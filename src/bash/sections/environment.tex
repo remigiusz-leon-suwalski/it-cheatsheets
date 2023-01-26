@@ -1,0 +1,83 @@
+\textbf{Terminal handling}:
+\begin{compactenum}
+	\item [\symbolcoreutils] \commandcoreutils{tty} prints terminal filename.
+
+	\item [\symbolcoreutils] \commandcoreutils{stty} changes/prints terminal settings.
+\end{compactenum}
+
+
+\begin{compactenum}
+	\item [???] \textbf{clear} clears the terminal screen.
+	\item [???] \textbf{env} runs programs in modified environment:
+	\item [] without parameters, prints environmental variables.
+	\item [???] \textbf{exit} terminates the calling process.
+	\item [???] \textbf{finger} looks up user information.
+	\item [Bash] \textbf{history} displays the history list. %with line numbers.
+	\item [???] \textbf{mesg} displays messages from other users.
+\end{compactenum}
+
+\begin{compactenum}
+	\item [???] \textbf{passwd} changes user password:
+	\item [\texttt{d}] deletes (empties) an account's password,
+	\item [\texttt{e}] expires an account's password,
+	\item [\texttt{n}] minimum days to change password,
+	\item [\texttt{w}] warning days before password expire,
+	\item [\texttt{x}] maximum days a password remains valid.
+\end{compactenum}
+
+\begin{compactenum}
+        \item [???] \textbf{su} changes user ID or becomes superuser.
+        \item [???] \textbf{sudo} executes a command as superuser:
+        \item [\texttt{u}] as a different user.
+\end{compactenum}
+
+\textbf{System context}:
+\begin{compactenum}
+	\item [\symbolcoreutils] \commandcoreutils{arch}: \dotfill ????
+
+	\item [\symbolcoreutils] \commandcoreutils{hostid}: \dotfill ????
+
+	\item [\symbolcoreutils] \commandcoreutils{uptime}: how long has system been running?
+	\item [\texttt{s}] system up since: yyyy-mm-dd HH:MM:SS.
+
+	\item [\symbolcoreutils] \commandcoreutils{hostname} shows/sets the host name:
+	\item [\texttt{d}] displays the DNS domain name,
+	\item [\texttt{i}] displays the network address.
+
+	\item [\symbolcoreutils] \commandcoreutils{nproc} prints number of processing units.
+
+	\item [\symbolcoreutils] \commandcoreutils{uname} prints system information:
+	\item [\texttt{a}] equivalent to:
+	\texttt{s} (kernel name),
+	\texttt{n} (network node hostname),
+	\texttt{rv} (kernel release and version),
+	\texttt{m} (machine hardware name),
+	\texttt{p} (processor type),
+	\texttt{i} (hardware platform),
+	\texttt{o} (operating system).
+\end{compactenum}
+
+\begin{compactenum}
+	\item [???] \textbf{wall} sends a message to all users,
+	\item [???] \textbf{write} sends a message to another user. 
+\end{compactenum}
+
+\textbf{User information}:
+\begin{compactenum}
+	\item [\symbolcoreutils] \commandcoreutils{whoami} prints effective userid.
+
+	\item [\symbolcoreutils] \commandcoreutils{logname} prints user's login name.
+
+	\item [\symbolcoreutils] \commandcoreutils{pinky} prints user information.
+
+	\item [\symbolcoreutils] \commandcoreutils{who} shows who is logged on,
+	\item [\texttt{a}] more data, same as bdprtTu + login.
+
+	\item [???] \textbf{w} does the same, shows what they are doing,
+
+	\item [\symbolcoreutils] \commandcoreutils{users}: \dotfill ????
+
+	\item [\symbolcoreutils] \commandcoreutils{groups}: \dotfill ???
+
+	\item [\symbolcoreutils] \commandcoreutils{id}: \dotfill ???
+\end{compactenum}
