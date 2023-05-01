@@ -2,16 +2,23 @@
 
 \subsection{List operations}
 
-\textbf{map} returns a list constructed by appling a function to all items in a list passed as the second argument.
+\textbf{map} returns a list constructed by appling a function to all items in a list:
 \begin{minted}{haskell}
 map :: (a -> b) -> [a] -> [b]
 map _ []     = []
 map f (x:xs) = f x : map f xs
 \end{minted}
 
-% (++)
+\textbf{filter} returns the list of those elements that satisfy the predicate:
+\begin{minted}{haskell}
+filter :: (a -> Bool) -> [a] -> [a]
+filter pred []     = []
+filter pred (x:xs)
+  | pred x         = x : filter pred xs
+  | otherwise      = filter pred xs
+\end{minted}
 
-% filter
+% (++)
 
 % head
 
@@ -23,11 +30,20 @@ map f (x:xs) = f x : map f xs
 
 % (!!)
 
-% null
+\textbf{null} tests whether the structure is empty:
+\begin{minted}{haskell}
+null :: Foldable t => t a -> Bool
+null = foldr (\_ _ -> False) True
+\end{minted}
 
 % length
 
-% reverse
+\textbf{reverse} returns the elements of a list in reverse order (hangs for infinite lists):
+\begin{minted}{haskell}
+reverse :: [a] -> [a]
+reverse = foldl (flip (:)) []
+\end{minted}
+
 
 % and
 
