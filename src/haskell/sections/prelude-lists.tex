@@ -1,0 +1,12 @@
+%
+
+\subsection{List operations}
+
+\textbf{map} returns a list constructed by appling a function to all items in a list passed as the second argument.
+\begin{minted}{haskell}
+map :: (a -> b) -> [a] -> [b]
+map _ []     = []
+map f (x:xs) = f x : map f xs
+\end{minted}
+
+%

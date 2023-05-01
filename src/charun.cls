@@ -15,6 +15,9 @@
 \RequirePackage{parskip}
 \RequirePackage[compact]{titlesec}
 
+% produce hypertext links
+\RequirePackage{hyperref}
+
 
 % Syntax highlighting
 % \RequirePackage[outputdir=../../build]{minted}
