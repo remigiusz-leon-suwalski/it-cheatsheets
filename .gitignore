@@ -1,0 +1,10 @@
+*.pdf
+
+# LaTeX build files
+*.aux
+*.log
+*.out
+_minted-*
+
+# Python virtual env
+venv
