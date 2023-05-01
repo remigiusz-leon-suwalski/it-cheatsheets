@@ -3,6 +3,28 @@
 \subsection{Standard types, classes and related functions}
 
 \subsubsection{Basic data types}
+\textbf{Bool} is a boolean type. It can have only two values: True and False.
+\begin{minted}{haskell}
+data Bool = False | True
+
+(&&) :: Bool -> Bool -> Bool
+True  && x = x
+False && _ = False
+
+(||) :: Bool -> Bool -> Bool
+True  || _ = True
+False || x = x
+
+not :: Bool -> Bool
+not True  = False
+not False = True
+\end{minted}
+
+\textbf{otherwise} is defined as the value True. It helps to make guards more readable:
+\begin{minted}{haskell}
+f x | x < 0     = ...
+    | otherwise = ...
+\end{minted}
 
 \subsubsection{Basic data types}
 
