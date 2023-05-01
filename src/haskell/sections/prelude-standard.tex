@@ -2,4 +2,36 @@
 
 \subsection{Standard types, classes and related functions}
 
+\subsubsection{Basic data types}
+
+\subsubsection{Basic data types}
+
+\subsubsection{Numbers}
+%%% Numeric types
+
+%%% Numeric type classes
+\textbf{Num} is a basic numeric class.
+The Haskell Report defines no laws for Num.
+However, (+) and (*) are customarily expected to define a ring.
+\begin{minted}{haskell}
+class  Num a  where
+    (+), (-), (*)       :: a -> a -> a
+    negate              :: a -> a
+    abs                 :: a -> a
+    signum              :: a -> a
+    fromInteger         :: Integer -> a
+    x - y               = x + negate y
+    negate x            = 0 - x
+\end{minted}
+
+%%% Numeric functions
+
+\subsubsection{Semigroups and Monoids}
+
+\subsubsection{Monads and functors}
+
+\subsubsection{Folds and traversals}
+
+\subsubsection{Miscellaneous functions}
+
 %
