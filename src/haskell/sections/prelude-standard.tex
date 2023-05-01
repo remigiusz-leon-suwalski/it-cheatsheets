@@ -26,6 +26,34 @@ f x | x < 0     = ...
     | otherwise = ...
 \end{minted}
 
+% data Maybe a
+
+% data Either a b
+
+% data Ordering
+
+% data Char
+
+A \textbf{String} is a list of characters:
+\begin{minted}{haskell}
+type String = [Char]
+\end{minted}
+
+\textbf{Tuples}:
+\begin{minted}{haskell}
+fst :: (a, b) -> a
+fst (x, _) = x
+
+snd :: (a, b) -> b
+snd (_, y) = y
+
+curry :: ((a, b) -> c) -> a -> b -> c
+curry f x y = f (x, y)
+
+uncurry :: (a -> b -> c) -> ((a, b) -> c)
+uncurry f p = f (fst p) (snd p)
+\end{minted}
+
 \subsubsection{Basic data types}
 
 \subsubsection{Numbers}
