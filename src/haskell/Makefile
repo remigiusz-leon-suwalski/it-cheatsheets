@@ -1,6 +1,6 @@
 all: haskell-notes.pdf
 
-haskell-notes.pdf: charun.cls haskell-notes.tex
+haskell-notes.pdf: charun.cls haskell-notes.tex sections/*.tex
 	pdflatex -shell-escape haskell-notes.tex
 
 clean:
