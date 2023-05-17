@@ -1,0 +1,52 @@
+%
+
+\subsection{SELECT}
+\textbf{SELECT} retrieves specified columns (or all columns if \mintinline{sql}{*} is used) from table mentioned after \mintinline{sql}{FROM} keyword.
+\begin{minted}[linenos,firstnumber=last]{sql}
+SELECT * FROM cd.facilities;
+SELECT name, membercost FROM cd.facilities;
+\end{minted}
+
+If '\textbf{DISTINCT}' is used, duplicate rows are removed from the results.
+\begin{minted}[linenos,firstnumber=last]{sql}
+SELECT DISTINCT surname FROM cd.members
+\end{minted}
+
+If '\textbf{AS} + name' is used, specified name is used for an output column.
+\begin{minted}[linenos,firstnumber=last]{sql}
+SELECT name AS facilityname FROM cd.facilities;
+\end{minted}
+
+% https://pgexercises.com/questions/basic/where.html
+If '\textbf{WHERE} + condition' is used, rows that don't satisfy that condition are removed from the output, but not the table :).
+Usual logical operators are available: \mintinline{sql}{AND}, \mintinline{sql}{OR}, \mintinline{sql}{NOT}.
+SQL uses a three-valued logic system with true, false and null (representing unknowns).
+See \textbf{\ref{subsection_comparison}} for comparison operators.
+\begin{minted}[linenos,firstnumber=last]{sql}
+SELECT * FROM cd.facilities WHERE membercost > 0;
+SELECT facid, name FROM cd.facilities
+WHERE membercost > 0 AND (membercost < monthlymaintenance);
+\end{minted}
+
+If '\textbf{ORDER BY} + column(s)' is used, returned rows are sorted in the specified order, otherwise rows are returned in whatever rorder the system finds fastest to produce.
+Here \mintinline{sql}{ASC} is the default mode.
+
+If '\textbf{LIMIT} + count' is used, no more rows than given count are returned.
+If '\textbf{OFFSET} + start' is also used, that many initial rows will be skipped.
+(This produces unpredictable output if rows are not sorted with \mintinline{sql}{ORDER BY}!).
+Standard SQL uses FETCH instead, LIMIT is Postgresql specific.
+
+\begin{minted}[linenos,firstnumber=last]{sql}
+SELECT surname, firstname FROM cd.members
+ORDER BY surname DESC LIMIT 10 OFFSET 5;
+\end{minted}
+
+Operators \textbf{UNION}, \textbf{INTERSECT} and \textbf{INTERSECT} are used to combine outputs of multiple \mintinline{sql}{SELECT} statements, corresponding to $\cup$, $\cap$ and $\setminus$.
+In all three cases, duplicate rows are removed unless \textbf{ALL} is used!
+\begin{minted}[linenos,firstnumber=last]{sql}
+SELECT surname FROM cd.members
+UNION
+SELECT name FROM cd.facilities;
+\end{minted}
+
+%

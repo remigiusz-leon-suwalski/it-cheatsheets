@@ -1,0 +1,24 @@
+%
+
+% https://www.postgresql.org/docs/current/functions-conditional.html
+% 9.18. Conditional Expressions
+\subsection{Conditional expressions}
+\textbf{CASE} is a generic conditional expression, similar to if/else:
+\begin{minted}[linenos,firstnumber=last]{sql}
+SELECT name,
+    CASE WHEN (monthlymaintenance > 100) THEN 'expensive'
+         ELSE 'cheap'
+    END AS cost
+FROM cd.facilities;
+\end{minted}
+It has a simpler form:
+\begin{minted}[linenos,firstnumber=last]{sql}
+...
+CASE a WHEN 1 THEN 'one'
+       WHEN 2 THEN 'two'
+       ELSE 'other'
+END
+...
+\end{minted}
+
+%

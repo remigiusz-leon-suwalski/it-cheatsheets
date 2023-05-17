@@ -1,156 +1,46 @@
 \documentclass{charun}
-\title{PostgreSQL 15.3 notes, version 0.1.0}
+\title{PostgreSQL 15.3 notes, version 0.1.1}
 \author{Leon Suwalski}
 \begin{document}
 \begin{multicols*}{2}
 \maketitle
 \raggedright
 
-% https://pgexercises.com/questions/basic/selectall.html
-% https://pgexercises.com/questions/basic/selectspecific.html
 \section{SQL Commands}
-\subsection{SELECT}
-\textbf{SELECT} retrieves specified columns (or all columns if \mintinline{sql}{*} is used) from table mentioned after \mintinline{sql}{FROM} keyword.
-\begin{minted}[linenos,firstnumber=last]{sql}
-SELECT * FROM cd.facilities;
-SELECT name, membercost FROM cd.facilities;
-\end{minted}
-
-If '\textbf{DISTINCT}' is used, duplicate rows are removed from the results.
-\begin{minted}[linenos,firstnumber=last]{sql}
-SELECT DISTINCT surname FROM cd.members
-\end{minted}
-
-If '\textbf{AS} + name' is used, specified name is used for an output column.
-\begin{minted}[linenos,firstnumber=last]{sql}
-SELECT name AS facilityname FROM cd.facilities;
-\end{minted}
-
-% https://pgexercises.com/questions/basic/where.html
-If '\textbf{WHERE} + condition' is used, rows that don't satisfy that condition are removed from the output, but not the table :).
-Usual logical operators are available: \mintinline{sql}{AND}, \mintinline{sql}{OR}, \mintinline{sql}{NOT}.
-SQL uses a three-valued logic system with true, false and null (representing unknowns).
-See \textbf{\ref{subsection_comparison}} for comparison operators.
-\begin{minted}[linenos,firstnumber=last]{sql}
-SELECT * FROM cd.facilities WHERE membercost > 0;
-SELECT facid, name FROM cd.facilities
-WHERE membercost > 0 AND (membercost < monthlymaintenance);
-\end{minted}
-
-If '\textbf{ORDER BY} + column(s)' is used, returned rows are sorted in the specified order, otherwise rows are returned in whatever rorder the system finds fastest to produce.
-Here \mintinline{sql}{ASC} is the default mode.
-
-If '\textbf{LIMIT} + count' is used, no more rows than given count are returned.
-If '\textbf{OFFSET} + start' is also used, that many initial rows will be skipped.
-(This produces unpredictable output if rows are not sorted with \mintinline{sql}{ORDER BY}!).
-Standard SQL uses FETCH instead, LIMIT is Postgresql specific.
-
-\begin{minted}[linenos,firstnumber=last]{sql}
-SELECT surname, firstname FROM cd.members
-ORDER BY surname DESC LIMIT 10 OFFSET 5;
-\end{minted}
-
-Operators \textbf{UNION}, \textbf{INTERSECT} and \textbf{INTERSECT} are used to combine outputs of multiple \mintinline{sql}{SELECT} statements, corresponding to $\cup$, $\cap$ and $\setminus$.
-In all three cases, duplicate rows are removed unless \textbf{ALL} is used!
-\begin{minted}[linenos,firstnumber=last]{sql}
-SELECT surname FROM cd.members
-UNION
-SELECT name FROM cd.facilities;
-\end{minted}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\input{sections/command-select}
 
 % Chapter 9. Functions and Operators
 \section{Functions and operators}
-
-% https://www.postgresql.org/docs/current/functions-comparison.html
-% 9.2 Comparison
-\subsection{Comparison}
-\label{subsection_comparison}%
-Comparison operators are \mintinline{sql}{<}, \mintinline{sql}{<=}, \mintinline{sql}{>}, \mintinline{sql}{>=}, \mintinline{sql}{=} (equal), \mintinline{sql}{<>} (not equal), \mintinline{sql}{!=} (alias for not equal).
-For example, below query returns members who joined after the start of September 2012:
-\begin{minted}[linenos,firstnumber=last]{sql}
-SELECT memid FROM cd.members WHERE joindate >= '2012-09-01';
-\end{minted}
-% BETWEEN, BETWEEN SYMMETRIC, IS DISTINCT FROM, IS NULL, IS UNKNOWN, IS TRUE, IS FALSE
-
-% https://www.postgresql.org/docs/current/functions-math.html
-% 9.3 Mathematical
-
-% https://www.postgresql.org/docs/current/functions-string.html
-% 9.4 String
-
-% https://www.postgresql.org/docs/15/functions-matching.html
-% 9.7. Pattern Matching
-\subsection{Pattern matching}
-% There's other ways to accomplish this task: Postgres supports regular expressions with the ~ operator, for example. Use whatever makes you feel comfortable, but do be aware that the LIKE operator is much more portable between systems.
-\textbf{LIKE} provides pattern matching: underscore matches any single character, percentage matches any string (possible empty).
-\begin{minted}[linenos,firstnumber=last]{sql}
-SELECT * FROM cd.facilities WHERE name LIKE '%Tennis%';
-\end{minted}
-% SIMILAR TO
-
-% https://www.postgresql.org/docs/current/functions-conditional.html
-% 9.18. Conditional Expressions
-\subsection{Conditional expressions}
-\textbf{CASE} is a generic conditional expression, similar to if/else:
-\begin{minted}[linenos,firstnumber=last]{sql}
-SELECT name,
-    CASE WHEN (monthlymaintenance > 100) THEN 'expensive'
-         ELSE 'cheap'
-    END AS cost
-FROM cd.facilities;
-\end{minted}
-It has a simpler form:
-\begin{minted}[linenos,firstnumber=last]{sql}
-...
-CASE a WHEN 1 THEN 'one'
-       WHEN 2 THEN 'two'
-       ELSE 'other'
-END
-...
-\end{minted}
-
-% https://www.postgresql.org/docs/15/functions-aggregate.html
-% 9.21. Aggregate Functions
-\subsection{Aggregate functions}
-Aggregate functions can't be used in the \mintinline{sql}{WHERE} clauses due to the order of evaluation of clauses. Therefore this works:
-\begin{minted}[linenos,firstnumber=last]{sql}
-SELECT * FROM cd.members
-WHERE joindate = (SELECT MAX(joindate) FROM cd.members);
-\end{minted}
-And this does not:
-\begin{minted}[linenos,firstnumber=last]{sql}
-SELECT * FROM cd.members
-WHERE joindate = MAX(joindate);
-\end{minted}
-
-Common aggregate functions are
-\textbf{COUNT},
-\textbf{MAX} (maximum),
-\textbf{MIN} (minimum),
-\textbf{SUM}.
-
-% https://www.postgresql.org/docs/current/functions-subquery.html
-% 9.23. Subquery Expressions
-\subsection{Subquery expressions}
-\textbf{IN} is a shorthand for multiple OR statements.
-Right-hand side is a subquery returning one column or a list of scalar expressions; result is true if left-hand side is equal to any of the right-hand rows/expressions.
-\begin{minted}[linenos,firstnumber=last]{sql}
-SELECT * FROM cd.facilities WHERE facid in (1, 5);
-\end{minted}
+% 01
+\input{sections/09-02-comparison}
+% 03
+% 04
+% 05
+% 06
+\input{sections/09-07-pattern-matching}
+% 08
+% 09
+% 10
+% 11
+% 12
+% 13
+% 14
+% 15
+% 16
+% 17
+\input{sections/09-18-conditional-expressions}
+% 19
+% 20
+\input{sections/09-21-aggregate-functions}
+% 22
+\input{sections/09-23-subquery-expressions}
+% 24
+% 25
+% 26
+% 27
+% 28
+% 29
+% 30
 
 \newpage
 \section{Old stuff}

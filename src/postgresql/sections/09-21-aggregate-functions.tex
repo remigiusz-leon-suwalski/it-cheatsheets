@@ -1,0 +1,23 @@
+%
+
+% https://www.postgresql.org/docs/15/functions-aggregate.html
+% 9.21. Aggregate Functions
+\subsection{Aggregate functions}
+Aggregate functions can't be used in the \mintinline{sql}{WHERE} clauses due to the order of evaluation of clauses. Therefore this works:
+\begin{minted}[linenos,firstnumber=last]{sql}
+SELECT * FROM cd.members
+WHERE joindate = (SELECT MAX(joindate) FROM cd.members);
+\end{minted}
+And this does not:
+\begin{minted}[linenos,firstnumber=last]{sql}
+SELECT * FROM cd.members
+WHERE joindate = MAX(joindate);
+\end{minted}
+
+Common aggregate functions are
+\textbf{COUNT},
+\textbf{MAX} (maximum),
+\textbf{MIN} (minimum),
+\textbf{SUM}.
+
+%

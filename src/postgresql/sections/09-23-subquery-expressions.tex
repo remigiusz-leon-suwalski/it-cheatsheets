@@ -1,0 +1,12 @@
+%
+
+% https://www.postgresql.org/docs/current/functions-subquery.html
+% 9.23. Subquery Expressions
+\subsection{Subquery expressions}
+\textbf{IN} is a shorthand for multiple OR statements.
+Right-hand side is a subquery returning one column or a list of scalar expressions; result is true if left-hand side is equal to any of the right-hand rows/expressions.
+\begin{minted}[linenos,firstnumber=last]{sql}
+SELECT * FROM cd.facilities WHERE facid in (1, 5);
+\end{minted}
+
+%
