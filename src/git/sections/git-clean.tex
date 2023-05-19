@@ -1,10 +1,11 @@
 %
 
+\textbf{git clean}\git{clean} removes untracked files.
+Useful short options:
 \begin{compactenum}
-\item [\texttt{git}] \texttt{clean} removes untracked files.
-\item [\texttt{-d}] untracked \emph{directories} as well.
-\item [\texttt{-f}] with \emph{force}.
-\item [\texttt{-x}] ignored files too.
+\item [\texttt{-d}] recursing into untracked directories too,
+\item [\texttt{-f}] removes untracked files even if clean.requireForce is not set to false,
+\item [\texttt{-x}] without using standard ignore rules (.gitignore).
 \end{compactenum}
 
 %
