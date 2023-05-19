@@ -2,45 +2,26 @@
 
 \textbf{git log}\marginpar[\textbf{\color{blue}{log}}]{\textbf{\color{blue}{log}}} displays entire commit history (without any diff output by default).
 
-\begin{minted}{bash}
-# between foo and bar
-git log foo..bar
+\mintinline{bash}{git log foo..bar} displays only commits between \texttt{foo} and \texttt{bar}.
+Similarly \mintinline{bash}{git log foo ^bar} displays only commits reachable from foo but not bar.
 
-# reachable from foo or bar but not baz
-git log foo bar ^baz
+\mintinline{bash}{git log --author=<pattern> --committer=<pattern>} displays only commits with author/committer matching regex.
 
-# only commits with author/committer matching regex
-git log --author=<pattern>
-git log --committer=<pattern>
+\mintinline{bash}{git log --grep=<pattern>} displays only commits with log message matching regex.
 
-# only commits with log message matching regex
-git log --grep=<pattern>
+\mintinline{bash}{git log --follow <path>} continues listing the history beyond renames but works only for a single file!
 
-# continues listing the history beyond renames
-# works only for a single file!
-git log --follow <path>
+\mintinline{bash}{git log --no-merges} skips commits with more than one parent.
 
-# without commits with more than one parent
-# the same as --max-parents=1
-git log --no-merges
+\mintinline{bash}{git log --decorate} prints nice reference names without refs/heads/, refs/tags/ and refs/remotes/ prefixes.
 
-# without refs/heads/, refs/tags/ and refs/remotes/
-git log --decorate
+\mintinline{bash}{git log --oneline} skips author, date and full commit message. Equivalent to \mintinline{bash}{--pretty=oneline --abbrev-commit}.
 
-# without author, date, full commit message
-# the same as --pretty=oneline --abbrev-commit
-git log --oneline
+\mintinline{bash}{git log --graph} draws a GuitarHero-like text based graph.
 
-# draws a GuitarHero-like text based graph
-git log --graph
+\mintinline{bash}{git log --stat} generates a diffstat (histogram).
 
-# generates a diffstat (histogram)
-git log --stat
-
-# using custom format
-git log --format='format:%h %an'
-\end{minted}
-
+\mintinline{bash}{git log --format='format:%h %an'} uses custom format.
 When using format option, following placeholders are commonly used:
 \mintinline{bash}{%H} (commit hash),
 \mintinline{bash}{%h} (abbreviated commit hash),
