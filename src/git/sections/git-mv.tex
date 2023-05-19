@@ -1,9 +1,12 @@
 %
 
+\textbf{git mv}\git{mv} moves files, directories symlinks.
+Useful short options:
 \begin{compactenum}
-\item [\texttt{git}] \texttt{mv} moves files, directories, symlinks.
-\item [\texttt{-f}] \emph{forces} move even if target exists (required on OSX when changing file name's capitalization).
-\item [\texttt{-n}] performs a dry run.
+\item [\texttt{-f}] forces move even if target exists (equivalent to \mintinline{bash}{--force}),
+\item [\texttt{-n}] performs a dry run (equivalent to \mintinline{bash}{--dry-run}).
 \end{compactenum}
+
+On OSX, \texttt{-f} flag is mandatory when changing capitalization of file name.
 
 %
