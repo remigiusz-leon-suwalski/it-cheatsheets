@@ -1,6 +1,6 @@
 all: python3-notes.pdf
 
-python3-notes.pdf: charun.cls python3-notes.tex sections/*.tex
+python3-notes.pdf: charun.cls python3-notes.tex intro/*.tex libraries/*/*.tex
 	pdflatex -shell-escape python3-notes.tex
 
 clean:
