@@ -2,7 +2,7 @@
 \ProvidesClass{charuun}[2021/04/27 Reference cards]
 \LoadClass[a4paper, twoside, 8pt, twocolumn]{extarticle}
 
-\RequirePackage[left=1.2cm, right=1.2cm, top=2.25cm, bottom=1.25cm]{geometry}
+\RequirePackage[left=1.5cm, right=1.5cm, top=2.25cm, bottom=1.25cm]{geometry}
 
 % Font, symbols
 \RequirePackage[T1]{fontenc}
