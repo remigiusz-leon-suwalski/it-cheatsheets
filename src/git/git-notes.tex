@@ -12,7 +12,7 @@ Useful options:
 \begin{compactenum}
 \item [\texttt{-f}] allow adding otherwise ignored files (equivalent to \mintinline{bash}{--force}),
 \item [\texttt{-p}] interactively choose hunks of patch to be added (equivalent to \mintinline{bash}{--patch}),
-\item [\texttt{-v}] be verbose.
+\item [\texttt{-v}] be verbose (equivalent to \mintinline{bash}{--verbose}).
 \end{compactenum}
 
 \section{git commit}
@@ -25,10 +25,21 @@ See also \mintinline{bash}{git commit --author=...}
 
 Useful short options:
 \begin{compactenum}
-\item [\texttt{-m}] with specified commit message,
-\item [\texttt{-v}] with diff between HEAD and what would be committed at the bottom of commit message template (diff will not be part of the commit message!).
+\item [\texttt{-m}] with specified commit message (equivalent to \mintinline{bash}{--message=...}),
+\item [\texttt{-v}] with diff between HEAD and what would be committed at the bottom of commit message template.
+Diff will not be part of the commit message!.
+(equivalent to \mintinline{bash}{--verbose}),
 \end{compactenum}
 
+\section{git push}
+\textbf{git push} uploads local branch commits to the corresponding remote branch.
+
+\mintinline{bash}{git push origin master} pushes branch \emph{master} to remote \emph{origin}.
+
+Useful short options:
+\begin{compactenum}
+\item [\texttt{-f}] disables overwrite checks (equivalent to \mintinline{bash}{--force}),
+\end{compactenum}
 
 \end{multicols*}
 \end{document}
