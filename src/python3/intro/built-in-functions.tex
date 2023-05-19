@@ -5,32 +5,15 @@ all() # False if any element is False
 any() # False if all elements are False or iterable is empty
 \end{minted}
 
-\begin{itemize}
-% \item \mintinline{python}{__import__()},
+Mathematical operations:
+\begin{minted}{python}
+abs()    # absolute value of a number
+divmod() # quotient, remainder of non-complex numbers division
+min()    # smallest element
+max()    # largest element
+\end{minted}
 
-\item \mintinline{python}{abs()}: absolute value (of a number).
-
-\item
-\mintinline{python}{ascii()},
-
-\item
-\mintinline{python}{breakpoint()},
-\mintinline{python}{bytearray()},
-\mintinline{python}{bytes()},
-\mintinline{python}{callable()},
-\dotfill not implemented yet.
-
-\item \mintinline{python}{chr()}: converts integer to character, for example \mintinline{python}{chr(97) == 'a'}.
-
-\item \mintinline{python}{ord()}: converts character into integer, for example \mintinline{python}{ord('a') == 97}.
-
-\item
-\mintinline{python}{classmethod()},
-\mintinline{python}{compile()},
-\dotfill not implemented yet.
-\end{itemize}
-
-Converting:
+Converting between data types:
 \begin{minted}{python}
 bool() # anything not listed below: True
 # empty sequences, collections, zeroes, None, False: False
@@ -47,6 +30,9 @@ float() # converts a number or string
 complex() # converts a pair of numbers or string
 # complex("3+4j") == complex(3,4) == (3+4j)
 
+chr() # converts integer to character, chr(97) == 'a'
+ord() # converts character to integer, ord('a') == 97
+
 tuple()
 list()
 dict() # dictionary
@@ -54,6 +40,38 @@ frozenset()
 set()
 str() # string
 \end{minted}
+
+Functional programming:
+\begin{minted}{python}
+# only those elements for which function is true
+filter(function, iterable)
+
+# applies function to every element of iterable
+map(function, iterable)
+\end{minted}
+
+\begin{itemize}
+% \item \mintinline{python}{__import__()},
+
+\item
+\mintinline{python}{ascii()},
+
+\item
+\mintinline{python}{breakpoint()},
+\mintinline{python}{bytearray()},
+\mintinline{python}{bytes()},
+\mintinline{python}{callable()},
+\dotfill not implemented yet.
+
+
+
+\item
+\mintinline{python}{classmethod()},
+\mintinline{python}{compile()},
+\dotfill not implemented yet.
+\end{itemize}
+
+
 
 \begin{itemize}
 \item
@@ -64,7 +82,6 @@ str() # string
 \mintinline{python}{dir()},
 \dotfill not implemented yet.
 
-\item \mintinline{python}{divmod()}: quotient and remainder.
 
 \item \mintinline{python}{enumerate()}: returns tuples containing a count (from 0) and consecutive values of a sequence or iterator.
 
@@ -72,10 +89,6 @@ str() # string
 \mintinline{python}{eval()},
 \mintinline{python}{exec()},
 \dotfill not implemented yet.
-
-\item \mintinline{python}{filter(function, iterable)}: returns only those elements for which function returns true.
-
-\item \mintinline{python}{map(function, iterable)}: applies function to every item of iterable.
 
 \item
 \mintinline{python}{format()},
@@ -96,8 +109,6 @@ str() # string
 \item
 \mintinline{python}{locals()},
 \dotfill not implemented yet.
-\mintinline{python}{max()}: the largest item.
-\mintinline{python}{min()}: the smallest item.
 
 \item
 \mintinline{python}{memoryview()},
