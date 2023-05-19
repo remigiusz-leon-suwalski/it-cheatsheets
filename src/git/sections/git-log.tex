@@ -1,3 +1,25 @@
 %
 
+\begin{compactenum}
+\item [\texttt{git}] \texttt{log} shows commit logs.
+\item [\texttt{-G}] looks for diffs whose patch contains added or removed lines matching regex.
+\item [\texttt{-S}] looks for diffs that change \# of occurrences of given string.
+\item [\texttt{-U}] with different than usual three lines of context.
+\item [\texttt{-n}] limits the \emph{number} of commits to output.
+\item [\texttt{-p}] generates a patch.
+\item [---] \texttt{author}, \texttt{committer}: limits to commits with author/committer matching (any) pattern.
+\item [---] \texttt{oneline}: shows abbrev. commits, one per line.
+\item [---] \texttt{format}: pretty-prints in a given format.
+\begin{compactenum}
+\item [\texttt{H}] commit hash (\texttt{h}: abbreviated),
+\item [\texttt{an}] author name,
+\item [\texttt{ae}] author email,
+\item [\texttt{ad}] author date (\texttt{ar} relative, \texttt{ai} ISO 8601, \texttt{at} UNIX timestamp), commiter: \texttt{a} $\to$ \texttt{c},
+\item [\texttt{d}] ref name,
+\item [\texttt{s}, \texttt{b}] subject, body.
+\end{compactenum}
+\item [---] \texttt{graph}: draws a representation of history.
+\item [---] \texttt{no-merges}: skip commits with more than one parent.
+\end{compactenum}
+
 %
