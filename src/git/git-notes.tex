@@ -1,10 +1,18 @@
 \documentclass{charun}
-\title{Git notes, version 0.0.1}
+\title{Git notes, version 0.1.0}
 \author{Leon Suwalski}
 \begin{document}
 \begin{multicols*}{2}
 \maketitle
 \raggedright
-Git.
+
+\section{git add}
+\textbf{git add} adds new or changed files to the staging area.
+Useful options:
+\begin{compactenum}
+\item [\texttt{-f}] allow adding otherwise ignored files (equivalent to \mintinline{bash}{--force}),
+\item [\texttt{-p}] interactively choose hunks of patch to be added (equivalent to \mintinline{bash}{--patch}),
+\item [\texttt{-v}] be verbose.
+\end{compactenum}
 \end{multicols*}
 \end{document}
