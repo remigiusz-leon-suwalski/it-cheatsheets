@@ -1,11 +1,17 @@
 %
 
+\textbf{git remote}\git{remote} manages set of tracked repositories.
+With no arguments, lists existing remotes.
+
+Useful options:
 \begin{compactenum}
-\item [\texttt{git}] \texttt{remote} manages set of tracked repositories.
-\item [\texttt{-v}] be more \emph{verbose} (showiung remote URLs).
-\item [\scriptsize \texttt{add}] adds a remote.
-\item [\scriptsize \texttt{rename}] renames the remote.
-\item [\scriptsize \texttt{remove}] removes the remote.
+\item [\texttt{-v}] shows URL after name (equivalent to \mintinline{bash}{--verbose}).
 \end{compactenum}
+
+\mintinline{bash}{git remote add <name> <URL>} adds a remote, so \mintinline{bash}{git fetch <name>} can later create remote-tracking branches.
+
+\mintinline{bash}{git remote rename <old> <new>} renames the remote :D
+
+\mintinline{bash}{git remote remove <name>} removes the remote, all remote-tracking branches and configuration settings.
 
 %

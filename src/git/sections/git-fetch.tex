@@ -1,10 +1,12 @@
 %
 
+\textbf{git fetch}\git{fetch} downloads objects and refs.
+
+\mintinline{bash}{git fetch --all} fetches all remotes.
+
 \begin{compactenum}
-\item [\texttt{git}] \texttt{fetch} downloads objects and refs.
-\item [\texttt{-p}] \emph{prunes} refs that no longer exist on the remote.
-\item [\texttt{-t}] fetches all \emph{tags} from the remote.
-\item [---] \texttt{all}: fetches all remotes.
+\item [\texttt{-p}] prunes refs that no longer exist on the remote (equivalent to \mintinline{bash}{--prune}),
+\item [\texttt{-t}] fetches all tags from the remote (equivalent to \mintinline{bash}{--tags}).
 \end{compactenum}
 
 %
