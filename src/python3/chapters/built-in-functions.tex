@@ -10,8 +10,6 @@
 
 \item
 \mintinline{python}{ascii()},
-\mintinline{python}{bin()},
-\dotfill not implemented yet.
 
 \item \mintinline{python}{bool()}: \mintinline{python}{False} for empty sequences and collections, zero of any numeric type, \mintinline{python}{None} and \mintinline{python}{False}; otherwise \mintinline{python}{True}.
 
@@ -30,17 +28,24 @@
 \mintinline{python}{classmethod()},
 \mintinline{python}{compile()},
 \dotfill not implemented yet.
+\end{itemize}
 
-\item \mintinline{python}{complex()}: convert string or pair of numbers into; for example \mintinline{python}{complex("3+4j") == complex(3,4)}.
+Converting:
+\begin{minted}{python}
+complex() # converts a pair of numbers or string
+# complex("3+4j") == complex(3,4) == (3+4j)
 
-\item \mintinline{python}{float()}: converts a number or string to a floating point number.
+# float, int require a number or string
+float() # converts a number or string
+int() # converts a number or string
 
-\item \mintinline{python}{hex()}: converts an integer to a lowercase hexadecimal string prefixed with "0x".
+# hex, oct, bin require an integer
+hex() # to a lowercase hexadecimal string prefixed with "0x"
+oct() # to an octal string prefixed with "0o"
+bin() # to a binary string prefixed with "0b"
+\end{minted}
 
-\item \mintinline{python}{int()}: converts a number or string to an integer.
-
-\item \mintinline{python}{oct()}: converts an integer to an octal string prefixed with "0o".
-
+\begin{itemize}
 \item
 \mintinline{python}{delattr()},
 \dotfill not implemented yet.
