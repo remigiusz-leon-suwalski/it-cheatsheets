@@ -1,8 +1,9 @@
 \documentclass{charuun}
-\title{Git notes, version 0.10.0}
+\title{Git notes, version 0.10.1}
 \author{Leon Suwalski}
 
 \setlength{\marginparsep}{-25pt}
+\newcommand{\git}[1]{\marginpar[\textbf{\color{blue}{#1}}]{\textbf{\color{blue}{#1}}}}
 
 \usepackage{marginnote}
 
@@ -12,6 +13,10 @@
 
 \textbf{git} is a stupid content tracker.
 
+\section{Git commands -- setting up a repository}
+\input{sections/git-init}
+\input{sections/git-clone}
+
 \section{Git commands -- history}
 \input{sections/git-blame}
 \input{sections/git-diff}
@@ -20,8 +25,6 @@
 \input{sections/git-show}
 
 \section{Git commands -- not assigned}
-\input{sections/git-init}
-\input{sections/git-clone}
 \input{sections/git-add}
 \input{sections/git-commit}
 \input{sections/git-push}
