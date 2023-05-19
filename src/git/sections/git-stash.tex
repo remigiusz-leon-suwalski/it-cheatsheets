@@ -1,12 +1,23 @@
 %
 
-\begin{compactenum}
-\item [\texttt{git}] \texttt{stash} stashes changes in dirty directory away.
-\item [\scriptsize \texttt{apply}] applies single stash.
-\item [\scriptsize \texttt{list}] lists stashes.
-\item [\scriptsize \texttt{push}] default behaviour.
-\item [\scriptsize \texttt{pop}] removes single stash and applies it.
-\item [\scriptsize \texttt{show}] shows changes recorded in stash entry.
-\end{compactenum}
+\textbf{git stash}\git{stash} stashes the changes in a dirty directory away.
+It's a bit differs a bit from other Git commands as it has no short options.
+
+\begin{minted}{bash}
+# the same as 'git stash'
+git stash push
+
+# list the stash entries
+git stash list
+
+# inverse operation of 'git stash push':
+# remove a single stashed state,
+# apply it to the working tree.
+git stash pop
+
+# keep a single stashed state,
+# apply it to the working tree.
+git stash apply
+\end{minted}
 
 %
