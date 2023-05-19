@@ -1,17 +1,17 @@
 \section{Built-in Functions}
+Logical operations:
+\begin{minted}{python}
+all() # False if any element is False
+any() # False if all elements are False or iterable is empty
+\end{minted}
+
 \begin{itemize}
 % \item \mintinline{python}{__import__()},
 
 \item \mintinline{python}{abs()}: absolute value (of a number).
 
-\item \mintinline{python}{all()}: \mintinline{python}{True}, unless some element is \mintinline{python}{False}.
-
-\item \mintinline{python}{any()}: \mintinline{python}{True}, unless all elements are \mintinline{python}{False} or the iterable is empty.
-
 \item
 \mintinline{python}{ascii()},
-
-\item \mintinline{python}{bool()}: \mintinline{python}{False} for empty sequences and collections, zero of any numeric type, \mintinline{python}{None} and \mintinline{python}{False}; otherwise \mintinline{python}{True}.
 
 \item
 \mintinline{python}{breakpoint()},
@@ -32,35 +32,33 @@
 
 Converting:
 \begin{minted}{python}
-complex() # converts a pair of numbers or string
-# complex("3+4j") == complex(3,4) == (3+4j)
-
-# float, int require a number or string
-float() # converts a number or string
-int() # converts a number or string
+bool() # anything not listed below: True
+# empty sequences, collections, zeroes, None, False: False
 
 # hex, oct, bin require an integer
 hex() # to a lowercase hexadecimal string prefixed with "0x"
 oct() # to an octal string prefixed with "0o"
 bin() # to a binary string prefixed with "0b"
+       
+# int, float require a number or string
+int() # converts a number or string
+float() # converts a number or string
+
+complex() # converts a pair of numbers or string
+# complex("3+4j") == complex(3,4) == (3+4j)
+
+tuple()
+list()
+dict() # dictionary
+frozenset()
+set()
+str() # string
 \end{minted}
 
 \begin{itemize}
 \item
 \mintinline{python}{delattr()},
 \dotfill not implemented yet.
-%
-
-\item \mintinline{python}{dict()}: converts to a dictionary.
-
-\item \mintinline{python}{list()}: converts to a list.
-
-\item \mintinline{python}{frozenset()}, \mintinline{python}{set()}: converts to a (frozen) set.
-
-\item \mintinline{python}{str()}: converts to a string.
-
-\item \mintinline{python}{tuple()}: converts to a tuple.
-%
 
 \item
 \mintinline{python}{dir()},
