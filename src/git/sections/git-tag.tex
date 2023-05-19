@@ -1,16 +1,19 @@
 %
 
+\textbf{git tag}\git{tag} lists tags.
+Useful short options:
 \begin{compactenum}
-\item [\texttt{git}] \texttt{tag} lists tags.
-\item [\texttt{-a}] makes an \emph{annotated} tag.
-\item [\texttt{-d}] \emph{deletes} existing tags.
-\item [\texttt{-f}] \emph{forces} replacement of existing tags.
-\item [\texttt{-m}] uses given tag \emph{message} instead of prompting.
-\item [\texttt{-s}] makes a GPG-\emph{signed} tag.
-\item [\texttt{-u}] the same as \texttt{-s} but with custom key.
-\item [\texttt{-v}] \emph{verifies} GPG signature of tags.
-\item [---] \texttt{contains}: only tags containing given commit.
-\item [---] \texttt{sort}: sorts by keys from \texttt{git for-each-ref}.
+\item [\texttt{-a}] makes an annotated tag instead (equivalent to \mintinline{bash}{--annotate}),
+\item [\texttt{-d}] deletes existing tags instead (equivalent to \mintinline{bash}{--delete}),
+\item [\texttt{-f}] instead of failing, replaces an existing tag (equivalent to \mintinline{bash}{--force}),
+\item [\texttt{-m}] instead of prompting, uses given message (equivalent to \mintinline{bash}{--message=}),
+\item [\texttt{-s}] makes a GPG-signed tag (equivalent to \mintinline{bash}{--sign}),
+\item [\texttt{-u}] makes a custom GPG key signed tag (equivalent to \mintinline{bash}{--local-user=}),
+\item [\texttt{-v}] verifies GPG signature of tags (equivalent to \mintinline{bash}{--verify}).
 \end{compactenum}
+
+\mintinline{bash}{git tag --contains <commit>} lists only tags which contain the specified commit, implies \mintinline{bash}{--list}.
+
+\mintinline{bash}{git tag --sort=<key>} sorts based on the key given, in descending order if key is prefixed with a minus sign.
 
 %
