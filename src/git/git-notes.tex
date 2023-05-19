@@ -1,5 +1,5 @@
 \documentclass{charun}
-\title{Git notes, version 0.1.0}
+\title{Git notes, version 0.2.0}
 \author{Leon Suwalski}
 \begin{document}
 \begin{multicols*}{2}
@@ -14,5 +14,21 @@ Useful options:
 \item [\texttt{-p}] interactively choose hunks of patch to be added (equivalent to \mintinline{bash}{--patch}),
 \item [\texttt{-v}] be verbose.
 \end{compactenum}
+
+\section{git commit}
+\textbf{git commit} creates a commit, which is like a snapshot of the repository.
+
+\mintinline{bash}{git commit --reset-author}: when amending or committing a conflicting cherry-pick, declare authorship of the resulting commit to the committer.
+See also \mintinline{bash}{git commit --author=...}
+
+\mintinline{bash}{git commit --no-edit}: to keep current commit message without launching an editor (useful during amends).
+
+Useful short options:
+\begin{compactenum}
+\item [\texttt{-m}] with specified commit message,
+\item [\texttt{-v}] with diff between HEAD and what would be committed at the bottom of commit message template (diff will not be part of the commit message!).
+\end{compactenum}
+
+
 \end{multicols*}
 \end{document}
