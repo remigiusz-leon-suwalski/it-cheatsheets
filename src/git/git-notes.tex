@@ -6,43 +6,10 @@
 \maketitle
 \raggedright
 
-\section{git add}
-\textbf{git add} adds new or changed files to the staging area.
-Useful options:
-\begin{compactenum}
-\item [\texttt{-f}] allow adding otherwise ignored files (equivalent to \mintinline{bash}{--force}),
-\item [\texttt{-p}] interactively choose hunks of patch to be added (equivalent to \mintinline{bash}{--patch}),
-\item [\texttt{-v}] be verbose (equivalent to \mintinline{bash}{--verbose}).
-\end{compactenum}
-
-\section{git commit}
-\textbf{git commit} creates a commit, which is like a snapshot of the repository.
-
-\mintinline{bash}{git commit --reset-author}: when amending or committing a conflicting cherry-pick, declare authorship of the resulting commit to the committer.
-See also \mintinline{bash}{git commit --author=...}
-
-\mintinline{bash}{git commit --no-edit}: to keep current commit message without launching an editor (useful during amends).
-
-Useful short options:
-\begin{compactenum}
-\item [\texttt{-m}] with specified commit message (equivalent to \mintinline{bash}{--message=...}),
-\item [\texttt{-v}] with diff between HEAD and what would be committed at the bottom of commit message template.
-Diff will not be part of the commit message!.
-(equivalent to \mintinline{bash}{--verbose}),
-\end{compactenum}
-
-\section{git push}
-\textbf{git push} uploads local branch commits to the corresponding remote branch.
-
-\mintinline{bash}{git push origin master} pushes branch \emph{master} to remote \emph{origin}.
-
-Useful short options:
-\begin{compactenum}
-\item [\texttt{-f}] disables overwrite checks (equivalent to \mintinline{bash}{--force}),
-\end{compactenum}
-
-\section{git revert}
-\textbf{git revert} creates a commit that undoes one or more existing commits.
+\input{sections/git-add}
+\input{sections/git-commit}
+\input{sections/git-push}
+\input{sections/git-revert}
 
 \end{multicols*}
 \end{document}

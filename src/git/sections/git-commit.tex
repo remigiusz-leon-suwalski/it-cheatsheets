@@ -1,0 +1,19 @@
+%
+
+\section{git commit}
+\textbf{git commit} creates a commit, which is like a snapshot of the repository.
+
+\mintinline{bash}{git commit --reset-author}: when amending or committing a conflicting cherry-pick, declare authorship of the resulting commit to the committer.
+See also \mintinline{bash}{git commit --author=...}
+
+\mintinline{bash}{git commit --no-edit}: to keep current commit message without launching an editor (useful during amends).
+
+Useful short options:
+\begin{compactenum}
+\item [\texttt{-m}] with specified commit message (equivalent to \mintinline{bash}{--message=...}),
+\item [\texttt{-v}] with diff between HEAD and what would be committed at the bottom of commit message template.
+Diff will not be part of the commit message!.
+(equivalent to \mintinline{bash}{--verbose}),
+\end{compactenum}
+
+%
