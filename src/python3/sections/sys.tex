@@ -1,10 +1,9 @@
+%
+
 \subsection{sys -- system-specific parameters and functions}
-Iterating over stdin:
-\begin{minted}{python}
-import sys
 
-for line in sys.stdin:
-    pass
-\end{minted}
+\mintinline{python}{sys.argv} is a list of command line arguments, \mintinline{python}{argv[0]} is the script name.
 
-% sys.argv
+\mintinline{python}{sys.exit([arg])} raises a SystemExit exception, where optional argument can be an integer giving the exit status (where 0 is considered successful termination).
+
+%
