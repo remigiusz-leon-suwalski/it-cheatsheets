@@ -1,12 +1,15 @@
 %
 
+\textbf{git branch}\git{branch} lists just local branches.
+Useful short options:
 \begin{compactenum}
-\item [\texttt{git}] \texttt{branch} lists local branches.
-\item [\texttt{-a}] \emph{all} branches instead.
-\item [\texttt{-r}] \emph{remote} branches instead.
-\item [\texttt{-v}] show sha1 and commit subject for each head.
-\item [\texttt{-d}] \emph{deletes} a local branch (\texttt{D}: with force).
-\item [\texttt{-m}] \emph{moves} a local branch (\texttt{M}: with force).
+\item [\texttt{-a}] all branches instead (equivalent to \mintinline{bash}{--all}),
+\item [\texttt{-r}] just remote branches instead (equivalent to \mintinline{bash}{--remotes}),
+\item [\texttt{-v}] show sha1 and commit subject for each head,
+\item [\texttt{-d}] deletes a local branch instead (equivalent to \mintinline{bash}{--delete}),
+\item [\texttt{-D}] equivalent to \mintinline{bash}{--delete --force},
+\item [\texttt{-m}] moves a local branch instead (equivalent to \mintinline{bash}{--move}),
+\item [\texttt{-M}] equivalent to \mintinline{bash}{--move --force}.
 \end{compactenum}
 
 %

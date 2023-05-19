@@ -7,7 +7,7 @@
     right=1.5cm,
     top=2.25cm,
     bottom=1.25cm,
-    marginparwidth=8mm,
+    marginparwidth=11mm,
     marginparsep=1mm
 ]{geometry}
 
