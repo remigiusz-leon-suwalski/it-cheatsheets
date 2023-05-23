@@ -1,8 +1,9 @@
 \section{Programming in Bash}
 \subsection{Shebang}
 The shebang (\mintinline{bash}{#!}) at the head of a script indicates an interpreter for execution, as in \mintinline{bash}{#!/bin/bash}.
-Lines starting with a \mintinline{bash}{#} (with the exception of shebang) are comments and thus won't be executed.
-Even better is \mintinline{bash}{#!/usr/bin/env bash} (overflow-16365130).
+(Even better is \mintinline{bash}{#!/usr/bin/env bash}, see stackoverflow question \href{https://stackoverflow.com/questions/16365130/what-is-the-difference-between-usr-bin-env-bash-and-usr-bin-bash}{\#16365130}).
+Other lines starting with a \mintinline{bash}{#} are comments and thus won't be executed.
+
 
 \subsection{Quoting and literals}
 Inside \textbf{single quotes} \mintinline{bash}{' '} nothing is interpreted: they preserve literal values of characters enclosed within them.
@@ -38,7 +39,7 @@ Special variables:
 \end{compactenum}
 
 \subsection{Expansions}
-Eight expansions happen after splitting command into tokens, in the order that they are expanded.
+Eight expansions happen after splitting command into tokens, in the order that they are explained.
 
 \subsubsection{Brace expansion}
 Brace expansion is used when we need to generate all possible string combinations.
@@ -66,28 +67,26 @@ There is a \textbf{tilde expansion} as well.
 The expression \mintinline{bash}{~[user]} expands to the home directory of the current (or given) user.
 
 \subsubsection{Parameter expansion}
-\begin{enumerate}
-\item \mintinline{bash}{${var^}}, \mintinline{bash}{${var,}}, \mintinline{bash}{${var~}} convert first character to upper, lower or reverse case (every, when caret/comma/tilde are doubled).
+\mintinline{bash}{${var^}}, \mintinline{bash}{${var,}}, \mintinline{bash}{${var~}} convert first character to upper, lower or reverse case (every, when caret/comma/tilde are doubled).
 This has an impact on every array element.
 
-\item \mintinline{bash}{${var#pattern}}, \mintinline{bash}{${var%pattern}} remove the pattern from the beginning, end of variable (greedy when hash, percent sign are doubled).
+\mintinline{bash}{${var#pattern}}, \mintinline{bash}{${var%pattern}} remove the pattern from the beginning, end of variable (greedy when hash, percent sign are doubled).
 Application: extracting parts of a filename.
 
-\item \mintinline{bash}{${var/pattern/string}} performs a single (when first slash is doubled: full) search and replace operation.
+\mintinline{bash}{${var/pattern/string}} performs a single (when first slash is doubled: full) search and replace operation.
 
-\item \mintinline{bash}{${#var}} returns length of the string.
+\mintinline{bash}{${#var}} returns length of the string.
 
-\item \mintinline{bash}{${var:offset:length}} skips first \texttt{offset} characters from \texttt{var} and truncates the output to given length.
+\mintinline{bash}{${var:offset:length}} skips first \texttt{offset} characters from \texttt{var} and truncates the output to given length.
 \texttt{:length} may be skipped.
 
 Negative values separated with extra space are accepted.
 
-\item \mintinline{bash}{${var:-value}} uses a default value, if \texttt{var} is empty or unset.
+\mintinline{bash}{${var:-value}} uses a default value, if \texttt{var} is empty or unset.
 
 \mintinline{bash}{${var:=value}} does the same, but performs an assignment as well.
 
 \mintinline{bash}{${var:+value}} uses an alternative value if \texttt{var} isn't empty or unset!
-\end{enumerate}
 
 \subsubsection{Command substitution}
 To execute commands in a subshell and then pass their stdout (but not stderr!), use \mintinline{bash}{$( commands )}.
