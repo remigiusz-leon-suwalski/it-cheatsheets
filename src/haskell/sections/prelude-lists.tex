@@ -20,15 +20,23 @@ filter pred (x:xs)
 
 % (++)
 
-% head
+\textbf{head} and \textbf{last} return first and last element.
+\textbf{tail}/\textbf{init} return all the elements of a list except the head/last one:
+\begin{minted}{haskell}
+head :: [a] -> a
+head (x:_)  = x
 
-% last
+last :: [a] -> a
+last [x]    = x
+last (_:xs) = last xs
 
-% tail
+tail :: [a] -> [a]
+tail (_:xs) = xs
 
-% init
-
-% (!!)
+init :: [a] -> [a]
+init [x]    = []
+init (x:xs) = x : init xs
+\end{minted}
 
 \textbf{null} tests whether the structure is empty:
 \begin{minted}{haskell}
@@ -36,14 +44,18 @@ null :: Foldable t => t a -> Bool
 null = foldr (\_ _ -> False) True
 \end{minted}
 
-% length
+\textbf{length} returns the size/length of a finite structure:
+\begin{minted}{haskell}
+length :: Foldable t => t a -> Int 
+length :: t a -> Int
+length = foldl' (\c _ -> c+1) 0
+\end{minted}
 
 \textbf{reverse} returns the elements of a list in reverse order (hangs for infinite lists):
 \begin{minted}{haskell}
 reverse :: [a] -> [a]
 reverse = foldl (flip (:)) []
 \end{minted}
-
 
 % and
 
