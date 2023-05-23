@@ -18,6 +18,11 @@
 % produce hypertext links
 \RequirePackage{hyperref}
 
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
 
 % Syntax highlighting
 % \RequirePackage[outputdir=../../build]{minted}
