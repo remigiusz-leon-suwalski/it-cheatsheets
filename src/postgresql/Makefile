@@ -1,6 +1,6 @@
 all: postgresql-notes.pdf
 
-postgresql-notes.pdf: charun.cls postgresql-notes.tex
+postgresql-notes.pdf: charun.cls postgresql-notes.tex sections/*.tex
 	pdflatex -shell-escape postgresql-notes.tex
 
 clean:
