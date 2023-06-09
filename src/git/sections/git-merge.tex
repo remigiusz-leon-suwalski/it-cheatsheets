@@ -2,4 +2,19 @@
 
 \textbf{git merge}\git{merge} joins two or more development histories together.
 
+% https://stackoverflow.com/questions/34119866/setting-up-and-using-meld-as-your-git-difftool-and-mergetool
+\textbf{git mergetool} uses a GUI program like Meld to resolve the conflicts during merges.
+To configure it, add following to \texttt{.gitconfig}:
+\begin{minted}{ini}
+[merge]
+    tool = meld
+[mergetool "meld"]
+    # Choose one of these 2 lines (not both!)
+    # https://stackoverflow.com/a/34119867
+    cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
+    cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"
+\end{minted}
+
+Command \mintinline{bash}{git mergetool} should be invoked after a conflict from \mintinline{bash}{git merge} occurs.
+
 %

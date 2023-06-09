@@ -1,0 +1,13 @@
+%
+
+\textbf{git config}\git{config} gets or sets local (repository) or global options.
+
+\mintinline{bash}{git config --list} lists all variables and their values.
+
+\mintinline{bash}{git config --show-origin} augments the output with the origin type (file, stdin, blob, command line) and the actual origin (path, ref, blob).
+
+\mintinline{bash}{git config user.email 'john@doe.com'} sets repository-wide, as with \mintinline{bash}{--local}, e-mail for author/committer fields.
+By adding \mintinline{bash}{--global} flag the same happens for all repositories of current (Unix) user.
+There is also a rarily used \mintinline{bash}{--system} flag that is applied system-wide.
+
+%
