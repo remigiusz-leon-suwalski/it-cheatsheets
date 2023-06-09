@@ -1,0 +1,13 @@
+%
+
+% https://www.postgresql.org/docs/15/queries-table-expressions.html
+% 7.2 Table expressions
+\subsection{Table expressions}
+The \textbf{INNER JOIN} keyword selects records that have matching values in both tables.
+You can join a table to itself!
+\begin{minted}[linenos,firstnumber=last]{sql}
+SELECT bks.starttime FROM cd.bookings bks
+INNER JOIN cd.members mems ON mems.memid = bks.memid;
+\end{minted}
+
+%
