@@ -1,20 +1,26 @@
 %
 
 \subsection{json -- JSON encoder and decoder}
-Converting plaintext to JSON:
+Parsing plaintext:
 \begin{minted}{python}
 x = '{"name": "John", "age": 30}'
 y = json.loads(x)
+
 with open("response.json", "r") as f:
     z = json.load(f)
 \end{minted}
 
-Converting JSON to plaintext:
+Serializing JSONs:
 \begin{minted}{python}
-# dump and dumps use the same keyword arguments
+# indent:        either (number of spaces) or 
+#                (a string) printed per indent level, 
+# sort_keys:     sorts all dictionaries by keys
+# ensure_ascii:  escapes non-ASCII characters
+# fp:            file-like object that supports .write()
 x = json.dumps(y, indent=4, sort_keys=True)
+
 with open("response.json", "w") as f:
-    json.dump(z, f)
+    json.dump(z, fp=f, ensure_ascii=False)
 \end{minted}
 
 %
