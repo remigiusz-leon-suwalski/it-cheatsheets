@@ -2,24 +2,49 @@
 
 \textbf{git log}\marginpar[\textbf{\color{blue}{log}}]{\textbf{\color{blue}{log}}} displays entire commit history (without any diff output by default).
 
-\mintinline{bash}{git log foo..bar} displays only commits between \texttt{foo} and \texttt{bar}.
-Similarly \mintinline{bash}{git log foo ^bar} displays only commits reachable from foo but not bar.
-
-\mintinline{bash}{git log --author=<pattern> --committer=<pattern>} displays only commits with author/committer matching regex.
-
-\mintinline{bash}{git log --grep=<pattern>} displays only commits with log message matching regex.
-
 \mintinline{bash}{git log --follow <path>} continues listing the history beyond renames but works only for a single file!
 
-\mintinline{bash}{git log --no-merges} skips commits with more than one parent.
+There are multiple ways of limiting output:
+\begin{minted}{bash}
+# commits between foo and bar:
+git log foo..bar
 
-\mintinline{bash}{git log --decorate} prints nice reference names without refs/heads/, refs/tags/ and refs/remotes/ prefixes.
+# commits reachable from foo but not bar:
+git log foo ^bar
 
-\mintinline{bash}{git log --oneline} skips author, date and full commit message. Equivalent to \mintinline{bash}{--pretty=oneline --abbrev-commit}.
+# commits with author, committer or
+# commit message matching a regex:
+git log --author=<pattern>
+git log --committer=<pattern>
+git log --grep=<pattern>
 
-\mintinline{bash}{git log --graph} draws a GuitarHero-like text based graph.
+# commits younger/older than a specific date:
+git log --since=<date> --until=<date>
+git log --after=<date> --before=<date>
 
-\mintinline{bash}{git log --stat} generates a diffstat (histogram).
+# ignore commits with more than 1 parent (merge commits):
+git log --no-merges
+\end{minted}
+
+And it's possible to control output format:
+\begin{minted}{bash}
+# displays only names of changed files
+git log --name-only
+
+# generates a diffstat (histogram)
+git log --stat
+
+# skips author, date and full commit message
+git log --oneline
+git log --pretty=oneline --abbrev-commit
+
+# displays nice references, without
+# refs/heads/, refs/tags, refs/remotes/
+git log --decorate
+
+# draws a GuitarHero-like text based graph
+git log --graph
+\end{minted}
 
 \mintinline{bash}{git log --format='format:%h %an'} uses custom format.
 When using format option, following placeholders are commonly used:
@@ -30,8 +55,7 @@ When using format option, following placeholders are commonly used:
 \mintinline{bash}{%ad} or \mintinline{bash}{%aD} or \mintinline{bash}{%ar} or \mintinline{bash}{%at} or \mintinline{bash}{%ai} or \mintinline{bash}{%aI} or \mintinline{bash}{%as} or \mintinline{bash}{%ah} (author date),
 \mintinline{bash}{%s} and \mintinline{bash}{%b} (subject and body).
 Author placeholders have corresponding committer placeholders.
-
-Various date formats:
+Various date formats are:
 \begin{compactenum}
 \item [\texttt{\%ad}] $\to\,\,$ \texttt{Sat Sep 18 19:40:37 2021}
 \item [\texttt{\%aD}] $\to\,\,$ \texttt{Sat, 18 Sep 2021 13:40:37 -0400}
@@ -43,7 +67,7 @@ Various date formats:
 \item [\texttt{\%at}] $\to\,\,$ \texttt{1631986837}
 \end{compactenum}
 
-Useful short options:
+Useful short options for \mintinline{bash}{git log}:
 \begin{compactenum}
 \item [\texttt{-G}] looks for diffs whose patch contains lines matching regex.
 \item [\texttt{-n}] limits the number of commits to output (equivalent to \mintinline{bash}{--max-count=}),
