@@ -1,26 +1,36 @@
-\section{Manage images}
-\important{Download an image} from the Docker registry (this is done by \mintinline{bash}{docker run ...} if any image wasn't pulled manually):
-\begin{bashcode}
-$ docker image pull busybox
-\end{bashcode}
+%
 
-\important{List images} (only top level, their repository, tags and their size):
+\section{Manage images}
 \begin{bashcode}
-$ docker image ls
+$ docker pull busybox
+# The same as 'docker image pull busybox'
+# Downloads an image from a registry
+
+$ docker images
+# The same as 'docker image ls'
+# Lists images (skipping intermediate ones)
 REPOSITORY  TAG    IMAGE ID     CREATED      SIZE
 busybox     latest c55b0f125dc6 13 days ago  1.24MB
 ubuntu      latest 7e0aa2d69a15 3 weeks ago  72.7MB
 hello-world latest d1165f221234 2 months ago 13.3kB
+
+$ docker rmi IMAGE
+# The same as 'docker image rm ...'
+# Removes image(s).
 \end{bashcode}
 
 Useful switches:
 \begin{compactitem}
     \item \textbf{\mintinline{bash}{--all}}: including intermediate images,
     \item \textbf{\mintinline{bash}{--digests}}: including SHA256 digests,
-    \item \textbf{\mintinline{bash}{--filter=}} \dotfill TO BE DONE,
-    \item \textbf{\mintinline{bash}{--format=""}} \dotfill TO BE DONE.
+    \item \textbf{\mintinline{bash}{--filter=}}, \textbf{\mintinline{bash}{--format=""}}: \dotfill to be done later.
 \end{compactitem}
 
+
+
+
+{
+\color{red}
 \important{Push a local image} to a registry:
 \begin{bashcode}
 $ docker image push NAME[:TAG]
@@ -53,4 +63,5 @@ To delete all dangling images:
 $ docker image rm $(docker images -qf dangling=true)
 \end{bashcode}
 
+}
 %

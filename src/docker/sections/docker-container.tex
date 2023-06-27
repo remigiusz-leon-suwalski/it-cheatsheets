@@ -1,4 +1,38 @@
 \section{Manage containers}
+\begin{bashcode}
+$ docker ps
+# The same as 'docker container ls'
+# Lists running containers
+CONTAINER ID IMAGE   COMMAND CREATED    STATUS    PORTS NAMES
+fdde5a2d9731 busybox "sh"    1 hour ago Up 1 hour       great_g
+
+$ docker ps -a
+# Lists all containers (the same as --all)
+
+$ docker ps -q
+# Lists container IDs (the same as --quiet)
+
+$ docker stop CONTAINER
+# The same as 'docker container stop'
+
+$ docker rm CONTAINER
+# The same as 'docker container rm ...'
+# Removes container(s).
+
+$ docker rm -f CONTAINER
+# Forces the removal (uses SIGKILL)
+
+$ docker rm $(docker ps -a -q -f status=exited)
+# The same as 'docker container prune'.
+# Removes all stopped containers
+
+$ docker port static-site
+# The same as 'docker container port ...'
+# Lists port mappings
+\end{bashcode}
+
+
+{\color{red}
 \important{Create container}, don't start it:
 \begin{bashcode}
 $ docker container create ...
@@ -106,5 +140,6 @@ Remove all exited containers:
 $ docker rm $(docker ps -a -q -f status=exited)
 $ docker container prune # requires API >= 1.25
 \end{bashcode}
+}
 
 %

@@ -13,8 +13,12 @@ Useful switches:
 
 Sample content of the Dockerfile:
 \begin{bashcode}
-FROM nginx
-COPY html /usr/share/nginx/html
+FROM python:3.8
+WORKDIR /usr/src/app
+COPY . .
+RUN pip install --no-cache-dir -r requirements.txt
+EXPOSE 5000
+CMD ["python", "./app.py"]
 \end{bashcode}
 
 From \url{https://dmitryfrank.com/projects/docker-quick-ref} you can obtain a  nice printable quick reference for Dockerfile syntax, available on the MIT license from Dmitry Frank.

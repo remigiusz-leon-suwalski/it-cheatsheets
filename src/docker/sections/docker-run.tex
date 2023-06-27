@@ -1,28 +1,34 @@
 %
 
-\section{Run a command in a new container}
-\important{Start a container} -- process with its own file system, its own networking, and its own isolated process tree:
+\section{Create and run new containers}
+\textbf{docker run} runs a process in a new container, with its own file system, its own networking, and its own isolated process tree.
+If the IMAGE is not already loaded, it will be pulled with dependencies first.
 \begin{bashcode}
+$ docker run --rm hello-world
+# Auto-remove the container when it exits.
+
+$ docker run --name 'my-busy-box' busybox:1.36
+# Assigns a name to the container. When not present, Docker
+# generates a name from notable scientists and hackers like
+# 'quirky_heyrovsky' or 'condescending_hofstadter'.
+
 $ docker run -it ubuntu /bin/bash
+# -i keeps stdin open (same as --interactive)
+# -t allocates a pseudo-TTY (same as --tty)
+
+$ docker run -p 8888:5000 my_user/my_image
+# -p publishes a port/range of ports to the host,
+# -P exposes ports to random ports on the host interfaces.
+# -p = --publish, -P = --publish-all
 \end{bashcode}
+
+{\color{red}
 
 Useful short options:
 \begin{compactitem}
     \item [\texttt{-d}] runs in background (same as \mintinline{bash}{--detach}),
-    \item [\texttt{-i}] keeps stdin open, even if not attached (same as \mintinline{bash}{--interactive}),
-    \item [\texttt{-p}] publishes a (range of) ports to the host (same as \mintinline{bash}{--publish}),
-    \item [\texttt{-P}] publishes exposed ports to random ports on the host interfaces (same as \mintinline{bash}{--publish-all}),
-    \item [\texttt{-t}] allocate a pseudo-TTY (same as \mintinline{bash}{--tty}),
     \item [\texttt{-v}] creates a bind mount (same as \mintinline{bash}{--volume}).
 \end{compactitem}
-
-\mintinline{bash}{docker run --name 'my-busy-box' busybox:1.36} assigns a name to the container.
-When not present, Docker generates a name from notable scientists and hackers like \mintinline{bash}{'quirky_heyrovsky'} or \mintinline{bash}{'condescending_hofstadter'}.
-
-\mintinline{bash}{docker run --rm hello-world} auto-removes the container when it exits.
-
-\mintinline{bash}{docker run --publish '7000-8000:7000-8000' alpine} publishes range of ports.
-Similar syntax with colon is expected by the volume flag.
 
 Example.
 Applications can be made more secure by running them in read-only mode.
@@ -41,5 +47,6 @@ $ docker run -v /dev/log:/dev/log -it fedora /bin/bash
 $ journalctl -b | grep Hello
 # maj 20 09:03:20 plavi-pc root[8831]: Hello from my container
 \end{bashcode}
+}
 
 %
