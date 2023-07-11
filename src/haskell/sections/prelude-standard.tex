@@ -32,8 +32,7 @@ f x | x < 0     = ...
 
 % data Ordering
 
-% data Char
-
+\textbf{Char} is a type that represents Unicode code points, which extends ISO 8859-1 (Latin-1), which extends ASCII character set.
 A \textbf{String} is a list of characters:
 \begin{minted}{haskell}
 type String = [Char]
@@ -49,12 +48,23 @@ snd (_, y) = y
 
 curry :: ((a, b) -> c) -> a -> b -> c
 curry f x y = f (x, y)
+-- curry fst 1 2 gives 1
 
 uncurry :: (a -> b -> c) -> ((a, b) -> c)
 uncurry f p = f (fst p) (snd p)
+-- uncurry (+) (1, 2) gives 3
 \end{minted}
 
 \subsubsection{Basic data types}
+\textbf{Eq} class defines equality \mintinline{haskell}{==} and inequality \mintinline{haskell}{/=}.
+
+For totally ordered datatypes, \textbf{Ord} is used which supports comparisons: \mintinline{haskell}{<}, \mintinline{haskell}{<=}, \mintinline{haskell}{>}, \mintinline{haskell}{>=}, \mintinline{haskell}{max}, \mintinline{haskell}{min}.
+Note that \mintinline{haskell}{max} and \mintinline{haskell}{min} don't have to return either of their arguments but something that is equal to one of arguments in terms of \mintinline{haskell}{==}.
+
+For sequentially ordered types, use \textbf{Enum}.
+It supports (among others) methods \mintinline{haskell}{succ} (which gives the successor, like adding 1 for numeric types), \mintinline{haskell}{pred} (which gives the predecessor) and \mintinline{haskell}{toEnum}/\mintinline{haskell}{fromEnum} which convert from/to an Int.
+
+There is also \textbf{Bounded} class that has two methods: \mintinline{haskell}{minBound}, \mintinline{haskell}{maxBound}.
 
 \subsubsection{Numbers}
 Numeric types:
