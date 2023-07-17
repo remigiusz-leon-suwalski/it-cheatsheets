@@ -10,4 +10,8 @@ SELECT bks.starttime FROM cd.bookings bks
 INNER JOIN cd.members mems ON mems.memid = bks.memid;
 \end{minted}
 
+\textbf{LEFT INNER JOIN} produces an output row even if a given row on the left hand table doesn't match anything.
+Similarly \textbf{RIGHT INNER JOIN} produces at least one row for each row in right hand table.
+Finally we have \textbf{FULL OUTER JOIN} which treats both sides of the expression as optional and is rarely used.
+
 %

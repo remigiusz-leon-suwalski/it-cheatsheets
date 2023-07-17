@@ -4,7 +4,13 @@
 *.aux
 *.log
 *.out
+*.pyg
 _minted-*
+
+# VS Code
+*.fdb_latexmk
+*.fls
+*.synctex.gz
 
 # Python virtual env
 venv
