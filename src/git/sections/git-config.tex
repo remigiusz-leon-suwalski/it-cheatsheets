@@ -6,8 +6,19 @@
 
 \mintinline{bash}{git config --show-origin} augments the output with the origin type (file, stdin, blob, command line) and the actual origin (path, ref, blob).
 
-\mintinline{bash}{git config user.email 'john@doe.com'} sets repository-wide, as with \mintinline{bash}{--local}, e-mail for author/committer fields.
+\mintinline{bash}{git config option-name option-value} sets an option repository wide, exactly like with \mintinline{bash}{--local} switch.
 By adding \mintinline{bash}{--global} flag the same happens for all repositories of current (Unix) user.
-There is also a rarily used \mintinline{bash}{--system} flag that is applied system-wide.
+There is also a rarily used flag \mintinline{bash}{--system} that is applied system-wide.
+
+Useful options include:
+\begin{minted}{bash}
+git config user.email 'john@doe.com'
+git config user.name 'John Doe'
+
+# "reuse recorded resolution"; tells Git to remember how
+# a hunk conflict has been resolved so that the next time
+# it sees the same conflict, Git resolves it automatically.
+git config rerere.enabled true
+\end{minted}
 
 %
