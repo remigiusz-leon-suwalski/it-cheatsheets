@@ -1,7 +1,57 @@
 %
 
 \subsection{re -- regular expression operations}
+\textbf{re} provides regular expression matching operations similar to those found in Perl.
+Most important functions are: \mintinline{python}{re.match}, \mintinline{python}{re.search}, \mintinline{python}{re.findall}, \mintinline{python}{re.sub}, \mintinline{python}{re.split}.
+Since regexes often use backslash character, it's a good practice to write them using raw string (prefixing with r).
 
-\mintinline{python}{re.findall(pattern, string)} finds all non-overlapping matches of pattern in string, as a list of strings or tuples (if there are multiple capturing groups).
+See also \textbf{fnmatch} in subsection \ref{subsection_fnmatch} for shell globbing.
 
+Both \mintinline{python}{re.match} and \mintinline{python}{re.search} check if a string matches pattern.
+The difference between them is that \mintinline{python}{re.match} is anchored at the beginning of the string while \mintinline{python}{re.search} searches the entire string.
+
+\begin{minted}{python}
+def display_match(m):
+    if m is None:
+        return None
+    return f"match {m.group()} groups {m.groups()}"
+
+m = re.match(pattern, string)
+# Python compiles and caches regexes. Therefore we don't
+# get worse performance by compiling regex first, using
+# it later. Above code is therefore equivalent to:
+regex = re.compile(pattern)
+m = regex.match(string)
+
+valid = re.compile(r"^[akjqt2-9]{5}$")
+display_match(valid.match("akt5q"))
+# 'match akt5q groups ()'
+display_match(valid.match("akt5r"))
+# None
+letters_numbers = re.compile(r'([a-z]*)-([0-9]+)')
+display_match(letters_numbers.match('alfa-5009'))
+# "match alfa-5009 groups ('alfa', '5009')"
+\end{minted}
+
+\mintinline{python}{re.findall} finds all non-overlapping matches of pattern in string, as a list of strings or tuples (if there are multiple capturing groups).
+\begin{minted}{python}
+re.findall(r'\bf[a-z]*', 'which foot or hand fell faster')
+# ['foot', 'fell', 'faster']
+re.findall(r'(\w+)=(\d+)', 'set width=20 and height=10')
+# [('width', '20'), ('height', '10')]
+\end{minted}
+
+\mintinline{python}{re.sub(pattern, replacement, string)} finds and replaces leftmost non-overlapping occurrences of a pattern.
+\begin{minted}{python}
+re.sub(r'(\d+)', r'digits-\1', 'alfa-3141-5926')
+# 'alfa-digits-3141-digits-5926'
+re.sub(r'aba', 'efe', 'abababa')
+# 'efebefe'
+\end{minted}
+
+\mintinline{python}{re.split(pattern, string)} splits a string by the occurrences of a pattern.
+\begin{minted}{python}
+re.split('[a-f]+', '0a3B9', flags=re.IGNORECASE)
+['0', '3', '9']
+\end{minted}
 %

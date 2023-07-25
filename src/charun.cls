@@ -18,13 +18,21 @@
 % produce hypertext links
 \RequirePackage{hyperref}
 
-\usepackage{amsfonts}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{hyperref}
+\RequirePackage{amsfonts}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+\RequirePackage{hyperref}
 
 % Syntax highlighting
 % \RequirePackage[outputdir=../../build]{minted}
+\RequirePackage[dvipsnames]{xcolor}
+% \RequirePackage{mdframed}
+\RequirePackage[breakable]{tcolorbox}
 \RequirePackage{minted}
 \usemintedstyle{pastie}
+
+% \BeforeBeginEnvironment{minted}{\begin{mdframed}[backgroundcolor=someblue]}
+% \AfterEndEnvironment{minted}{\end{mdframed}}
+
+\AfterEndEnvironment{minted}{\end{tcolorbox}}%

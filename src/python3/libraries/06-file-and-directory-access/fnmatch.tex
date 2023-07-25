@@ -1,0 +1,15 @@
+%
+
+\subsection{fnmatch -- Unix filename pattern matching}
+\label{subsection_fnmatch}%
+\textbf{fnmatch} module provides support for Unix shell-style wildcards: asterisk (everything), question mark (any single character) and square brackets (any character in given set).
+
+\begin{minted}{python}
+if fnmatch.fnmatch(some_file, '*.txt'):
+    print("Case insensitive match", some_file)
+
+if fnmatch.fnmatchcase(some_file, '*.txt'):
+    print("Case sensitive match", some_file)
+\end{minted}
+
+%

@@ -4,17 +4,17 @@ To print text, use \mintinline{python}{print()}.
 Logical operations:
 \begin{minted}{python}
 all() # False if any element is False
-any() # False if all elements are False or iterable is empty
+any() # False if all elements are False or empty iterable
 \end{minted}
 
 Mathematical operations:
 \begin{minted}{python}
 abs()    # absolute value of a number
-divmod() # quotient, remainder of non-complex numbers division
+divmod() # quotient, remainder; requires non-comples args
 min()    # smallest element
 max()    # largest element
-pow()    # exponentiation, with optional parameter for modulus
-round()  # rounds to given precision (to integer by default)
+pow()    # exponentiation, with optional modulus
+round()  # rounds to given precision (default: to integer)
 \end{minted}
 
 \mintinline{python}{type()} returns the type of an object.
@@ -23,11 +23,11 @@ Converting between data types:
 bool() # anything not listed below: True
 # empty sequences, collections, zeroes, None, False: False
 
-# hex, oct, bin require an integer
-hex() # to a lowercase hexadecimal string prefixed with "0x"
-oct() # to an octal string prefixed with "0o"
-bin() # to a binary string prefixed with "0b"
-       
+# hex, oct, bin convert an integer to lowercase strings:
+hex() # prefixed with "0x" (base 16)
+oct() # prefixed with "0o" (base 8)
+bin() # prefixed with "0b" (base 2)
+
 # int, float require a number or string
 int() # converts a number or string
 float() # converts a number or string
@@ -63,11 +63,12 @@ sorted(xs, reverse=True)
 
 sum(xs, start=0)  # sums start and the items
                   # start can't be a string
-"".join(xs)       # sum alternative for strings
-math.fsum(xs)     # sum alternative for floats
-itertools.chain() # sum alternative for a series of iterables
+# alternatives:
+"".join(xs)       # for strings
+math.fsum(xs)     # for floats
+itertools.chain() # for a series of iterables
 
-zip() # aggregates (into tuples) elements from each of the iterables
+zip() # merges iterables element-wise
 \end{minted}
 
 Functional programming:
