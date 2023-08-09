@@ -1,5 +1,5 @@
 \documentclass{charuun}
-\title{Git notes, version 0.12.2}
+\title{Git notes, version 0.12.3}
 \author{Leon Suwalski}
 
 % \setlength{\marginparsep}{-25pt}
@@ -58,6 +58,14 @@
 \input{sections/git-push}
 \input{sections/git-pull}
 \input{sections/git-fetch}
+
+\section{Specifying revisions}
+\begin{minted}{bash}
+# @{u} refers to the upstream branch which the
+# current branch is tracking, for example:
+git merge @{u}
+# @{upstream} means the same.
+\end{minted}
 
 \section{To be done}
 To remove a commit:
