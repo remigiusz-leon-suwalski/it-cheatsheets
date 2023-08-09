@@ -19,6 +19,10 @@ git config user.name 'John Doe'
 # a hunk conflict has been resolved so that the next time
 # it sees the same conflict, Git resolves it automatically.
 git config rerere.enabled true
+
+# keep HTTPS credentials using Unix sockets, protected with
+# file permissions, so generally speaking, they are secure
+git config credential.helper cache
 \end{minted}
 
 %
