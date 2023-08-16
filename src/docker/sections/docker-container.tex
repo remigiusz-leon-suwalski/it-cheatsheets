@@ -1,5 +1,14 @@
 \section{Manage containers}
 \begin{bashcode}
+$ docker run hello-world
+# The same as `docker container run ...`
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+
+$ docker run -d nginx
+# -d = --detach=true runs in the background
+# `docker container attach` attaches local stdin & stdout
+
 $ docker ps
 # The same as 'docker container ls'
 # Lists running containers
@@ -7,50 +16,41 @@ CONTAINER ID IMAGE   COMMAND CREATED    STATUS    PORTS NAMES
 fdde5a2d9731 busybox "sh"    1 hour ago Up 1 hour       great_g
 
 $ docker ps -a
-# Lists all containers (the same as --all)
+# -a == --all lists all, not just running containers
 
 $ docker ps -q
-# Lists container IDs (the same as --quiet)
+# -q == --quiet lists container IDs
 
-$ docker stop CONTAINER
-# The same as 'docker container stop'
+$ docker stop fdde5a2d9731
+# The same as `docker container stop ...`'
+# --time: seconds to wait before stopping
 
-$ docker rm CONTAINER
-# The same as 'docker container rm ...'
-# Removes container(s).
+$ docker start fdde5a2d9731
+# The same as `docker container start ...`'
 
-$ docker rm -f CONTAINER
-# Forces the removal (uses SIGKILL)
+$ docker rm fdde5a2d9731
+# The same as `docker container rm ...`
+# Removes stopped (!) container.
+
+$ docker rm -f fdde5a2d9731
+# -f == --force forces the removal (uses SIGKILL).
+# -v == --volumes removes anonymous volumes associated 
+# with the container
 
 $ docker rm $(docker ps -a -q -f status=exited)
-# The same as 'docker container prune'.
-# Removes all stopped containers
+# The same as `docker container prune` if API >= 1.25
+# Removes all stopped containers.
 
 $ docker port static-site
 # The same as 'docker container port ...'
 # Lists port mappings
 \end{bashcode}
 
-
 {\color{red}
 \important{Create container}, don't start it:
 \begin{bashcode}
 $ docker container create ...
 \end{bashcode}
-
-\important{List running containers}:
-\begin{bashcode}
-$ docker container ls
-CONTAINER ID IMAGE   COMMAND CREATED       STATUS
-94f6cf532af9 busybox "sh"    3 seconds ago Up 2 seconds
-
-# PORTS, NAMES were truncated :)
-\end{bashcode}
-
-Useful switches:
-\begin{compactitem}
-    \item \mintinline{bash}{--all}: show all, not just running containers
-\end{compactitem}
 
 \important{Rename container}
 \begin{bashcode}
@@ -93,21 +93,6 @@ Useful switches:
     \item \mintinline{bash}{--workdir}: custom working directory inside the container.
 \end{compactitem}
 
-\important{Stop containers} (send SIGTERM first and SIGKILL after grace period -- to the main process inside the container):
-\begin{bashcode}
-$ docker container stop bold_cerf
-\end{bashcode}
-
-Useful switches:
-\begin{compactitem}
-    \item \mintinline{bash}{--time}: seconds to wait before killing
-\end{compactitem}
-
-\important{Start a stopped container} again:
-\begin{bashcode}
-$ docker container start bold_cerf
-\end{bashcode}
-
 \important{Kill a cointainer}
 \begin{bashcode}
 $ docker container kill bold_cerf
@@ -118,28 +103,10 @@ You can kill them all too:
 $ docker kill $(docker ps -q)
 \end{bashcode}
 
-\important{Remove containers}:
-\begin{bashcode}
-$ docker container rm bold_cerf
-\end{bashcode}
-
-All stopped:
-\begin{bashcode}
-$ docker rm $(docker ps -a -q)
-\end{bashcode}
-
 Useful switches:
 \begin{compactitem}
     \item \mintinline{bash}{--force}: uses SIGKILL,
-    \item \mintinline{bash}{--volumes}: removes anonymous volumes associated with the container.
 \end{compactitem}
-
-You can't remove a running container, need to stop it first.
-Remove all exited containers:
-\begin{bashcode}
-$ docker rm $(docker ps -a -q -f status=exited)
-$ docker container prune # requires API >= 1.25
-\end{bashcode}
 }
 
 %
