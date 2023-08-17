@@ -11,7 +11,8 @@ All error messages should go to STDERR,
 a function to print out error messages along with other status information is recommended:
 \begin{minted}{bash}
 err () {
-  echo "[$(date +%Y-%m-%d\ %T)]: $@" >&2
+  echo "[$(date +%Y-%m-%d\ %T)]:" \
+    "$@" >&2
 }
 \end{minted}
 

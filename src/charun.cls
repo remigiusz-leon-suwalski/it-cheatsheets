@@ -35,4 +35,5 @@
 % \BeforeBeginEnvironment{minted}{\begin{mdframed}[backgroundcolor=someblue]}
 % \AfterEndEnvironment{minted}{\end{mdframed}}
 
+\BeforeBeginEnvironment{minted}{\begin{tcolorbox}}%
 \AfterEndEnvironment{minted}{\end{tcolorbox}}%
