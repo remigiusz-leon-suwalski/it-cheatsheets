@@ -1,0 +1,10 @@
+%
+
+\subsection{Totally ordered datatypes}
+\mintinline{haskell}{Ord} implements a total order: a binary relation $\le$ on some set $X$ such that $\forall a, b, c \in X$ we have $a \le a$; if $a \le b$ and $b \le c$ then $a \le c$, if $a \le b$ and $b \le a$ then $a = b$; finally $a \le b$ or $b \le a$.
+
+Minimal complete definition is either \mintinline{haskell}{compare} or \mintinline{haskell}{(<=)}, other methods include rest of comparisons: \mintinline{haskell}{(>=)}, \mintinline{haskell}{(<)}, \mintinline{haskell}{(>)}; also \mintinline{haskell}{min} and \mintinline{haskell}{max}.
+
+There is a similar class (but not subclass!) called \mintinline{haskell}{Bounded} with just two methods: \mintinline{haskell}{minBound}, \mintinline{haskell}{maxBound}.
+
+%

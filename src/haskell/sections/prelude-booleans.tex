@@ -1,0 +1,28 @@
+%
+
+\subsection{Booleans}
+\textbf{Bool} is a boolean type which can have only two values: \mintinline{haskell}{True} and  \mintinline{haskell}{False}.
+
+\begin{minted}{haskell}
+data Bool = False | True
+
+(&&) :: Bool -> Bool -> Bool
+True  && x = x
+False && _ = False
+
+(||) :: Bool -> Bool -> Bool
+True  || _ = True
+False || x = x
+
+not :: Bool -> Bool
+not True  = False
+not False = True
+\end{minted}
+
+\textbf{otherwise} is defined as the value True. It helps to make guards more readable:
+\begin{minted}{haskell}
+f x | x < 0     = ...
+    | otherwise = ...
+\end{minted}
+
+%

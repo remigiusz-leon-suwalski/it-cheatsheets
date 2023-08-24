@@ -1,0 +1,46 @@
+%
+
+\subsection{Numbers}
+\textbf{TODO!}
+Int, Integer, Float, Double, Rational, Word
+
+Numeric types:
+\begin{itemize}
+\item \textbf{Int} is a fixed-precision integer type with at least the range $-2^{29} .. 2^{29}-1$.
+\item \textbf{Integer} represents the entire infinite range of integers.
+\item \textbf{Float} are single-precision floating point numbers.
+\item \textbf{Double} are double-precision floating point numbers.
+\item \textbf{Rational} are arbitrary-precision rational numbers, represented as a ratio of two Integer values.
+\item \textbf{Word} is an unsigned integral type, with the same size as Int.
+\end{itemize}
+
+%%% Numeric type classes
+\textbf{Num} is a basic numeric class.
+The Haskell Report defines no laws for Num.
+However, (+) and (*) are customarily expected to define a ring.
+\begin{minted}{haskell}
+class  Num a  where
+    (+), (-), (*)       :: a -> a -> a
+    negate              :: a -> a
+    abs                 :: a -> a
+    signum              :: a -> a
+    fromInteger         :: Integer -> a
+    x - y               = x + negate y
+    negate x            = 0 - x
+\end{minted}
+
+% class (Num a, Ord a) => Real a where
+
+% class (Real a, Enum a) => Integral a where
+
+% class Num a => Fractional a where
+
+% class Fractional a => Floating a where
+
+% class (Real a, Fractional a) => RealFrac a where
+
+% class (RealFrac a, Floating a) => RealFloat a where
+
+%%% Numeric functions
+
+%
