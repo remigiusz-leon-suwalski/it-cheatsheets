@@ -1,18 +1,18 @@
+%
+
 \subsection{Shell builtins}
 \begin{compactenum}
 \item [\symbolbash] \commandbash{.}: evaluates a script.
 
-\item [\symbolbash] \commandbash{:}: like true, does nothing successfully.
-
 \item [\symbolbash] \commandbash{[}: defines conditionals.
 
 \item [\symbolbash] \commandbash{alias}: substitutes a string for a word.
+\item [\symbolbash] \commandbash{unalias}: removes defined aliases.
 
 \item [\symbolbash] \commandbash{bg}: runs jobs in the background.
+\item [\symbolbash] \commandbash{fg}: \dotfill ????
 
 \item [\symbolbash] \commandbash{bind}: binds keys to readline function/macro.
-
-\item [\symbolbash] \commandbash{break}: exits from a loop.
 
 \item [\symbolbash] \commandbash{builtin}: executes the specified shell builtin.
 
@@ -29,7 +29,6 @@
 
 \item [\symbolbash] \commandbash{compopt}: \dotfill ????
 
-\item [\symbolbash] \commandbash{continue}: resumes next iteration of a loop.
 
 \item [\symbolbash] \commandbash{declare}: declares variables and/or gives them attributes: \texttt{a} indexed array, \texttt{A} associative array, \texttt{i} integer, \texttt{l} lowercase chars only.
 
@@ -51,11 +50,7 @@
 
 \item [\symbolbash] \commandbash{export}: \dotfill ????
 
-\item [\symbolbash] \commandbash{false}: \dotfill ????
-
 \item [\symbolbash] \commandbash{fc}: \dotfill ????
-
-\item [\symbolbash] \commandbash{fg}: \dotfill ????
 
 \item [\symbolbash] \commandbash{getopts}: \dotfill ????
 
@@ -94,7 +89,7 @@
 
 \item [\symbolbash] \commandbash{set}: \dotfill ????
 
-\item [\symbolbash] \commandbash{shift}: \dotfill ????
+\item [\symbolbash] \commandbash{shift}: renames positional parameters from n+1, n+2, ... to 1, 2, ... (by default, $n = 1$).
 
 \item [\symbolbash] \commandbash{shopt}: \dotfill ????
 
@@ -109,6 +104,7 @@
 \item [\symbolbash] \commandbash{trap}: \dotfill ????
 
 \item [\symbolbash] \commandbash{true}: \dotfill ????
+\item [\symbolbash] \commandbash{false}: \dotfill ????
 
 \item [\symbolbash] \commandbash{type}: \dotfill ????
 
@@ -118,11 +114,27 @@
 
 \item [\symbolbash] \commandbash{umask}: gets/sets file mode creation mask.
 
-\item [\symbolbash] \commandbash{unalias}: \dotfill ????
 
 \item [\symbolbash] \commandbash{unset}: unsets a shell variable, removing it from memory and the shell's exported environment.
 
 \item [\symbolbash] \commandbash{wait}: waits for process to change state.
 \end{compactenum}
 
+Useful when writing scripts/functions:
 
+\begin{compactenum}
+\item [\symbolbash] \commandbash{break}: exits from a loop.
+\item [\symbolbash] \commandbash{continue}: resumes next iteration of a loop.
+
+\item [\symbolbash] \commandbash{local}: restricts variable scope to a function and its children; without operands lists them.
+
+\item [\symbolbash] \commandbash{return}: stops function and returns a value.
+
+\item [\symbolbash] \commandbash{shift}: renames positional parameters from n+1, n+2, ... to 1, 2, ... (by default, $n = 1$).
+
+\item [\symbolbash] \commandbash{true}: does nothing, successfully.
+\item [\symbolbash] \commandbash{:} (colon): like true, does nothing successfully.
+\item [\symbolbash] \commandbash{false}: does nothing, unsuccessfully.
+\end{compactenum}
+
+%
