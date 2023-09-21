@@ -1,0 +1,22 @@
+%
+
+\subsection{Tuples}
+Tuples are immutable and their elements don't need to be all of the same type.
+
+\begin{minted}{haskell}
+fst :: (a, b) -> a
+fst (x, _) = x
+
+snd :: (a, b) -> b
+snd (_, y) = y
+
+curry :: ((a, b) -> c) -> a -> b -> c
+curry f x y = f (x, y)
+-- curry fst 1 2 gives 1
+
+uncurry :: (a -> b -> c) -> ((a, b) -> c)
+uncurry f p = f (fst p) (snd p)
+-- uncurry (+) (1, 2) gives 3
+\end{minted}
+
+%
