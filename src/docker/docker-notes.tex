@@ -1,5 +1,5 @@
 \documentclass{charun}
-\title{Docker notes, version 0.8.2}
+\title{Docker notes, version 0.8.3}
 \author{Leon Suwalski}
 
 \usepackage{xcolor}
@@ -14,14 +14,18 @@
 
 \usepackage{hyperref}
 \usepackage{paralist}
+\definecolor{myblue}{RGB}{205, 255, 205}
+
+\BeforeBeginEnvironment{minted}{\begin{tcolorbox}[breakable,boxsep=5pt,left=0pt,right=0pt,top=0pt,bottom=0pt,boxrule=0.5pt,arc=0pt,outer arc=0pt,colback=myblue,colframe=myblue]\small}%
+\AfterEndEnvironment{minted}{\end{tcolorbox}}%
 
 \begin{document}
-\begin{multicols*}{2}
+\begin{multicols}{2}
 \maketitle
 \raggedright
 
 This is not suitable for studying and should be used only as a handy reference.
-Learn from \href{https://devopswithdocker.com}{Devops with Docker} instead.
+Learn from \href{https://devopswithdocker.com}{Devops with Docker}\footnote{\texttt{https://devopswithdocker.com}} instead.
 
 \input{sections/docker-image}
 \input{sections/docker-container}
@@ -34,5 +38,5 @@ Learn from \href{https://devopswithdocker.com}{Devops with Docker} instead.
 \section{Aliases}
 \input{sections/aliases}
 
-\end{multicols*}
+\end{multicols}
 \end{document}

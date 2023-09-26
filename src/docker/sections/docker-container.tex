@@ -1,52 +1,106 @@
 \section{Manage containers}
+\subsection{Running containers}
+Run a container with random name (an adjective with surname of a notable scientist or hacker):
 \begin{bashcode}
-$ docker run hello-world
-# The same as `docker container run ...`
+$ docker run hello-world # = docker container run ...
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
-
-$ docker run -d nginx
-# -d = --detach=true runs in the background
-# `docker container attach` attaches local stdin & stdout
-
-$ docker ps
-# The same as 'docker container ls'
-# Lists running containers
-CONTAINER ID IMAGE   COMMAND CREATED    STATUS    PORTS NAMES
-fdde5a2d9731 busybox "sh"    1 hour ago Up 1 hour       great_g
-
-$ docker ps -a
-# -a == --all lists all, not just running containers
-
-$ docker ps -q
-# -q == --quiet lists container IDs
-
-$ docker stop fdde5a2d9731
-# The same as `docker container stop ...`'
-# --time: seconds to wait before stopping
-
-$ docker start fdde5a2d9731
-# The same as `docker container start ...`'
-
-$ docker rm fdde5a2d9731
-# The same as `docker container rm ...`
-# Removes stopped (!) container.
-
-$ docker rm -f fdde5a2d9731
-# -f == --force forces the removal (uses SIGKILL).
-# -v == --volumes removes anonymous volumes associated 
-# with the container
-
-$ docker rm $(docker ps -a -q -f status=exited)
-# The same as `docker container prune` if API >= 1.25
-# Removes all stopped containers.
-
-$ docker port static-site
-# The same as 'docker container port ...'
-# Lists port mappings
 \end{bashcode}
 
-{\color{red}
+Assigns custom name to the container:
+\begin{bashcode}
+$ docker run --name='cobra' python
+\end{bashcode}
+
+Useful switches include:
+\begin{bashcode}
+# -d == --detach=true runs in the background
+# `docker container attach` attaches local stdin & stdout
+
+# -i == --interactive keeps STDIN open
+# -t == --tty allocaes a pseudo-TTY
+\end{bashcode}
+
+\subsection{Listing containers}
+List running containers:
+\begin{bashcode}
+$ docker ps = # docker container ls
+CONTAINER ID IMAGE   COMMAND CREATED    STATUS    PORTS NAMES
+fdde5a2d9731 busybox "sh"    1 hour ago Up 1 hour       great_g
+\end{bashcode}
+
+Useful switches include:
+\begin{bashcode}
+# -a == --all lists all, not just running containers
+# -q == --quiet lists only container IDs
+# -s == --size lists total file sizes
+\end{bashcode}
+
+List port mappings:
+\begin{bashcode}
+$ docker port static-site # = docker container port ...
+\end{bashcode}
+
+List logs of a container that was started with the json-file or journald logging driver:
+\begin{bashcode}
+$ docker run --name test -d busybox sh -c \
+    "while true; do $(echo date); sleep 1; done"
+$ docker logs -f --until=2s test # = docker container logs ...
+# -f == --follow works like in `tail` command
+# --until only logs since timestamp (like 2013-01-02T13:23:37Z)
+#         or relative (like 42m),
+# --since only logs until a timestamp or relative (see above).
+\end{bashcode}
+
+\subsection{Starting, pausing, stopping containers}
+Pause/unpause all processes within containers:
+\begin{bashcode}
+$ docker pause cobra   # = docker container pause ...
+$ docker unpause cobra # = docker container unpause ...
+\end{bashcode}
+
+Start/stop/kill:
+\begin{bashcode}
+$ docker start fdde5a2d9731 # = docker container start ...
+$ docker stop fdde5a2d9731  # = docker container stop ...
+# --time: seconds to wait before stopping
+$ docker kill fdde5a2d9731  # = docker container kill ...
+\end{bashcode}
+
+\subsection{Running commands inside containers}
+Execute a command inside the container:
+
+\begin{bashcode}
+$ docker exec -it ubuntu bash # = docker container exec ...
+\end{bashcode}
+
+By default it's executed in the working directory that was set during container creation.
+Does not work for paused containers!
+Useful switches:
+\begin{bashcode}
+# --workdir: custom working directory inside the container.
+\end{bashcode}
+    
+\subsection{Removing containers}
+Remove a stopped container:
+\begin{bashcode}
+$ docker rm fdde5a2d9731 # = docker container rm ...
+\end{bashcode}
+
+Useful switches include:
+\begin{bashcode}
+# -f == --force forces the removal (uses SIGKILL).
+# -v == --volumes removes associated anonymous volumes
+\end{bashcode}
+
+Remove all stopped containers:
+\begin{bashcode}
+$ docker container prune                        # requires API >= 1.25
+$ docker rm $(docker ps -a -q -f status=exited) # does the same
+\end{bashcode}
+
+\subsection{Work in progress}
+\color{red}
 \important{Create container}, don't start it:
 \begin{bashcode}
 $ docker container create ...
@@ -57,41 +111,19 @@ $ docker container create ...
 $ docker container rename ...
 \end{bashcode}
 
-\important{Display running processes} of a container:
+Display running processes of a container:
 \begin{bashcode}
 $ docker container top bold_cerf
 UID  PID   PPID  C STIME TTY   TIME     CMD
 root 16433 16412 0 00:42 pts/0 00:00:00 bash
 \end{bashcode}
 
-\important{Fetch the logs} of a container:
-\begin{bashcode}
-$ docker run --name test -d busybox sh -c \
-    "while true; do $(echo date); sleep 1; done"
-$ docker container logs -f --until=2s test
-\end{bashcode}
-
-This command is only functional for containers that are started with the json-file or journald logging driver.
-
-Useful switches:
-\begin{compactitem}
-    \item \mintinline{bash}{--follow}: follows log output,
-    \item \mintinline{bash}{--since}: only logs since timestamp (like 2013-01-02T13:23:37Z) or relative (like 42m),
-    \item \mintinline{bash}{--until}: only logs until a timestamp or relative (see above).
-\end{compactitem}
+Fetch the logs of a container:
 
 \important{Run a command} in a running container:
 \begin{bashcode}
 $ docker container exec -it bold_cerf bash
 \end{bashcode}
-
-By default it's executed in the working directory that was set during container creation.
-Does not work for paused containers.
-
-Useful switches:
-\begin{compactitem}
-    \item \mintinline{bash}{--workdir}: custom working directory inside the container.
-\end{compactitem}
 
 \important{Kill a cointainer}
 \begin{bashcode}
@@ -107,6 +139,6 @@ Useful switches:
 \begin{compactitem}
     \item \mintinline{bash}{--force}: uses SIGKILL,
 \end{compactitem}
-}
+\color{black}
 
 %

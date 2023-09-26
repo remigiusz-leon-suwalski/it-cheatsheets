@@ -1,11 +1,15 @@
 %
 
 \section{Manage images}
+\subsection{Pulling images}
 \begin{bashcode}
 $ docker pull busybox
-# The same as 'docker image pull busybox'
+# The same as 'docker image pull ...'
 # Downloads an image from a registry
+\end{bashcode}
 
+\subsection{Listing images}
+\begin{bashcode}
 $ docker images
 # The same as 'docker image ls'
 # Lists images (skipping intermediate ones)
@@ -14,21 +18,27 @@ busybox     latest c55b0f125dc6 13 days ago  1.24MB
 ubuntu      latest 7e0aa2d69a15 3 weeks ago  72.7MB
 hello-world latest d1165f221234 2 months ago 13.3kB
 
-$ docker rmi IMAGE
-# The same as 'docker image rm ...'
-# Removes image(s).
+$ docker images -a
+# including intermediate images
+$ docker images --digests
+# including SHA256 digests
+$ docker images --dilter='...'
+# TODO
 \end{bashcode}
 
-Useful switches:
-\begin{compactitem}
-    \item \textbf{\mintinline{bash}{--all}}: including intermediate images,
-    \item \textbf{\mintinline{bash}{--digests}}: including SHA256 digests,
-    \item \textbf{\mintinline{bash}{--filter=}}, \textbf{\mintinline{bash}{--format=""}}: \dotfill to be done later.
-\end{compactitem}
+\subsection{Removing images}
+\begin{bashcode}
+$ docker rmi IMAGE
+# The same as 'docker image rm ...'
+# Removes images unless some container is using them
+$ docker image prune
+# The same as `docker image rm $(docker images -qf dangling=true)`
+# Removes dangling images (without a repository name / a tag)
+$ docker image prune -a
+# -a == --all removes all unused images instead
+\end{bashcode}
 
-
-
-
+\subsection{Work in progress}
 {
 \color{red}
 \important{Push a local image} to a registry:
@@ -50,18 +60,6 @@ $ docker image tag rhel-httpd:latest \
 >     registry-host:5000/myadmin/rhel-httpd:latest
 $ docker image push registry-host:5000/myadmin/rhel-httpd:latest
 \end{bashcode}
-
-\important{Delete an image}: you need to delete the containers that use given image before deleting image.
-Then:
-\begin{bashcode}
-$ docker image rm d1165f221234
-\end{bashcode}
-
-Example.
-To delete all dangling images:
-\begin{bashcode}
-$ docker image rm $(docker images -qf dangling=true)
-\end{bashcode}
-
 }
+
 %

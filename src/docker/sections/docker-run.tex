@@ -19,10 +19,9 @@ $ docker run -it ubuntu /bin/bash
 $ docker run -p 8888:5000 my_user/my_image
 # -p publishes a port/range of ports to the host,
 # -P exposes ports to random ports on the host interfaces.
-# -p = --publish, -P = --publish-all
+# -p == --publish, -P == --publish-all
 \end{bashcode}
 
-{\color{red}
 
 Useful short options:
 \begin{compactitem}
@@ -47,6 +46,5 @@ $ docker run -v /dev/log:/dev/log -it fedora /bin/bash
 $ journalctl -b | grep Hello
 # maj 20 09:03:20 plavi-pc root[8831]: Hello from my container
 \end{bashcode}
-}
 
 %
