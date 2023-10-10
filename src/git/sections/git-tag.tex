@@ -6,6 +6,7 @@ Useful short options:
 \item [\texttt{-a}] makes an annotated tag instead (equivalent to \mintinline{bash}{--annotate}),
 \item [\texttt{-d}] deletes existing tags instead (equivalent to \mintinline{bash}{--delete}),
 \item [\texttt{-f}] instead of failing, replaces an existing tag (equivalent to \mintinline{bash}{--force}),
+\item [\texttt{-l}] lists only tags matching given shell pattern (equivalent to \mintinline{bash}{--list}),
 \item [\texttt{-m}] instead of prompting, uses given message (equivalent to \mintinline{bash}{--message=}),
 \item [\texttt{-s}] makes a GPG-signed tag (equivalent to \mintinline{bash}{--sign}),
 \item [\texttt{-u}] makes a custom GPG key signed tag (equivalent to \mintinline{bash}{--local-user=}),
@@ -15,5 +16,20 @@ Useful short options:
 \mintinline{bash}{git tag --contains <commit>} lists only tags which contain the specified commit, implies \mintinline{bash}{--list}.
 
 \mintinline{bash}{git tag --sort=<key>} sorts based on the key given, in descending order if key is prefixed with a minus sign.
+
+Tags can be pushed:
+
+\begin{minted}{bash}
+git push origin v1.5   # single tag
+git push origin --tags # all tags that aren't already there
+git push origin --tags # all annotated tags that aren't ...
+\end{minted}
+
+And deleted:
+
+\begin{minted}{bash}
+git tag -d v1.5               # locally
+git push origin --delete v1.5 # remotely
+\end{minted}
 
 %

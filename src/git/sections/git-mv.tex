@@ -1,6 +1,7 @@
 %
 
-\textbf{git mv}\git{mv} moves files, directories symlinks.
+\textbf{git mv}\git{mv} moves files, directories, symlinks.
+Since Git doesn't explicitly track file movements, this is equivalent to renaming followed by \mintinline{bash}{git rm ...} and \mintinline{bash}{git add ...}.
 Useful short options:
 \begin{compactenum}
 \item [\texttt{-f}] forces move even if target exists (equivalent to \mintinline{bash}{--force}),

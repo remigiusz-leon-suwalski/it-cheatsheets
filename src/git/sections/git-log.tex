@@ -33,10 +33,14 @@ git log --name-only
 
 # generates a diffstat (histogram)
 git log --stat
+git log --shortstat
 
 # skips author, date and full commit message
 git log --oneline
 git log --pretty=oneline --abbrev-commit
+
+# displays date in a relative format ("2 weeks ago")
+git log --relative-date
 
 # displays nice references, without
 # refs/heads/, refs/tags, refs/remotes/
