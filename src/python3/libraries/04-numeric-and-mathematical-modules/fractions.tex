@@ -1,0 +1,11 @@
+\subsection{fractions -- rational numbers}
+This module supports rational number arithmetic:
+\begin{minted}{python}
+from fractions import Fraction
+from math import pi
+a = Fraction(-8, 5)
+b = Fraction("3/7")
+a.numerator + b.denominator          # -8 + 7 = 1
+a + b                                # Fraction(-41, 35)
+Fraction(pi).limit_denominator(1000) # Fraction(355, 113)
+\end{minted}
