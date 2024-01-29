@@ -1,6 +1,17 @@
 \documentclass{charun}
 \title{Haskell notes, version 0.19.2}
 \author{Leon Suwalski}
+
+\usepackage{xcolor}
+
+\renewcommand{\theFancyVerbLine}{\sffamily \textcolor[rgb]{0.5,0.5,1.0}{\oldstylenums{\arabic{FancyVerbLine}}}}
+% copied from https://tex.stackexchange.com/questions/132849/how-can-i-change-the-font-size-of-the-number-in-minted-environment
+
+\definecolor{myblue}{RGB}{233, 230, 248}
+
+\BeforeBeginEnvironment{minted}{\begin{tcolorbox}[breakable,boxsep=5pt,left=0pt,right=0pt,top=0pt,bottom=0pt,boxrule=0.5pt,arc=0pt,outer arc=0pt,colback=myblue,colframe=myblue]\small}%
+\AfterEndEnvironment{minted}{\end{tcolorbox}}%
+
 \begin{document}
 \begin{multicols*}{3}
 \maketitle
