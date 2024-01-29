@@ -1,18 +1,6 @@
 %
 
-\subsection{Numbers}
-\textbf{TODO!}
-Int, Integer, Float, Double, Rational, Word
-
-Numeric types:
-\begin{itemize}
-\item \textbf{Int} is a fixed-precision integer type with at least the range $-2^{29} .. 2^{29}-1$.
-\item \textbf{Integer} represents the entire infinite range of integers.
-\item \textbf{Float} are single-precision floating point numbers.
-\item \textbf{Double} are double-precision floating point numbers.
-\item \textbf{Rational} are arbitrary-precision rational numbers, represented as a ratio of two Integer values.
-\item \textbf{Word} is an unsigned integral type, with the same size as Int.
-\end{itemize}
+\subsubsection{Numeric type classes}
 
 %%% Numeric type classes
 \textbf{Num} is a basic numeric class.
@@ -20,19 +8,40 @@ The Haskell Report defines no laws for Num.
 However, (+) and (*) are customarily expected to define a ring.
 \begin{minted}{haskell}
 class  Num a  where
-    (+), (-), (*)       :: a -> a -> a
-    negate              :: a -> a
-    abs                 :: a -> a
-    signum              :: a -> a
-    fromInteger         :: Integer -> a
-    x - y               = x + negate y
-    negate x            = 0 - x
+    (+), (-), (*) :: a -> a -> a
+    negate        :: a -> a
+    abs           :: a -> a
+    signum        :: a -> a
+    fromInteger   :: Integer -> a
+    x - y         = x + negate y
+    negate x      = 0 - x
 \end{minted}
 
-% class (Num a, Ord a) => Real a where
+\textbf{Real} is a real numbers class:
+\begin{minted}{haskell}
+class (Num a, Ord a) => Real a where
+    toRational :: a -> Rational 
+\end{minted}
 
-% class (Real a, Enum a) => Integral a where
+\textbf{Integral} supports integer division:
+\begin{minted}{haskell}
+class (Real a, Enum a) => Integral a where 
+    quot      :: a -> a -> a
+    rem       :: a -> a -> a
+    div       :: a -> a -> a
+    mod       :: a -> a -> a
+    quotRem   :: a -> a -> (a, a) 
+    divMod    :: a -> a -> (a, a) 
+    toInteger :: a -> Integer 
+\end{minted}
 
+\mintinline{haskell}{quot} truncates toward $0$, \mintinline{haskell}{div} toward $-\infty$.
+They satisfy:
+\begin{minted}{haskell}
+(x `quot` y) * y + (x `rem` y) == x
+(x `div` y)  * y + (x `mod` y) == x
+\end{minted}
+    
 % class Num a => Fractional a where
 
 % class Fractional a => Floating a where
@@ -42,5 +51,6 @@ class  Num a  where
 % class (RealFrac a, Floating a) => RealFloat a where
 
 %%% Numeric functions
+% subtract even odd gcd lcm ^ ^^ fromIntegral realToFrac
 
 %

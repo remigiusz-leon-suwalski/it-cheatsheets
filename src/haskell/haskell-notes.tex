@@ -1,5 +1,5 @@
 \documentclass{charun}
-\title{Haskell notes, version 0.19.1}
+\title{Haskell notes, version 0.19.2}
 \author{Leon Suwalski}
 \begin{document}
 \begin{multicols*}{3}
@@ -9,11 +9,24 @@ Haskell haskell haskell.
 \section{Prelude}
 Based on \href{https://hackage.haskell.org/package/base-4.18.0.0/docs/Prelude.html}{Hackage docs} for \texttt{base-4.18.0.0}.
 
-\input{sections/prelude-booleans}
+\subsection{Basic data types}
+\input{sections/prelude-types-numbers}
 
-\input{sections/prelude-strings}
+\input{sections/prelude-types-booleans}
 
-\input{sections/prelude-tuples}
+\subsubsection{Maybe}
+\textbf{TODO!}
+The Maybe type encapsulates an optional value.
+
+\subsubsection{Either}
+\textbf{TODO!}
+The Either type represents values with two possibilities.
+
+\input{sections/prelude-types-strings}
+
+\input{sections/prelude-types-tuples}
+
+\subsection{Basic type classes}
 
 \input{sections/prelude-ord}
 
@@ -25,21 +38,14 @@ Based on \href{https://hackage.haskell.org/package/base-4.18.0.0/docs/Prelude.ht
 
 \newpage
 
-
-
-
-
-
 % old stuff
 
 \input{sections/prelude-standard}
 
 \input{sections/prelude-lists}
 
-
 \input{sections/prelude-io}
 
-To be done: maybe, either, 
 Data.Char: ord, chr
 % https://hackage.haskell.org/package/base-4.18.0.0/docs/Data-Char.html#v:chr
 
