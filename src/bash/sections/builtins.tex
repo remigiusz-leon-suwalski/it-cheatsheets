@@ -9,26 +9,22 @@
 \item [\symbolbash] \commandbash{alias}: substitutes a string for a word.
 \item [\symbolbash] \commandbash{unalias}: removes defined aliases.
 
-\item [\symbolbash] \commandbash{bg}: runs jobs in the background.
-\item [\symbolbash] \commandbash{fg}: \dotfill ????
+\item [\symbolbash] \commandbash{bg}/\commandbash{fg}: resumes suspended job in the background/brings a background or suspended process to the foreground.
 
 \item [\symbolbash] \commandbash{bind}: binds keys to readline function/macro.
 
 \item [\symbolbash] \commandbash{builtin}: executes the specified shell builtin.
 
-\item [\symbolbash] \commandbash{caller}: \dotfill ????
+\item [\symbolbash] \commandbash{caller}: inspects the call stack.
 
 \item [\symbolbash] \commandbash{cd}: changes the shell working directory.
 \item [\texttt{-}] to the previous directory.
 
-\item [\symbolbash] \commandbash{command -v}: tells how shell will invoke the specified command (like 'command -v grep').
+\item [\symbolbash] \commandbash{command -v}: tells how shell will invoke the specified command (like '{\small \mintinline{bash}{command -v grep}}').
 
 \item [\symbolbash] \commandbash{compgen}: generates completions for: \texttt{a}~aliases, \texttt{b}~shell builtins, \texttt{c}~all commands, \texttt{d}~directories, \texttt{e}~exported shell variables, \texttt{f}~files, \texttt{g}~groups, \texttt{j}~jobs, \texttt{k}~shell reserved words, \texttt{s}~services, \texttt{u}~users, \texttt{v}~shell variables.
-
-\item [\symbolbash] \commandbash{complete}: \dotfill ????
-
-\item [\symbolbash] \commandbash{compopt}: \dotfill ????
-
+\item [\symbolbash] \commandbash{complete}: handles how commands are completed when pressing Tab.
+\item [\symbolbash] \commandbash{compopt}: modifies completion options (?).
 
 \item [\symbolbash] \commandbash{declare}: declares variables and/or gives them attributes: \texttt{a} indexed array, \texttt{A} associative array, \texttt{i} integer, \texttt{l} lowercase chars only.
 
@@ -40,13 +36,13 @@
 \item [\texttt{e}] enables interpretation of backslash escapes,
 \item [\texttt{n}] does not output the trailing newline.
 
-\item [\symbolbash] \commandbash{enable}: \dotfill ????
+\item [\symbolbash] \commandbash{enable}: enables/disables shell builtins.
 
 \item [\symbolbash] \commandbash{eval}: \dotfill ????
 
 \item [\symbolbash] \commandbash{exec}: \dotfill ????
 
-\item [\symbolbash] \commandbash{exit}: \dotfill ????
+\item [\symbolbash] \commandbash{exit}: exits the shell with a status (0..255) or, if omitted, exit code of the last command.
 
 \item [\symbolbash] \commandbash{export}: \dotfill ????
 
@@ -56,7 +52,7 @@
 
 \item [\symbolbash] \commandbash{hash}: \dotfill ????
 
-\item [\symbolbash] \commandbash{help}: \dotfill ????
+\item [\symbolbash] \commandbash{help}: displays info about shell builtins.
 
 \item [\symbolbash] \commandbash{history}: \dotfill ????
 
@@ -103,8 +99,7 @@
 
 \item [\symbolbash] \commandbash{trap}: \dotfill ????
 
-\item [\symbolbash] \commandbash{true}: \dotfill ????
-\item [\symbolbash] \commandbash{false}: \dotfill ????
+\item [\symbolbash] \commandbash{false}/\commandbash{true}: returns an un/successful result.
 
 \item [\symbolbash] \commandbash{type}: \dotfill ????
 
