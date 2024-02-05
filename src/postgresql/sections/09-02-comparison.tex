@@ -1,5 +1,6 @@
 % https://www.postgresql.org/docs/current/functions-comparison.html
 % 9.2 Comparison
+\color{red}
 \subsection{Comparison}
 \label{subsection_comparison}%
 Comparison operators are \mintinline{sql}{<}, \mintinline{sql}{<=}, \mintinline{sql}{>}, \mintinline{sql}{>=}, \mintinline{sql}{=} (equal), \mintinline{sql}{<>} (not equal), \mintinline{sql}{!=} (alias for not equal).
@@ -7,4 +8,7 @@ For example, below query returns members who joined after the start of September
 \begin{minted}[linenos,firstnumber=last]{sql}
 SELECT memid FROM cd.members WHERE joindate >= '2012-09-01';
 \end{minted}
+
+See also \ref{9_9_datetime} for date/time functions and operators.
+
 % BETWEEN, BETWEEN SYMMETRIC, IS DISTINCT FROM, IS NULL, IS UNKNOWN, IS TRUE, IS FALSE

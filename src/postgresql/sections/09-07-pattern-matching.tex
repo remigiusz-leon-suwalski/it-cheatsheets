@@ -2,10 +2,11 @@
 
 % https://www.postgresql.org/docs/15/functions-matching.html
 % 9.7. Pattern Matching
+\color{black}
 \subsection{Pattern matching}
 % There's other ways to accomplish this task: Postgres supports regular expressions with the ~ operator, for example. Use whatever makes you feel comfortable, but do be aware that the LIKE operator is much more portable between systems.
-\textbf{LIKE} provides pattern matching: underscore matches any single character, percentage matches any string (possible empty).
-\begin{minted}[linenos,firstnumber=last]{sql}
+\textbf{LIKE}\footnote{\url{https://www.postgresql.org/docs/current/functions-matching.html\#FUNCTIONS-LIKE}} provides pattern matching: underscore matches any single character, percentage matches any string (possible empty).
+\begin{minted}{sql}
 SELECT * FROM cd.facilities WHERE name LIKE '%Tennis%';
 \end{minted}
 % SIMILAR TO

@@ -1,28 +1,29 @@
 %
 
+\color{black}
 \subsection{SELECT}
-\textbf{SELECT} retrieves specified columns (or all columns if \mintinline{sql}{*} is used) from table mentioned after \mintinline{sql}{FROM} keyword.
-\begin{minted}[linenos,firstnumber=last]{sql}
+\textbf{SELECT}\footnote{\url{https://www.postgresql.org/docs/current/sql-select.html}} retrieves specified columns (or all columns if \mintinline{sql}{*} is used) from table mentioned after \mintinline{sql}{FROM} keyword:
+\begin{minted}{sql}
 SELECT * FROM cd.facilities;
 SELECT name, membercost FROM cd.facilities;
 \end{minted}
 
-If '\textbf{DISTINCT}' is used, duplicate rows are removed from the results.
-\begin{minted}[linenos,firstnumber=last]{sql}
+\textbf{SELECT DISTINCT} eliminates duplicate rows from the result:
+\begin{minted}{sql}
 SELECT DISTINCT surname FROM cd.members
 \end{minted}
 
-If '\textbf{AS} + name' is used, specified name is used for an output column.
-\begin{minted}[linenos,firstnumber=last]{sql}
+\textbf{AS} gives temporary aliases to the columns:
+\begin{minted}{sql}
 SELECT name AS facilityname FROM cd.facilities;
 \end{minted}
 
 % https://pgexercises.com/questions/basic/where.html
-If '\textbf{WHERE} + condition' is used, rows that don't satisfy that condition are removed from the output, but not the table :).
+The \textbf{WHERE} clause indicates the condition(s) that rows must satisfy to be selected. 
 Usual logical operators are available: \mintinline{sql}{AND}, \mintinline{sql}{OR}, \mintinline{sql}{NOT}.
 SQL uses a three-valued logic system with true, false and null (representing unknowns).
 See \textbf{\ref{subsection_comparison}} for comparison operators.
-\begin{minted}[linenos,firstnumber=last]{sql}
+\begin{minted}{sql}
 SELECT * FROM cd.facilities WHERE membercost > 0;
 SELECT facid, name FROM cd.facilities
 WHERE membercost > 0 AND (membercost < monthlymaintenance);
@@ -36,14 +37,14 @@ If '\textbf{OFFSET} + start' is also used, that many initial rows will be skippe
 (This produces unpredictable output if rows are not sorted with \mintinline{sql}{ORDER BY}!).
 Standard SQL uses FETCH instead, LIMIT is Postgresql specific.
 
-\begin{minted}[linenos,firstnumber=last]{sql}
+\begin{minted}{sql}
 SELECT surname, firstname FROM cd.members
 ORDER BY surname DESC LIMIT 10 OFFSET 5;
 \end{minted}
 
 Operators \textbf{UNION}, \textbf{INTERSECT} and \textbf{INTERSECT} are used to combine outputs of multiple \mintinline{sql}{SELECT} statements, corresponding to $\cup$, $\cap$ and $\setminus$.
 In all three cases, duplicate rows are removed unless \textbf{ALL} is used!
-\begin{minted}[linenos,firstnumber=last]{sql}
+\begin{minted}{sql}
 SELECT surname FROM cd.members
 UNION
 SELECT name FROM cd.facilities;
