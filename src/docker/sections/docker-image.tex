@@ -1,6 +1,20 @@
 %
 
 \section{Manage images}
+\subsection{Searching for images}
+\begin{bashcode}
+$ docker search hello-world
+NAME               DESCRIPTION         STARS OFFICIAL AUTOMATED
+hello-world        Hello World! (an... 2186  [OK]       
+tutum/hello-world  Image to test...    90             [OK]
+\end{bashcode}
+Useful switches include:
+\begin{bashcode}
+# --filter=stars=3                   : images with at least 3 stars
+# --filter=is-automated=(true|false)
+# --filter=is-official=(true|false)
+\end{bashcode}
+
 \subsection{Pulling images}
 \begin{bashcode}
 $ docker pull busybox

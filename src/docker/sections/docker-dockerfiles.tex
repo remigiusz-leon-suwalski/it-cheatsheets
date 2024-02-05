@@ -1,0 +1,53 @@
+%
+
+\section{Manage Dockerfiles}
+A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image.
+\begin{bashcode}
+$ cat hello.sh
+#!/bin/sh
+echo "Hello, docker!"
+$ cat Dockerfile
+FROM alpine:3.13
+WORKDIR /usr/src/app
+COPY hello.sh .
+# RUN chmod +x hello.sh
+CMD ./hello.sh
+\end{bashcode}
+To build:
+\begin{bashcode}
+$ docker build . -t hello-dokker
+[+] Building 0.3s (8/8) FINISHED                                                                                             docker:default
+ => [internal] load build definition from Dockerfile             0.0s
+ => => transferring dockerfile: 544B                             0.0s
+ => [internal] load .dockerignore                                0.0s
+ => => transferring context: 2B                                  0.0s
+ => [internal] load metadata for docker.io/library/alpine:3.13   0.0s
+ => [1/3] FROM docker.io/library/alpine:3.13                     0.0s
+ => [internal] load build context                                0.0s
+ => => transferring context: 68B                                 0.0s
+ => [2/3] WORKDIR /usr/src/app                                   0.1s
+ => [3/3] COPY hello.sh .                                        0.0s
+ => exporting to image                                           0.1s
+ => => exporting layers                                          0.1s
+ => => writing image sha256:2dd...b83                            0.0s
+ => => naming to docker.io/library/hello-dokker                  0.0s
+\end{bashcode}
+
+It's possible but not recommended to modify exisitng image:
+\begin{bashcode}
+$ docker run -it hello-dokker sh
+# in second terminal
+$ docker ps
+$ touch extra.txt
+$ docker cp ./extra.txt priceless_proskuriakova:/usr/src/app/
+$ docker diff priceless_proskuriakova
+C /usr
+C /usr/src
+C /usr/src/app
+A /usr/src/app/add
+C /root
+A /root/.ash_history
+$ docker commit proskuriakova goodbye-dokker
+\end{bashcode}
+
+%
