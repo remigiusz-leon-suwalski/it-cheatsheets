@@ -6,7 +6,6 @@
 \newcommand{\important}[1]{\textbf{\color{blue}#1}}
 
 \newminted{bash}{firstnumber=last}
-\renewcommand{\theFancyVerbLine}{\sffamily \textcolor[rgb]{0.5,0.5,1.0}{\oldstylenums{\arabic{FancyVerbLine}}}}
 % copied from https://tex.stackexchange.com/questions/132849/how-can-i-change-the-font-size-of-the-number-in-minted-environment
 
 \usepackage[scaled=0.85]{beramono}
@@ -14,9 +13,10 @@
 
 \usepackage{hyperref}
 \usepackage{paralist}
-\definecolor{myblue}{RGB}{205, 255, 205}
+\definecolor{dockercolor}{HTML}{d5efff}
+% copies from https://www.color-hex.com/color-palette/85828
 
-\BeforeBeginEnvironment{minted}{\begin{tcolorbox}[breakable,boxsep=5pt,left=0pt,right=0pt,top=0pt,bottom=0pt,boxrule=0.5pt,arc=0pt,outer arc=0pt,colback=myblue,colframe=myblue]\small}%
+\BeforeBeginEnvironment{minted}{\begin{tcolorbox}[breakable,boxsep=5pt,left=0pt,right=0pt,top=0pt,bottom=0pt,boxrule=0.5pt,arc=0pt,outer arc=0pt,colback=dockercolor,colframe=dockercolor]\small}%
 \AfterEndEnvironment{minted}{\end{tcolorbox}}%
 
 \begin{document}
