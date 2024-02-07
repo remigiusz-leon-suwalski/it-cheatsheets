@@ -2,8 +2,10 @@
 
 \subsection{sys -- system-specific parameters and functions}
 
-\mintinline{python}{sys.argv} is a list of command line arguments, \mintinline{python}{argv[0]} is the script name.
+\mintinline{python}{sys.argv} is a list of command line arguments, its first item equals the script name (or \mintinline{bash}{-c} or an empty string).
 
 \mintinline{python}{sys.exit([arg])} raises a SystemExit exception, where optional argument can be an integer giving the exit status (where 0 is considered successful termination).
+
+\mintinline{python}{sys.path} is a list of strings that specifies the search path for modules (based on PYTHONPATH environmental variable plus an installation dependent default).
 
 %
