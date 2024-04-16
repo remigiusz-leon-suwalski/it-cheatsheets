@@ -23,6 +23,7 @@ $ docker pull busybox
 \end{bashcode}
 
 \subsection{Listing images}
+Local:
 \begin{bashcode}
 $ docker images
 # The same as 'docker image ls'
@@ -39,6 +40,23 @@ $ docker images --digests
 $ docker images --dilter='...'
 # TODO
 \end{bashcode}
+
+Remote:
+\begin{bashcode}
+$ docker search hello-world
+NAME                DESCRIPTION                     STARS OFFICIAL
+hello-world         Hello World! (an example of ... 2226  [OK]
+rancher/hello-world This container image is no ...  6     
+okteto/hello-world                                  0     
+
+# By default, docker search will only search from
+# Docker Hub, but to a search different registry, you
+# can add the registry address before the search term:
+$ docker search quay.io/hello
+\end{bashcode}
+
+
+
 
 \subsection{Removing images}
 \begin{bashcode}
