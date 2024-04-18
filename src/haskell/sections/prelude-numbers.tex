@@ -25,7 +25,7 @@ class (Num a, Ord a) => Real a where
 
 \textbf{Integral} supports integer division:
 \begin{minted}{haskell}
-class (Real a, Enum a) => Integral a where 
+class (Real a, Enum a) => Integral a where
     quot      :: a -> a -> a
     rem       :: a -> a -> a
     div       :: a -> a -> a
@@ -41,8 +41,18 @@ They satisfy:
 (x `quot` y) * y + (x `rem` y) == x
 (x `div` y)  * y + (x `mod` y) == x
 \end{minted}
-    
-% class Num a => Fractional a where
+
+There are \mintinline{haskell}{quotRem} and \mintinline{haskell}{divMod} that do two things simultaneously.
+
+\textbf{Fractional} supports real division:
+\begin{minted}{haskell}
+class Num a => Fractional a where
+    (/)          :: a -> a -> a
+    recip        :: a -> a
+    fromRational :: Rational -> a
+    recip x      =  1 / x
+    x / y        = x * recip y
+\end{minted}
 
 % class Fractional a => Floating a where
 
