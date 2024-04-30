@@ -1,6 +1,10 @@
 %
 
-\textbf{git tag}\git{tag} lists tags.
+\textbf{git tag}\git{tag} lists tags (without options) or creates a lightweight tag (with its name).
+% TODO: git tag v1.2 abc345def if you want to tag later
+% git push origin --tags, --follow-tags
+% git tag -d v1.2
+% git push origin :refs/tags/v1.2 (albo --delete)
 Useful short options:
 \begin{compactenum}
 \item [\texttt{-a}] makes an annotated tag instead (equivalent to \mintinline{bash}{--annotate}),
