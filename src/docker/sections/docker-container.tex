@@ -14,11 +14,12 @@ $ docker run --name='cobra' python
 
 Useful switches include:
 \begin{bashcode}
-# -d == --detach=true runs in the background
+# -d   == --detach=true runs in the background
 # `docker container attach` attaches local stdin & stdout
 
-# -i == --interactive keeps STDIN open
-# -t == --tty allocaes a pseudo-TTY
+# -i   == --interactive keeps STDIN open
+# --rm == automatically removes the container when it exits
+# -t   == --tty allocaes a pseudo-TTY
 \end{bashcode}
 
 \subsection{Listing containers}
