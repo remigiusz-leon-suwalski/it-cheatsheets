@@ -12,4 +12,11 @@ Useful short options:
 \item [\texttt{-M}] equivalent to \mintinline{bash}{--move --force}.
 \end{compactenum}
 
+TODO: --merged/--no-merged, -u
+
+How to rename a branch:
+git branch --move bad-name good-name
+git push --set-upstream origin good-name
+git push origin --delete bad-name
+
 %
