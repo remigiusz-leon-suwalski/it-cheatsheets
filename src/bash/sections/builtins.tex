@@ -4,12 +4,11 @@
 \begin{compactenum}
 \item [\symbolbash] \commandbash{.}: evaluates a script.
 
-\item [\symbolbash] \commandbash{[}: defines conditionals.
+\item [\symbolbash] \commandbash{[}: defines conditionals, \commandbash{test}: checks file types and compares values. Both are discouraged, use \commandbash{[[ ]]} instead.
 
-\item [\symbolbash] \commandbash{alias}: substitutes a string for a word.
-\item [\symbolbash] \commandbash{unalias}: removes defined aliases.
+\item [\symbolbash] \commandbash{alias}: substitutes a string for a word,\\\commandbash{unalias}: removes defined aliases.
 
-\item [\symbolbash] \commandbash{bg}/\commandbash{fg}: resumes suspended job in the background/brings a background or suspended process to the foreground.
+\item [\symbolbash] \commandbash{bg}: resumes suspended job in the background; \commandbash{fg}: brings a background or suspended process to the foreground.
 
 \item [\symbolbash] \commandbash{bind}: binds keys to readline function/macro.
 
@@ -30,7 +29,7 @@
 
 \item [\symbolbash] \commandbash{dirs}: lists remembered (for popd) directories.
 
-\item [\symbolbash] \commandbash{disown}: \dotfill ????
+\item [\symbolbash] \commandbash{disown}: removes entries from the active jobs table; they are still connected to the terminal!
 
 \item [\symbolbash] \commandbash{echo}: displays a line of text:
 \item [\texttt{e}] enables interpretation of backslash escapes,
@@ -38,9 +37,9 @@
 
 \item [\symbolbash] \commandbash{enable}: enables/disables shell builtins.
 
-\item [\symbolbash] \commandbash{eval}: \dotfill ????
+\item [\symbolbash] \commandbash{eval}: executes a command by the shell
 
-\item [\symbolbash] \commandbash{exec}: \dotfill ????
+\item [\symbolbash] \commandbash{exec}: replaces current shell with a command.
 
 \item [\symbolbash] \commandbash{exit}: exits the shell with a status (0..255) or, if omitted, exit code of the last command.
 
@@ -93,7 +92,6 @@
 
 \item [\symbolbash] \commandbash{suspend}: \dotfill ????
 
-\item [\symbolbash] \commandbash{test}: checks file types and compares values.
 
 \item [\symbolbash] \commandbash{times}: \dotfill ????
 
