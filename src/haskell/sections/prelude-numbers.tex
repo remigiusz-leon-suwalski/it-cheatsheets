@@ -2,6 +2,14 @@
 
 \subsubsection{Numeric type classes}
 
+% TODO
+% data Int A fixed-precision integer type with at least the range [-2^29 .. 2^29-1]. The exact range for a given implementation can be determined by using minBound and maxBound from the Bounded class.
+% data Integer
+% data Float Single-precision floating point numbers. It is desirable that this type be at least equal in range and precision to the IEEE single-precision type.
+% data Double Double-precision floating point numbers. It is desirable that this type be at least equal in range and precision to the IEEE double-precision type.
+% type Rational = Ratio Integer Arbitrary-precision rational numbers, represented as a ratio of two Integer values. A rational number may be constructed using the % operator.
+% data Word A Word is an unsigned integral type, with the same size as Int.
+
 %%% Numeric type classes
 \textbf{Num} is a basic numeric class.
 The Haskell Report defines no laws for Num.
@@ -54,7 +62,19 @@ class Num a => Fractional a where
     x / y        = x * recip y
 \end{minted}
 
-% class Fractional a => Floating a where
+\textbf{Floating} has trigonometric and hyperbolic functions.
+\begin{minted}{haskell}
+class Fractional a => Floating a where
+    pi                  :: a
+    exp, log, sqrt      :: a -> a
+    (**), logBase       :: a -> a -> a
+    sin, cos, tan       :: a -> a
+    asin, acos, atan    :: a -> a
+    sinh, cosh, tanh    :: a -> a
+    asinh, acosh, atanh :: a -> a
+\end{minted}
+
+
 
 % class (Real a, Fractional a) => RealFrac a where
 

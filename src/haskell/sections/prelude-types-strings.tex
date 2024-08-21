@@ -7,4 +7,7 @@ A character literal in Haskell has type Char; a string is a list of characters: 
 \textbf{TO BE DONE!}
 To convert a Char to or from the corresponding Int value defined by Unicode, use toEnum and fromEnum from the Enum class respectively (or equivalently ord and chr).
 
+\textbf{TO BE DONE!}
+For historical reasons, the \texttt{base} library uses \mintinline{haskell}{String} in a lot of places for the conceptual simplicity, but library code dealing with user-data should use the \texttt{text} package for Unicode text, or the the bytestring package for binary data.
+
 %

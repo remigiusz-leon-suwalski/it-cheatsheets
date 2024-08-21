@@ -1,5 +1,5 @@
 \documentclass{charun}
-\title{Haskell notes, version 0.19.3}
+\title{Haskell notes, version 0.19.4}
 \author{Leon Suwalski}
 
 \usepackage{xcolor}
@@ -16,12 +16,14 @@
 \raggedright
 Haskell haskell haskell.
 \section{Prelude}
-Based on \href{https://hackage.haskell.org/package/base-4.18.0.0/docs/Prelude.html}{Hackage docs} for \texttt{base-4.18.0.0}.
+Based on \href{https://hackage.haskell.org/package/base-4.20.0.1/docs/Prelude.html}{Hackage docs} for \texttt{base-4.20.0.1}.
 
 \subsection{Basic data types}
+\input{sections/prelude-types-booleans}
+
 \input{sections/prelude-types-numbers}
 
-\input{sections/prelude-types-booleans}
+
 
 \subsubsection{Maybe}
 \textbf{TODO!}
@@ -37,9 +39,11 @@ The Either type represents values with two possibilities.
 
 \subsection{Basic type classes}
 
-\input{sections/prelude-ord}
+\input{sections/prelude-eq}
 
 \input{sections/prelude-enum}
+
+\input{sections/prelude-ord}
 
 \input{sections/prelude-numbers}
 
