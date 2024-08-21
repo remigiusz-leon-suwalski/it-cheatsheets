@@ -1,4 +1,14 @@
 \subsection{hashlib -- Secure hashes and message digests}
-To be done ....
+\begin{minted}{python}
+>>> hashlib.md5("John Doe".encode("utf-8"))
+<md5 _hashlib.HASH object @ 0x779f00a45af0>
+>>> hashlib.md5("John Doe".encode("utf-8")).hexdigest()
+'4c2a904bafba06591225113ad17b5cec'
 
+# This does not work
+>>> hashlib.md5("John Doe")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: Strings must be encoded before hashing
+\end{minted}
 %
