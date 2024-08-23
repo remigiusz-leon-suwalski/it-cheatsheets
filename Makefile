@@ -18,3 +18,6 @@ postgresql-pdf:
 
 python3-pdf:
 	cd src/python3 && $(MAKE) all
+
+ruby-pdf:
+	cd src/ruby && $(MAKE) all

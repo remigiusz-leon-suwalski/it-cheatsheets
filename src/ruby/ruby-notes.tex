@@ -1,0 +1,157 @@
+\documentclass{charun}
+\title{Ruby 3.3.0 notes, version 0.0.1}
+\author{Leon Suwalski}
+\definecolor{rubycolor}{HTML}{daffeb}
+\BeforeBeginEnvironment{minted}{\begin{tcolorbox}[breakable,boxsep=1pt,left=1pt,right=2pt,top=0pt,bottom=0pt,boxrule=0.5pt,arc=0pt,outer arc=0pt,colback=rubycolor,colframe=rubycolor]}%
+\AfterEndEnvironment{minted}{\end{tcolorbox}}%
+\begin{document}
+\begin{multicols*}{2}
+\maketitle
+\raggedright
+
+\section{Built-in data types}
+\subsection{Numbers}
+There are two main types of numbers in Ruby: integers and floats.
+\begin{minted}{ruby}
+1 + 2 - 3 * 4 / 5
+2 ** (12 % 5)
+\end{minted}
+
+Useful methods for numbers:
+\begin{minted}{ruby}
+0.even?
+1.odd?
+\end{minted}
+
+Conversions:
+\begin{minted}{ruby}
+13.to_f   # 13.0
+13.0.to_i # 13
+13.9.to_i # 13
+\end{minted}
+
+\subsection{Strings}
+Strings can be formed with either double or single quotes.
+Single quotes disable string interpolation and escape characters.
+\begin{minted}{ruby}
+"Hello " + "world!"      # concatenation
+"Hello " << "world!"     # shovel operator
+"Hello ".concat("world!)
+\end{minted}
+
+Substrings:
+\begin{minted}{ruby}
+"bonjour"[0]    # "b"
+"bonjour"[0..1] # "bo"
+"bonjour"[0, 4] # "bonj"
+"bonjour"[-1]   # "r"
+\end{minted}
+
+Interpolation:
+\begin{minted}{ruby}
+what = "le Monde"
+puts "Bonjour, #{what}" #=> "Bonjour, le Monde"
+puts 'Bonjour, #{what}' #=> "Bonjour, #{name}"
+\end{minted}
+
+String methods:
+\begin{minted}{ruby}
+"hello".capitalize #=> "Hello"
+"hello".include?("lo")  #=> true
+"hello".include?("z")   #=> false
+"hello".upcase  #=> "HELLO"
+"Hello".downcase  #=> "hello"
+"hello".empty?  #=> false
+"".empty?       #=> true
+"hello".length  #=> 5
+"hello".reverse  #=> "olleh"
+"hello world".split  #=> ["hello", "world"]
+"hello".split("")    #=> ["h", "e", "l", "l", "o"]
+" hello, world   ".strip  #=> "hello, world"
+\end{minted}
+
+Conversions:
+\begin{minted}{ruby}
+13.to_s   # "13"
+\end{minted}
+
+\subsection{Symbols}
+Symbols are unique identifiers that are considered code, not data. 
+\begin{minted}{ruby}
+:symbol
+\end{minted}
+% "string" == "string"  #=> true
+% "string".object_id == "string".object_id  #=> false
+% :symbol.object_id == :symbol.object_id    #=> true
+
+\subsection{Booleans}
+Booleans: true and false.
+Nil represents ''nothing'' and is needed because every method in Ruby always returns exactly one object.
+
+\subsection{Arrays}
+Arrays are zero-indexed, can contain all kinds of objects and have a defined order.
+\begin{minted}{ruby}
+words = ["one", "two", "three"]
+words << "four"
+puts words[10] # retrieving an element that does not exist gives nil
+[1, 2] + [5, 6] # [1, 2, 5, 6]
+["A", "Be"] * 2 # ["A", "Be", "A", "Be"]
+& # intersection
+# vvv methods vvv
+.first .last .length .sort .compact .index(...) .rotate(...), .transpose
+\end{minted}
+
+
+\subsection{Hashes}
+Like dictionaries.
+\begin{minted}{ruby}
+dictionary = { "one" => "eins", "two" => "zwei", "three" => "drei" }
+dictionary["zero"] = "null"
+puts dictionary["one"]
+> { "one" => "eins" }.merge({ "two" => "zwei" })
+=> { "one" => "eins", "two" => "zwei" }
+> dictionary = { "one" => "eins" }
+> dictionary.fetch("one")
+=> "eins"
+> dictionary.fetch("two")
+KeyError: key not found: "two"
+[] gives nil
+.length
+.size
+{ one: "eins", two: "zwei", three: "drei" } # new syntax
+{ :one => "eins", :two => "zwei", :three => "drei" } # old
+\end{minted}
+
+\begin{minted}{ruby}
+Objects - classes - methods
+> "this is a string".is_a?(String)
+=> true
+> "this is a string".class
+=> String
+
+If you check the list of methods on our String above you see that in Ruby we can have methods that end with a question mark ?. What’s up with that?
+
+By convention, in Ruby, these methods return either true or false. For example, we can ask a number if it is even or odd:
+
+These methods are called predicate methods in Ruby. Not quite sure why, maybe because of the historical math context of programming.
+
+Bang methods end with an exlamation mark, and often modify the object they are called on. 
+
+class Person
+  def initialize(name)
+  end
+end
+
+You see that we add a method called initialize to the class, and this method accepts a single argument, which is called name. At the moment, this method is still empty. We’ll add some code to it in a bit.
+
+The important bit to learn for you is: the method initialize is a special method with a special meaning in Ruby:
+
+Whenever you call the method new on a class, as in Person.new, the class will create a new instance of itself. It will then, internally, call the method initialize on the new object. Doing so it will simply pass all the arguments that you passed to new on to the method initialize.
+\end{minted}
+
+\end{multicols*}
+\end{document}
+
+https://www.theodinproject.com/lessons/ruby-variables
+http://ruby-for-beginners.rubymonstas.org/writing_classes/attribute_readers.html
+https://launchschool.com/books/ruby/read/basics
