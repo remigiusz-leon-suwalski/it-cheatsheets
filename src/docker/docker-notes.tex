@@ -3,21 +3,20 @@
 \author{Leon Suwalski}
 
 \usepackage{xcolor}
-\newcommand{\important}[1]{\textbf{\color{blue}#1}}
+% copied from https://www.color-hex.com/color-palette/85828
+\definecolor{dockercolor}{HTML}{d5efff}  % pastel
+\definecolor{dockercolor2}{HTML}{005e99} % sature
 
+% copied from https://tex.stackexchange.com/questions/132849/how-can-i-change-the-font-size-of-the-number-in-minted-environment
+\BeforeBeginEnvironment{minted}{\begin{tcolorbox}[breakable,boxsep=5pt,left=0pt,right=0pt,top=0pt,bottom=0pt,boxrule=0.5pt,arc=0pt,outer arc=0pt,colback=dockercolor,colframe=dockercolor2]\small}%
+\AfterEndEnvironment{minted}{\end{tcolorbox}}%
+
+\newcommand{\important}[1]{\textbf{\color{dockercolor2}#1}}
 \newminted{bash}{firstnumber=last}
 % copied from https://tex.stackexchange.com/questions/132849/how-can-i-change-the-font-size-of-the-number-in-minted-environment
-
 \usepackage[scaled=0.85]{beramono}
-% copied from https://tex.stackexchange.com/questions/484273/textbf-in-mintinline
-
 \usepackage{hyperref}
 \usepackage{paralist}
-\definecolor{dockercolor}{HTML}{d5efff}
-% copies from https://www.color-hex.com/color-palette/85828
-
-\BeforeBeginEnvironment{minted}{\begin{tcolorbox}[breakable,boxsep=5pt,left=0pt,right=0pt,top=0pt,bottom=0pt,boxrule=0.5pt,arc=0pt,outer arc=0pt,colback=dockercolor,colframe=dockercolor]\small}%
-\AfterEndEnvironment{minted}{\end{tcolorbox}}%
 
 \begin{document}
 \begin{multicols}{2}

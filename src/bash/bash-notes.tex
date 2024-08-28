@@ -1,17 +1,23 @@
 \documentclass{charun}
+\title{Bash 5.2.32 notes, version 0.2.216}
+\author{Leon Suwalski}
 
+\usepackage{xcolor}
+% NOT copied from https://www.color-hex.com/color-palette/85828
+\definecolor{bashcolor}{HTML}{f0f3f4}
+\definecolor{bashcolor2}{HTML}{425057}
+
+% copied from https://tex.stackexchange.com/questions/132849/how-can-i-change-the-font-size-of-the-number-in-minted-environment
+\BeforeBeginEnvironment{minted}{\begin{tcolorbox}[breakable,boxsep=5pt,left=0pt,right=0pt,top=0pt,bottom=0pt,boxrule=0.5pt,arc=0pt,outer arc=0pt,colback=bashcolor,colframe=bashcolor2]\small}%
+\AfterEndEnvironment{minted}{\end{tcolorbox}}%
+    
 \newcommand{\commandcoreutils}[1]{\textbf{#1}}
 \newcommand{\symbolcoreutils}{$\blacksquare\blacksquare$} % TODO
-
 \newcommand{\commandbash}[1]{\textbf{#1}}
 \newcommand{\symbolbash}{$\blacksquare\blacksquare$} % TODO
-
 \newcommand{\cmdcore}{$\blacksquare$}
 \newcommand{\cmdutil}{$\square\blacksquare$}
 \newcommand{\cmdvar}{$\square$}
-
-\title{Bash 5.2.32 notes, version 0.2.216}
-\author{Leon Suwalski}
 
 \begin{document}
 \begin{multicols*}{3}

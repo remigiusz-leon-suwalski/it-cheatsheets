@@ -3,13 +3,14 @@
 \author{Leon Suwalski}
 
 \usepackage{xcolor}
+% copied from https://www.color-hex.com/color-palette/85828
+\definecolor{haskellcolor}{HTML}{d4d0ff} % pastel
+\definecolor{haskellcolor2}{HTML}{0d0099} % pastel
 
-\definecolor{haskellcolor}{HTML}{d4d0ff}
-% copies from https://www.color-hex.com/color-palette/85828
-
-\BeforeBeginEnvironment{minted}{\begin{tcolorbox}[breakable,boxsep=5pt,left=0pt,right=0pt,top=0pt,bottom=0pt,boxrule=0.5pt,arc=0pt,outer arc=0pt,colback=haskellcolor,colframe=haskellcolor]\small}%
+% copied from https://tex.stackexchange.com/questions/132849/how-can-i-change-the-font-size-of-the-number-in-minted-environment
+\BeforeBeginEnvironment{minted}{\begin{tcolorbox}[breakable,boxsep=5pt,left=0pt,right=0pt,top=0pt,bottom=0pt,boxrule=0.5pt,arc=0pt,outer arc=0pt,colback=haskellcolor,colframe=haskellcolor2]\small}%
 \AfterEndEnvironment{minted}{\end{tcolorbox}}%
-
+    
 \begin{document}
 \begin{multicols*}{3}
 \maketitle

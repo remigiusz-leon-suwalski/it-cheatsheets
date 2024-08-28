@@ -1,8 +1,16 @@
-\documentclass{charuun}
+\documentclass{charun}
 \title{Git notes, version 0.12.7}
 \author{Leon Suwalski}
 
-% \setlength{\marginparsep}{-25pt}
+\usepackage{xcolor}
+% copied from https://www.color-hex.com/color-palette/85828
+\definecolor{gitcolor}{HTML}{ffecec}
+\definecolor{gitcolor2}{HTML}{990000}
+
+% copied from https://tex.stackexchange.com/questions/132849/how-can-i-change-the-font-size-of-the-number-in-minted-environment
+\BeforeBeginEnvironment{minted}{\begin{tcolorbox}[breakable,boxsep=5pt,left=0pt,right=0pt,top=0pt,bottom=0pt,boxrule=0.5pt,arc=0pt,outer arc=0pt,colback=gitcolor,colframe=gitcolor2]\small}%
+\AfterEndEnvironment{minted}{\end{tcolorbox}}%
+    
 \newcommand{\git}[1]{\marginpar[\textbf{\color{blue}{#1}}]{\textbf{\color{blue}{#1}}}}
 
 \usepackage{marginnote}
