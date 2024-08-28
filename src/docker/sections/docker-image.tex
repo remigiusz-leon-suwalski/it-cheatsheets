@@ -1,7 +1,7 @@
 %
 
 \section{Manage images}
-\subsection{Searching for images}
+\subsection{Search for images}
 \begin{bashcode}
 $ docker search hello-world
 NAME               DESCRIPTION         STARS OFFICIAL AUTOMATED
@@ -15,14 +15,14 @@ Useful switches include:
 # --filter=is-official=(true|false)
 \end{bashcode}
 
-\subsection{Pulling images}
+\subsection{Pull images}
 \begin{bashcode}
 $ docker pull busybox
 # The same as 'docker image pull ...'
 # Downloads an image from a registry
 \end{bashcode}
 
-\subsection{Listing images}
+\subsection{List images}
 Local:
 \begin{bashcode}
 $ docker images
@@ -55,10 +55,7 @@ okteto/hello-world                                  0
 $ docker search quay.io/hello
 \end{bashcode}
 
-
-
-
-\subsection{Removing images}
+\subsection{Remove images}
 \begin{bashcode}
 $ docker rmi IMAGE
 # The same as 'docker image rm ...'
