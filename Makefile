@@ -1,4 +1,4 @@
-all: bash-pdf docker-pdf git-pdf haskell-pdf postgresql-pdf python3-pdf
+all: bash-pdf docker-pdf git-pdf haskell-pdf postgresql-pdf python3-pdf ruby-pdf
 	cp */*/*notes.pdf .
 
 bash-pdf:
