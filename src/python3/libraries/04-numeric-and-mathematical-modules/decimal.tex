@@ -1,0 +1,11 @@
+\subsection{decimal -- fixed and floating point arithmetic}
+This module supports rational number arithmetic:
+\begin{minted}{python}
+from decimal import Decimal, localcontext
+x = Decimal("1.3")
+y = Decimal("1.7")
+with localcontext() as ctx:
+    print(x / y) # 0.7647058823529411764705882353
+    ctx.prec = 3
+    print(x / y) # 0.765
+\end{minted}
