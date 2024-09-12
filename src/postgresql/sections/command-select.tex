@@ -2,7 +2,7 @@
 
 \color{black}
 \subsection{SELECT}
-\textbf{SELECT}\footnote{\url{https://www.postgresql.org/docs/current/sql-select.html}} retrieves specified columns (or all columns if \mintinline{sql}{*} is used) from table mentioned after \mintinline{sql}{FROM} keyword:
+\textbf{SELECT} retrieves specified columns (or all columns if \mintinline{sql}{*} is used) from table mentioned after \mintinline{sql}{FROM} keyword:
 \begin{minted}{sql}
 SELECT * FROM cd.facilities;
 SELECT name, membercost FROM cd.facilities;
@@ -22,32 +22,28 @@ SELECT name AS facilityname FROM cd.facilities;
 The \textbf{WHERE} clause indicates the condition(s) that rows must satisfy to be selected. 
 Usual logical operators are available: \mintinline{sql}{AND}, \mintinline{sql}{OR}, \mintinline{sql}{NOT}.
 SQL uses a three-valued logic system with true, false and null (representing unknowns).
-See \textbf{\ref{subsection_comparison}} for comparison operators.
 \begin{minted}{sql}
-SELECT * FROM cd.facilities WHERE membercost > 0;
 SELECT facid, name FROM cd.facilities
 WHERE membercost > 0 AND (membercost < monthlymaintenance);
 \end{minted}
 
-If '\textbf{ORDER BY} + column(s)' is used, returned rows are sorted in the specified order, otherwise rows are returned in whatever rorder the system finds fastest to produce.
+With '\textbf{ORDER BY} + column(s)', returned rows are sorted (without: in whatever order the system finds fastest to produce).
 Here \mintinline{sql}{ASC} is the default mode.
 
-If '\textbf{LIMIT} + count' is used, no more rows than given count are returned.
-If '\textbf{OFFSET} + start' is also used, that many initial rows will be skipped.
-(This produces unpredictable output if rows are not sorted with \mintinline{sql}{ORDER BY}!).
-Standard SQL uses FETCH instead, LIMIT is Postgresql specific.
+With '\textbf{LIMIT} + count', no more rows than given count are returned.
+{\color{gray}(Standard SQL uses FETCH instead).}
+With '\textbf{OFFSET} + start', that many initial rows will be skipped.
+Both produce unpredictable output without \mintinline{sql}{ORDER BY}!
 
 \begin{minted}{sql}
 SELECT surname, firstname FROM cd.members
 ORDER BY surname DESC LIMIT 10 OFFSET 5;
 \end{minted}
 
-Operators \textbf{UNION}, \textbf{INTERSECT} and \textbf{INTERSECT} are used to combine outputs of multiple \mintinline{sql}{SELECT} statements, corresponding to $\cup$, $\cap$ and $\setminus$.
-In all three cases, duplicate rows are removed unless \textbf{ALL} is used!
+Operators \textbf{UNION}, \textbf{INTERSECT} and \textbf{EXCEPT} are used to combine outputs of multiple \mintinline{sql}{SELECT} statements, corresponding to $\cup$, $\cap$ and $\setminus$.
+In all three cases, duplicate rows are removed unless \textbf{ALL} (like in: \textbf{UNION ALL}) is used.
 \begin{minted}{sql}
-SELECT surname FROM cd.members
-UNION
-SELECT name FROM cd.facilities;
+SELECT surname FROM cd.members UNION SELECT name FROM cd.facilities;
 \end{minted}
 
 %
