@@ -8,4 +8,36 @@ z = ['blue', 'red', 'blue', 'yellow', 'blue', 'red']
 Counter(z) # Counter({'blue': 3, 'red': 2, 'yellow': 1})
 \end{minted}
 
+Deques are a generalization of stacks and queues.
+They support thread-safe, memory efficient appends and pops from either side of the deque with $\approx$ the same O(1) performance.
+(Lists are optimized for fast fixed-length operations).
+% https://realpython.com/python-deque/
+
+\begin{minted}{python}
+from collections import deque
+d = deque('Ala ma kota', 5) # bounded to 5 elements
+
+d.append(3.14)
+d.appendleft(2.78)
+d.extend([1, 2])
+d.extendleft([3, 4])
+d.insert("Pi", 5) # inserts "Pi" at position 5
+
+d.pop()
+d.popleft()
+
+d.remove(6)  # removes first occurrence
+d.clear()    # removes all elements
+
+d.count(7)
+d.index(8)   # first match
+d.maxlen()   # maximum size or None if unbounded
+
+d.reverse()  # in-place, returns None
+d.copy()     # shallow copy
+
+d.rotate(1)  # to the right, similar to d.appendleft(d.pop())
+d.rotate(-1) # to the left,  similar to d.append(d.popleft())
+\end{minted}
+
 %
