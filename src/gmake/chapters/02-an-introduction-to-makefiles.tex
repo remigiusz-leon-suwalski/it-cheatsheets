@@ -1,0 +1,44 @@
+%
+
+\section{An introduction to Makefiles}
+\subsection{What a rule looks like?}
+A simple makefile consists of rules with the following shape:
+\begin{minted}{make}
+target: prerequisites
+    recipe
+\end{minted}
+
+A \emph{target} is usually the name of a file that is generated, it can also be the name of an action to carry out, such as ‘clean’ (see Phony targets).
+A \emph{prerequisite} is a file that is used as input to create the target.
+A \emph{recipe} is an action that \texttt{make} carries out.
+You need to put a tab character at the beginning of every recipe line! 
+
+\subsection{How make processes a Makefile}
+By default, \texttt{make} starts with the first target (not targets whose names start with \texttt{.} unless they also contain one or more \texttt{/}).
+This is called the default goal.
+Calling the first target \texttt{all} is just a convention. 
+
+\subsection{Variables make makefiles simpler}
+\emph{Variables} allow a text string to be defined once and substituted in multiple places later.
+It is standard practice for every (C++...) makefile to have a variable named \texttt{objects} or similarly which is a list of all object file names:
+\begin{minted}{make}
+objects = main.o kbd.o command.o display.o \
+          insert.o search.o files.o utils.o
+\end{minted}
+
+\subsection{Letting \texttt{make} deduce the recipes}
+It is not necessary to spell out the recipes for compiling the individual C source files, because \texttt{make} can figure them out:
+it has an implicit rule for updating a \texttt{.o} file from a correspondingly named \texttt{.c} file using a \texttt{cc -c} command.
+For example, it will use the recipe \texttt{cc -c main.c -o main.o} to compile \texttt{main.c} into \texttt{main.o}.
+We can therefore omit the recipes from the rules for the object files. 
+
+\subsection{Rules for cleaning the directory}
+Makefiles commonly tell how to do a few other things besides compiling a program: for example, how to delete all the object files and executables so that the directory is clean. 
+\begin{minted}{make}
+.PHONY: clean
+clean:
+    -rm edit $(objects)
+\end{minted}
+This prevents \texttt{make} from getting confused by an actual file called \texttt{clean} and causes it to continue in spite of errors from \texttt{rm}.
+
+%
