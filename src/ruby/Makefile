@@ -1,6 +1,6 @@
 all: ruby-notes.pdf
 
-ruby-notes.pdf: charun.cls ruby-notes.tex
+ruby-notes.pdf: charun.cls ruby-notes.tex venv
 	. venv/bin/activate && pdflatex -shell-escape ruby-notes.tex
 
 venv:

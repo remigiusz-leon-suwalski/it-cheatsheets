@@ -157,6 +157,42 @@ Whenever you call the method new on a class, as in Person.new, the class will cr
 \end{minted}
 
 \end{multicols*}
+To be done:
+\begin{minted}{ruby}
+def likes(names)
+  case names.size
+  when 0 
+    "no one likes this"
+  when 1 
+    "#{names[0]} likes this"
+  when 2
+    "#{names[0]} and #{names[1]} like this"
+  when 3
+    "#{names[0]}, #{names[1]} and #{names[2]} like this"
+  else
+    "#{names[0]}, #{names[1]} and #{names.size - 2} others like this"
+  end
+end
+
+def even_or_odd(number)
+  number.even? ? "Even" : "Odd"
+end
+
+("aeiouy".chars.map { |vowel| "ala ma kota".count(vowel) }).sum
+inputStr.count("aeiou")
+str.delete('aeiouAEIOU')
+  numbers = numbers.split.map{|word| word.to_i}
+  "#{numbers.max} #{numbers.min}"
+  # minmax
+num.digits.map { |d| d*d } .reverse.join.to_i
+arr.select{|x| x > 0}.reduce(0, :+)
+l.select{|word| word.is_a? Numeric}
+l.reject { |x| x.is_a? String }
+l.grep(Numeric) # I knew. :D http://ruby-doc.org/core-2.3.1/Enumerable.html#method-i-grep
+s[(s.size-1)/2..s.size/2] # same as length ?
+s.chars.map.with_index { |s, i| (s * (i+1)).capitalize}.join("-")
+
+\end{minted}
 \end{document}
 
 https://www.theodinproject.com/lessons/ruby-variables
