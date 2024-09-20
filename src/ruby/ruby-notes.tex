@@ -1,6 +1,8 @@
-\documentclass{charun}
-\title{Ruby 3.3.0 notes, version 0.0.1}
+\documentclass{a5charun}
+\title{Ruby 3.3.0 notes, version 0.0.2}
 \author{Leon Suwalski}
+
+\setlength{\multicolsep}{6.0pt plus 1.0pt minus 1.0pt}% 50% of original values
 
 \usepackage{xcolor}
 % copied from https://www.color-hex.com/color-palette/85828
@@ -12,30 +14,110 @@
 \AfterEndEnvironment{minted}{\end{tcolorbox}}%
 
 \begin{document}
-\begin{multicols*}{2}
 \maketitle
-\raggedright
+\section{To be named... TODO}
+\subsection{Conditionals}
 
-\section{Built-in data types}
-\subsection{Numbers}
-There are two main types of numbers in Ruby: integers and floats.
+\begin{multicols}{3}
 \begin{minted}{ruby}
-1 + 2 - 3 * 4 / 5
-2 ** (12 % 5)
+if condition
+  action
+elsif condition
+  action
+else
+  action
+end
 \end{minted}
+\columnbreak
 
-Useful methods for numbers:
 \begin{minted}{ruby}
-0.even?
-1.odd?
+unless condition
+  action
+end
 \end{minted}
+\columnbreak
 
-Conversions:
 \begin{minted}{ruby}
-13.to_f   # 13.0
-13.0.to_i # 13
-13.9.to_i # 13
+case test_value
+  when value
+    action
+  when value
+    action
+  else
+    action
+end
 \end{minted}
+\end{multicols}
+
+\subsection{Loops and iterators}
+Loops are blocks of code that are continually repeated until a certain condition is met.
+\mintinline{ruby}{until} exists for similar reason to \mintinline{ruby}{unless}.
+There is a \mintinline{ruby}{loop} loop, which is infinite and rarely used.
+
+\mintinline{ruby}{break} and \mintinline{ruby}{next} have usual meaning.
+\mintinline{ruby}{redo} goes to the start of current iteration and does it again.
+
+\begin{multicols}{3}
+\begin{minted}{ruby}
+while condition
+  action
+end
+\end{minted}
+\columnbreak
+
+\begin{minted}{ruby}
+until condition
+  action
+end
+\end{minted}
+\columnbreak
+
+\begin{minted}{ruby}
+for x in xs
+  action
+end
+\end{minted}
+\end{multicols}
+
+Instead of giving a definition of what iterator is, we present several examples:
+\begin{itemize}
+  \item \mintinline{ruby}{5.times { puts "Hi!" }}
+  \item \mintinline{ruby}{1.upto(5) { puts "Hi!" }}
+  \item \mintinline{ruby}{5.down­to(1) { puts "Hi!" }}
+  \item \mintinline{ruby}{(1..5).each { puts "Hi!" }}
+  \item \mintinline{ruby}{xs.each { |x| puts 1+x }}
+\end{itemize}  
+
+
+\section{Built-in types}
+We start with common built-in data types.
+\subsection{Numeric types}
+There are two main types of numbers: integers and floats.
+Basic arithmetical operations are denoted with \mintinline{ruby}{+}, \mintinline{ruby}{-}, \mintinline{ruby}{*}, \mintinline{ruby}{/} (division) and \mintinline{ruby}{**} (exponentiation).
+Modular exponentiation of integers (but not floats!) is available as \mintinline{ruby}{.pow}, here modulus is optional.
+Other common method is \mintinline{ruby}{.abs} (absolute value).
+
+Comparison operators are \mintinline{ruby}{<}, \mintinline{ruby}{<=}, \mintinline{ruby}{<=>}, \mintinline{ruby}{==} (aliased as \mintinline{ruby}{===}), \mintinline{ruby}{>}, \mintinline{ruby}{>=}.
+
+\mintinline{ruby}{.ceil} and \mintinline{ruby}{.floor} are functions known in math as $\lfloor x \rfloor$ and $\lceil x \rceil$ respectively.
+There are \mintinline{ruby}{.round} and  \mintinline{ruby}{.truncate} as well.
+Both classes support \mintinline{ruby}{.divmod} (quotient and reminder), \mintinline{ruby}{.fdiv} (float result of division) and \mintinline{ruby}{%} (modulo).
+Only integers support \mintinline{ruby}{.div} and \mintinline{ruby}{remainder}.
+
+\mintinline{ruby}{.digits} is an array of (base-10, by default) digits of an Integer.
+\mintinline{ruby}{.odd?} and \mintinline{ruby}{.even?} are self explanatory.
+\mintinline{ruby}{.gcd} stands for greatest common divisor, \mintinline{ruby}{.lcm} for lowest common multiple (and there is \mintinline{ruby}{.gcdlcm} too).
+They are all Integer specific.
+
+\mintinline{ruby}{&}, \mintinline{ruby}{|}, \mintinline{ruby}{^} are bitwise AND, OR, XOR;
+\mintinline{ruby}{<<}, \mintinline{ruby}{>>} denote bit-shifts.
+
+\mintinline{ruby}{.size} gives the number of bytes in the machine representation, depends on the system and makes no sense for floats.
+
+It's possible to convert between types with \mintinline{ruby}{.to_i}, \mintinline{ruby}{.to_f}, \mintinline{ruby}{.to_s} (to string).
+
+\subsection{Numeric types -- rationals}
+To convert float, use \mintinline{ruby}{.to_r} method
 
 \subsection{Strings}
 Strings can be formed with either double or single quotes.
@@ -77,11 +159,6 @@ String methods:
 " hello, world   ".strip  #=> "hello, world"
 \end{minted}
 
-Conversions:
-\begin{minted}{ruby}
-13.to_s   # "13"
-\end{minted}
-
 \subsection{Symbols}
 Symbols are unique identifiers that are considered code, not data. 
 \begin{minted}{ruby}
@@ -90,6 +167,7 @@ Symbols are unique identifiers that are considered code, not data.
 % "string" == "string"  #=> true
 % "string".object_id == "string".object_id  #=> false
 % :symbol.object_id == :symbol.object_id    #=> true
+
 
 \subsection{Booleans}
 Booleans: true and false.
@@ -128,6 +206,48 @@ KeyError: key not found: "two"
 { one: "eins", two: "zwei", three: "drei" } # new syntax
 { :one => "eins", :two => "zwei", :three => "drei" } # old
 \end{minted}
+
+\begin{multicols*}{2}
+
+
+
+TO BE DONE
+
+\subsection{Symbols}
+
+
+Assignment operators = and shorthand +=, -= *= /=.
+
+Variable names should always be lowercase, and multiple words that make up a variable name should be split by an underscore. This is known as snake case.
+
+print vs puts, gets, gets.chomp
+
+if, elsif, else
+if vs unless
+% || && ! 
+
+5 == 5 true
+5.eql?(5) false (diff types)
+There is also .equal?
+
+spaceship operator <=>
+
+case (vs if)
+
+% 5_000
+
+ternary operator
+
+3.times do ...
+
+while, until, for
+redo
+
+next, break
+
+begin rescue end
+
+
 
 \begin{minted}{ruby}
 Objects - classes - methods
