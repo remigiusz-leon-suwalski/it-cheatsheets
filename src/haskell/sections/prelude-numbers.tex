@@ -74,12 +74,34 @@ class Fractional a => Floating a where
     asinh, acosh, atanh :: a -> a
 \end{minted}
 
+\textbf{RealFrac} extracts components of fractions (?).
+\begin{minted}{haskell}
+class (Real a, Fractional a) => RealFrac a where
+    properFraction :: Integral b => a -> (b, a)
+    truncate       :: Integral b => a -> b
+    round          :: Integral b => a -> b
+    ceiling        :: Integral b => a -> b
+    floor          :: Integral b => a -> b
+\end{minted}
 
+\textbf{RealFloat} gives efficient, machine-independent access to the components of a floating-point number (?).
+\begin{minted}{haskell}
+class (RealFrac a, Floating a) => RealFloat a where
+    ?
+\end{minted}
 
-% class (Real a, Fractional a) => RealFrac a where
-
-% class (RealFrac a, Floating a) => RealFloat a where
-
+\subsubsection{Numeric functions}
+\begin{minted}{haskell}
+subtract :: Num a => a -> a -> a
+even :: Integral a => a -> Bool
+odd :: Integral a => a -> Bool
+gcd :: Integral a => a -> a -> a
+lcm :: Integral a => a -> a -> a
+(^) :: (Num a, Integral b) => a -> b -> a infixr 8
+(^^) :: (Fractional a, Integral b) => a -> b -> a infixr 8
+fromIntegral :: (Integral a, Num b) => a -> b
+realToFrac :: (Real a, Fractional b) => a -> b
+\end{minted}
 %%% Numeric functions
 % subtract even odd gcd lcm ^ ^^ fromIntegral realToFrac
 
