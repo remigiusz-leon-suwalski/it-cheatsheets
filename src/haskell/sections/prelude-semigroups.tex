@@ -1,0 +1,33 @@
+%
+
+\subsubsection{Semigroups and monoids}
+
+\begin{minted}{haskell}
+class Semigroup a where Source #
+\end{minted}
+Should satisfy:
+\begin{minted}{haskell}
+x <> (y <> z) = (x <> y) <> z
+\end{minted}
+
+\begin{minted}{haskell}
+class Semigroup a => Monoid a where
+\end{minted}
+
+The class of monoids (types with an associative binary operation that has an identity). Instances should satisfy the following:
+
+\begin{minted}{haskell}
+x <> mempty = x
+mempty <> x = x
+x <> (y <> z) = (x <> y) <> z (Semigroup law)
+mconcat = foldr (<>) mempty
+\end{minted}
+
+Methods:
+\begin{minted}{haskell}
+mempty :: a Source #
+mappend :: a -> a -> a Source #
+mconcat :: [a] -> a Source #
+\end{minted}
+
+%
