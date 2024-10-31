@@ -1,0 +1,32 @@
+Ruby has if, unless, ternary operators and case (which uses \mintinline{ruby}{#===}).
+
+\begin{multicols}{3}
+\begin{minted}{ruby}
+if x >= 1
+  "Very big"
+elsif x >= 0
+  "Big"
+else
+  "Small"
+end
+\end{minted}
+\columnbreak
+
+\begin{minted}{ruby}
+unless failures == 0
+  raise "Failures detected"
+end
+\end{minted}
+\columnbreak
+
+\begin{minted}{ruby}
+case object
+when Integer
+  :int
+when String
+  :string
+else
+  :no_idea
+end
+\end{minted}
+\end{multicols}

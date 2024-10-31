@@ -1,0 +1,42 @@
+
+\subsection{Arrays}
+Arrays are zero-indexed, can contain all kinds of objects and have a defined order.
+% \begin{minted}{ruby}
+% words = ["one", "two", "three"]
+% words << "four"
+% puts words[10] # retrieving an element that does not exist gives nil
+% [1, 2] + [5, 6] # [1, 2, 5, 6]
+% ["A", "Be"] * 2 # ["A", "Be", "A", "Be"]
+% & # intersection
+% # vvv methods vvv
+% .first .last .length .sort .compact .index(...) .rotate(...), .transpose
+% \end{minted}
+
+\textbf{count} returns a count of specified elements.
+With no argument and no block, returns the count of all elements.
+With argument \mintinline{ruby}{obj}, returns the count of elements \mintinline{ruby}{==} to \mintinline{ruby}{obj}.
+With no argument and a block given, calls the block with each element; returns the count of elements for which the block returns a truthy value:
+\begin{minted}{ruby}
+[0, 1, 2].count # => 3
+[0, 1, 2, 0.0].count(0) # => 2
+[0, 1, 2, 3].count {|element| element > 1} # => 2
+\end{minted}
+
+\textbf{sum}.
+When a block is given, it is called with each element and the block’s return value (instead of the element itself) is used as the addend.
+When no block is given, returns the object equivalent to:
+\begin{minted}{ruby}
+sum = init
+array.each {|element| sum += element }
+\end{minted}
+Note: \mintinline{ruby}{join} (\mintinline{ruby}{flatten}) may be faster for an array of strings (of arrays).
+
+\textbf{uniq} returns a new Array containing those elements from self that are not duplicates, the first occurrence always being retained.
+With no block given, identifies and omits duplicates using method \mintinline{ruby}{eql?} to compare:
+With a block given, calls the block for each element; identifies (using method eql?) and omits duplicate values, that is, those elements for which the block returns the same value:
+\begin{minted}{ruby}
+['a', 'aa', 'aaa', 'b', 'bb', 'bbb'].uniq {|element| element.size } # => ["a", "aa", "aaa"]
+[0, 0, 1, 1, 2, 2].uniq # => [0, 1, 2]
+\end{minted}
+
+% return true if [2,3,5,7,11,17].include? num

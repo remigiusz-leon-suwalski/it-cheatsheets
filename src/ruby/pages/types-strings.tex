@@ -1,0 +1,86 @@
+%
+
+\subsection{Strings}
+Strings can be formed with either double or single quotes.
+Single quotes disable string interpolation and escape characters:
+\begin{minted}{ruby}
+what = "le Monde"
+puts "Bonjour, #{what}" #=> "Bonjour, le Monde"
+puts 'Bonjour, #{what}' #=> "Bonjour, #{name}"
+\end{minted}
+
+\textbf{count} returns the total number of characters in self that are specified by the given selectors (compare with count under Arrays):
+\begin{minted}{ruby}
+a = "hello world"
+a.count "lo"                   #=> 5
+a.count "lo", "o"              #=> 2
+a.count "hello", "^l"          #=> 4
+a.count "ej-m"                 #=> 4
+"hello^world".count "\\^aeiou" #=> 4
+"hello-world".count "a\\-eo"   #=> 4
+c = "hello world\\r\\n"
+c.count "\\"                   #=> 2
+c.count "\\A"                  #=> 0
+c.count "X-\\w"                #=> 3
+\end{minted}
+
+% String methods:
+% \begin{minted}{ruby}
+% "hello".capitalize #=> "Hello"
+% "hello".include?("lo")  #=> true
+% "hello".include?("z")   #=> false
+% "hello".upcase  #=> "HELLO"
+% "Hello".downcase  #=> "hello"
+% "hello".empty?  #=> false
+% "".empty?       #=> true
+% "hello".length  #=> 5
+% "hello".reverse  #=> "olleh"
+% "hello world".split  #=> ["hello", "world"]
+% "hello".split("")    #=> ["h", "e", "l", "l", "o"]
+% " hello, world   ".strip  #=> "hello, world"
+% \end{minted}
+
+
+% \begin{minted}{ruby}
+% "Hello " + "world!"      # concatenation
+% "Hello " << "world!"     # shovel operator
+% "Hello ".concat("world!)
+% \end{minted}
+
+% Substrings:
+% \begin{minted}{ruby}
+% "bonjour"[0]    # "b"
+% "bonjour"[0..1] # "bo"
+% "bonjour"[0, 4] # "bonj"
+% "bonjour"[-1]   # "r"
+% \end{minted}
+
+% Interpolation:
+
+\textbf{delete} returns a copy of self with characters specified by selectors removed.
+% "hello".delete "l","lo"        #=> "heo"
+% "hello".delete "lo"            #=> "he"
+% "hello".delete "aeiou", "^e"   #=> "hell"
+% "hello".delete "ej-m"          #=> "ho"
+
+\textbf{each\_char} calls the given block with each successive character:
+
+\begin{minted}{ruby}
+'hello'.each_char {|char| print char, ' ' }
+\end{minted}
+
+\textbf{downcase} and \textbf{upcase} return a lowercase and uppercase of characters in string:
+\begin{minted}{ruby}
+'HeLlO wOrLd!'.downcase # => "hello world!"
+'HeLlO wOrLd!'.upcase   # => "HELLO WORLD!"
+\end{minted}
+
+\textbf{chars} returns an array of the characters in self:
+\begin{minted}{ruby}
+'hello'.chars # => ["h", "e", "l", "l", "o"]
+\end{minted}
+
+% str.end_with?(ending)
+
+
+%

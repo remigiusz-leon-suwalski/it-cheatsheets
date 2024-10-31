@@ -1,0 +1,53 @@
+
+\subsection{Loops}
+Ruby has for loops (but you should almost never use them), while/until loops and an infinite \mintinline{ruby}{loop} loop (which is rarely used).
+\mintinline{ruby}{break} and \mintinline{ruby}{next} have usual meaning.
+\mintinline{ruby}{redo} goes to the start of current iteration and does it again.
+
+\begin{multicols}{3}
+\begin{minted}{ruby}
+while applies?
+  #...
+  break
+end
+
+do_something while applies?
+\end{minted}
+\columnbreak
+
+\begin{minted}{ruby}
+until applies?
+  do_something
+  break
+end
+
+do_something until applies?
+\end{minted}
+\columnbreak
+
+\begin{minted}{ruby}
+loop do
+  do_something
+  break
+end
+\end{minted}
+\end{multicols}
+
+(Nie wiem, jak to się nazywa)
+\begin{minted}{ruby}
+[1, 2, 3].each do |num|
+  do_something
+end
+
+[1, 2, 3].each.with_index do |num, idx|
+  do_something
+end
+\end{minted}
+Instead of giving a definition of what iterator is, we present several examples:
+\begin{itemize}
+  \item \mintinline{ruby}{5.times { puts "Hi!" }}
+  \item \mintinline{ruby}{1.upto(5) { puts "Hi!" }}
+  \item \mintinline{ruby}{5.down­to(1) { puts "Hi!" }}
+  \item \mintinline{ruby}{(1..5).each { puts "Hi!" }}
+  \item \mintinline{ruby}{xs.each { |x| puts 1+x }}
+\end{itemize}  
