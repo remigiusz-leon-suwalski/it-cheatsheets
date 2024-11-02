@@ -4,6 +4,9 @@
 
 \mintinline{bash}{git push origin master} pushes branch \emph{master} to remote \emph{origin}.
 
+To delete a branch from remote, use \mintinline{bash}{git push origin --delete <branch>}.
+To delete a local branch, use \mintinline{bash}{git branch --delete <branch>} (whish is equivalent to \mintinline{-d}).
+
 Useful short options:
 \begin{compactenum}
 \item [\texttt{-f}] disables overwrite checks (equivalent to \mintinline{bash}{--force}).
