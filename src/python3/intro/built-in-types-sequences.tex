@@ -1,4 +1,6 @@
 \subsection{Sequence types}
+There are three basic sequence types: lists, tuples, and range objects.
+
 Common sequence operations include:
 \begin{itemize}
     \item
@@ -8,7 +10,8 @@ Common sequence operations include:
     \item
     \mintinline{python}{x + s} (concatenation),
     \mintinline{python}{s * n},
-    \mintinline{python}{n * s} (iterated concatenation),
+    \mintinline{python}{n * s} (iterated concatenation).
+    Concatenating immutable sequences always results in a new object, so repeated concatenation will have a quadratic runtime cost!
 
     \item
     \mintinline{python}{s[i]},
@@ -16,15 +19,13 @@ Common sequence operations include:
     \mintinline{python}{s[i:j:k]} (slice with custom step),
 
     \item
-    \mintinline{python}{len(s)},
     \mintinline{python}{min(s)},
     \mintinline{python}{max(s)},
+    \mintinline{python}{len(s)},
+    \mintinline{python}{s.count(x)}
 
     \item
     \mintinline{python}{s.index(x[, i[, j]])} index of first occurence of x in s (at or after index i and before index j),
-
-    \item
-    \mintinline{python}{s.count(x)} (total number of occurrences).
 \end{itemize}
 
 Mutable sequence types implement as well:
@@ -47,9 +48,7 @@ Mutable sequence types implement as well:
     \mintinline{python}{s.reverse()} (reverses in place).
 \end{itemize}
 
-Lists are mutable.
+Lists are mutable and support sorting in place: \mintinline{python}{lst.sort()}
 Tuples and ranges are not.
-
-\input{intro/text_sequences}
 
 %

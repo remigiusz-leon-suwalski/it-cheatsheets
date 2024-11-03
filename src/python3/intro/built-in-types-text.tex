@@ -1,0 +1,72 @@
+\subsection{Text sequence type 'str'}
+String literals can be single, double or triple quoted (triple quoted strings may span multiple lines).
+Additional methods for strings (besides all of the common sequence operations) are:
+\begin{itemize}
+    \item
+\mintinline{python}{.capitalize()},
+\mintinline{python}{.casefold()} (converts \mintinline{python}{"ß"} aggresively to \mintinline{python}{"ss"}),
+\mintinline{python}{.lower()},
+\mintinline{python}{.swapcase()},
+\mintinline{python}{.title()},
+\mintinline{python}{.upper},
+    \item
+    \mintinline{python}{.center(width)},
+    \mintinline{python}{.ljust(width)},
+    \mintinline{python}{.rjust(width)},
+    \mintinline{python}{.zfill(width)} (warning: \mintinline{python}{"-42".zfill(5) == "-0042"}),
+    \mintinline{python}{.expandtabs(tabsize=8)},
+    \mintinline{python}{.lstrip()},
+    \mintinline{python}{.rstrip()},
+    \mintinline{python}{.strip()},
+    \mintinline{python}{.removeprefix(prefix)},
+    \mintinline{python}{.removesuffix(suffix)},
+    \item
+    \mintinline{python}{.encode(encoding="utf-8")} (string encoded to bytes),
+    \item
+    \mintinline{python}{.endswith(suffix)},
+    \mintinline{python}{.startswith(prefix)},
+        \item
+    \mintinline{python}{.find(sub)},
+    \mintinline{python}{.rfind(sub)},
+    \mintinline{python}{.index(sub)} (like find but raises ValueError if string is not found),
+    \mintinline{python}{.rindex(sub)},
+    \item
+    \mintinline{python}{.isalnum()},
+    \mintinline{python}{.isalpha()},
+    \mintinline{python}{.isascii()},
+    \mintinline{python}{.isdecimal()},
+    \mintinline{python}{.isdigit()},
+    \mintinline{python}{.isnumeric()},
+    \mintinline{python}{.islower()},
+    \mintinline{python}{.istitle()},
+    \mintinline{python}{.isupper()},
+    \item
+    \mintinline{python}{.join(iterable)},
+    \mintinline{python}{.partition(sep)} (part before separator, separator, part after),
+    \mintinline{python}{.rpartition(sep)},
+    \mintinline{python}{.split()}
+    \mintinline{python}{.rsplit()} 
+    \item
+    \mintinline{python}{.replace(old, new, count=1)}.
+\end{itemize}
+
+Don't use printf-style \mintinline{python}{%} syntax; string \mintinline{latex}{.format()} method is better:
+\begin{minted}{python}
+a = "Hello"
+b = "world"
+c = f"{a} {b}!"
+c = "{1} {0}!".format(b, a)
+
+d = {"name": "John", "age": 37}
+"Hello {name}-{age}!".format(name=d["name"], age=d["age"])
+"Hello {name}-{age}!".format(**d)
+\end{minted}
+
+Even better are formatted string literals (also called f-strings for short).
+Require Python 3.6+.
+\begin{minted}{python}
+f"Pi is approximately {math.pi:.3f}."
+f"2 + 2 = {2 + 2}"
+\end{minted}
+Because f-strings are evaluated at runtime, you can put any and all valid Python expressions in them.
+In order to make a brace appear in your string, you must use double braces.

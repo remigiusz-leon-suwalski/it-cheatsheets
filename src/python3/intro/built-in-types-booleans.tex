@@ -6,7 +6,7 @@ Here are most of the built-in objects considered false:
 \item empty sequences and collections: \mintinline{python}{''}, \mintinline{python}{()}, \mintinline{python}{[]}, \mintinline{python}{{}}, \mintinline{python}{set()}, \mintinline{python}{range(0)}.
 \end{itemize}
 
-Warning: \mintinline{python}{not a == b} means \mintinline{python}{not (a == b)}.
+% Warning: \mintinline{python}{not a == b} means \mintinline{python}{not (a == b)}.
 
 Operations ordered by ascending priority (first two are short-circuit: evaluate second argument only if needed):
 \begin{itemize}
@@ -15,9 +15,7 @@ Operations ordered by ascending priority (first two are short-circuit: evaluate 
 	\item \mintinline{python}{not p}: if p is false, then \mintinline{python}{True}, else \mintinline{python}{False}
 \end{itemize}
 
-All eight operations have the same priority (higher than that of the Boolean operations).
-Can be chained.
-They are:
+All eight comparison operations:
 \mintinline{python}{<},
 \mintinline{python}{<=},
 \mintinline{python}{>},
@@ -25,7 +23,9 @@ They are:
 \mintinline{python}{==} (equal),
 \mintinline{python}{!=} (not equal),
 \mintinline{python}{is} (object identity),
-\mintinline{python}{is not}.
+\mintinline{python}{is not}
+have the same priority (higher than that of the Boolean operations).
+They can be chained.
 
 For the string and bytes types, \mintinline{python}{x in y} checks if \mintinline{python}{x} is a substring of \mintinline{python}{y}.
 

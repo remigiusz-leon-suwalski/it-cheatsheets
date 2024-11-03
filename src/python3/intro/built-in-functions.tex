@@ -10,7 +10,7 @@ any() # False if all elements are False or empty iterable
 Mathematical operations:
 \begin{minted}{python}
 abs()    # absolute value of a number
-divmod() # quotient, remainder; requires non-comples args
+divmod() # quotient, remainder; requires non-complex args
 min()    # smallest element
 max()    # largest element
 pow()    # exponentiation, with optional modulus
@@ -28,24 +28,26 @@ hex() # prefixed with "0x" (base 16)
 oct() # prefixed with "0o" (base 8)
 bin() # prefixed with "0b" (base 2)
 
-# int, float require a number or string
-int() # converts a number or string
-float() # converts a number or string
-
-complex() # converts a pair of numbers or string
-# complex("3+4j") == complex(3,4) == (3+4j)
+int() # converts to an integer
+float() # converts to a floating number
+# int, float require a number or a string
+# int(1+0j) throws a TypeError.
+complex() # converts a pair of numbers or strings
+# complex("3+4j") == complex(3, 4) == 3+4j
+# 3+j throws a NameError: 'j' is not defined.
 
 chr() # converts integer to character, chr(97) == 'a'
 ord() # converts character to integer, ord('a') == 97
 
-tuple()
+# converting 
+str() # string
 list()
+tuple()
 dict() # dictionary
+set()
 frozenset()
 range(stop)
 range(start, stop, step=1)
-set()
-str() # string
 \end{minted}
 
 Functions for sequences/iterators:
@@ -56,17 +58,13 @@ len()       # number of items, or length
 reversed()  # a reverse iterator
 
 sorted()
-# with custom comparison function:
 sorted(xs, key=lambda x:x[-1])
-# as if each comparison were reversed:
 sorted(xs, reverse=True)
 
-sum(xs, start=0)  # sums start and the items
-                  # start can't be a string
-# alternatives:
-"".join(xs)       # for strings
-math.fsum(xs)     # for floats
-itertools.chain() # for a series of iterables
+sum(xs, start=0)  # start can't be a string
+"".join(xs)       # alternative for strings
+math.fsum(xs)     # alternative for floats
+itertools.chain() # alternative for a series of iterables
 
 zip() # merges iterables element-wise
 \end{minted}
@@ -82,12 +80,12 @@ map(function, iterable)
 
 \mintinline{python}{open()}: opens a file and then closes matching file descriptor.
 \begin{minted}{python}
-with open("path/to/file") as f:
-	for line in f:
-		# do something
+with open("path/to/file", encoding="utf8") as f:
+    for line in f:
+        # do something
 
 with open("path/to/file", "w") as f:
-	f.write("some string")
+    f.write("some string")
 \end{minted}
 
 Yet to be described:
