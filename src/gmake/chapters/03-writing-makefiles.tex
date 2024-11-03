@@ -1,39 +1,83 @@
+%
+
 \section{Writing Makefiles}
+\subsection{What name to give your makefile}
 Normally you should call your makefile either makefile or Makefile.
 If you want to use a nonstandard name for your makefile, you can specify the makefile name with the \texttt{-f} or \texttt{-{}-file} option. 
 
-The include directive tells make to suspend reading the current makefile and read one or more other makefiles before continuing.
+\subsection{Including other Makefiles}
+The include directive tells make to suspend reading the current makefile and read one or more other makefiles before continuing:
 
 \begin{minted}{make}
 include foo *.baz $(bar)
 \end{minted}
 
-\color{gray}
-\subsection{NEEDS TO BE DONE: The Variable MAKEFILES}
-Lorem ipsum...
-\color{black}
+\subsection{The variable MAKEFILES}
+If the environment variable \texttt{MAKEFILES} is defined, make considers its value as a list of names (separated by whitespace) of additional makefiles to be read before the others.
 
-\color{gray}
-\subsection{NEEDS TO BE DONE: How Makefiles Are Remade}
-Lorem ipsum...
-\color{black}
+\subsection{How make reads a makefile}
+GNU make does its work in two distinct phases. During the first phase it reads all the makefiles, included makefiles, etc. and internalizes all the variables and their values and implicit and explicit rules, and builds a dependency graph of all the targets and their prerequisites. During the second phase, make uses this internalized data to determine which targets need to be updated and run the recipes necessary to update them.
 
-\color{gray}
-\subsection{NEEDS TO BE DONE: Overriding Part of Another Makefile}
-Lorem ipsum...
-\color{black}
+We say that expansion is immediate if it happens during the first phase: make will expand that part of the construct as the makefile is parsed. We say that expansion is deferred if it is not immediate. Expansion of a deferred construct part is delayed until the expansion is used: either when it is referenced in an immediate context, or when it is needed during the second phase.
 
-\color{gray}
-\subsection{NEEDS TO BE DONE: How make Reads a Makefile}
-Lorem ipsum...
-\color{black}
+Variable definitions are parsed as follows:
+\begin{minted}{make}
+immediate = deferred
+immediate ?= deferred
+immediate := immediate
+immediate ::= immediate
+immediate :::= immediate-with-escape
+immediate += deferred or immediate
+immediate != immediate
+\end{minted}
 
-\color{gray}
-\subsection{NEEDS TO BE DONE: How Makefiles Are Parsed}
-Lorem ipsum...
-\color{black}
+\begin{multicols*}{2}
+\begin{minted}{make}
+define immediate
+  deferred
+endef
 
-\color{gray}
-\subsection{NEEDS TO BE DONE: Secondary Expansion}
-Lorem ipsum...
-\color{black}
+define immediate =
+  deferred
+endef
+
+define immediate ?=
+  deferred
+endef
+
+define immediate +=
+  deferred or immediate
+endef
+\end{minted}
+
+\begin{minted}{make}
+define immediate :=
+  immediate
+endef
+
+define immediate ::=
+  immediate
+endef
+
+define immediate :::=
+  immediate-with-escape
+endef
+
+define immediate !=
+  immediate
+endef
+\end{minted}
+\end{multicols*}
+
+
+For the append operator \texttt{+=}, the right-hand side is considered immediate if the variable was previously set as a simple variable (\texttt{:=} or \texttt{::=}), and deferred otherwise.
+For the immediate-with-escape operator \texttt{:::=}, the value on the right-hand side is immediately expanded but then escaped (that is, all instances of \texttt{\$} in the result of the expansion are replaced with \texttt{\$\$}).
+For the shell assignment operator \texttt{!=}, the right-hand side is evaluated immediately and handed to the shell. The result is stored in the variable named on the left, and that variable is considered a recursively expanded variable (and will thus be re-evaluated on each reference).
+
+A rule is always expanded the same way, regardless of the form:
+\begin{minted}{make}
+immediate : immediate ; deferred
+    deferred
+\end{minted}
+
+%

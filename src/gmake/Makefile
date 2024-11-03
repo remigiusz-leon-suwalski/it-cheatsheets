@@ -1,6 +1,6 @@
 all: gmake-notes.pdf
 
-gmake-notes.pdf: charun.cls gmake-notes.tex venv
+gmake-notes.pdf: charun.cls gmake-notes.tex chapters/*.tex venv
 	. venv/bin/activate && pdflatex -shell-escape gmake-notes.tex
 
 venv:
