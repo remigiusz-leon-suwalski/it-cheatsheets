@@ -26,6 +26,7 @@
 \item [\symbolbash] \commandbash{compopt}: modifies completion options (?).
 
 \item [\symbolbash] \commandbash{declare}: declares variables and/or gives them attributes: \texttt{a} indexed array, \texttt{A} associative array, \texttt{i} integer, \texttt{l} lowercase chars only.
+\item [\symbolbash] \commandbash{typeset}: alias for declare.
 
 \item [\symbolbash] \commandbash{dirs}: lists remembered (for popd) directories.
 
@@ -82,7 +83,7 @@
 
 \item [\symbolbash] \commandbash{return}: stops function and returns a value.
 
-\item [\symbolbash] \commandbash{set}: \dotfill ????
+\item [\symbolbash] \commandbash{set}: without options, prints name and value of each shell variable. Useful options are \mintinline{bash}{set -e} (exit on non-zero exit codes), \mintinline{bash}{set -o pipefail} (exit code of pipeline is last non-zero (or zero if all commands succeed)) and \mintinline{bash}{set -x} (prints commands before running them).
 
 \item [\symbolbash] \commandbash{shift}: renames positional parameters from n+1, n+2, ... to 1, 2, ... (by default, $n = 1$).
 
@@ -99,8 +100,6 @@
 \item [\symbolbash] \commandbash{false}/\commandbash{true}: returns an un/successful result.
 
 \item [\symbolbash] \commandbash{type}: \dotfill ????
-
-\item [\symbolbash] \commandbash{typeset}: \dotfill ????
 
 \item [\symbolbash] \commandbash{ulimit}: modifies shell resource limits.
 
