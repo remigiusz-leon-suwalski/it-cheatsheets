@@ -1,0 +1,31 @@
+%
+
+\subsubsection{Monads and functors}
+To be done later.
+\begin{minted}{haskell}
+class Functor (f :: Type -> Type) where
+    fmap :: (a -> b) -> f a -> f b
+    (<$) :: a -> f b -> f a
+    (<$>) :: Functor f => (a -> b) -> f a -> f b
+
+class Functor f => Applicative (f :: Type -> Type) where
+    pure :: a -> f a
+    (<*>) :: f (a -> b) -> f a -> f b
+    liftA2 :: (a -> b -> c) -> f a -> f b -> f c
+    (*>) :: f a -> f b -> f b
+    (<*) :: f a -> f b -> f a
+
+class Applicative m => Monad (m :: Type -> Type) where
+    (>>=) :: m a -> (a -> m b) -> m b infixl 1
+    (>>) :: m a -> m b -> m b infixl 1
+    return :: a -> m a
+
+class Monad m => MonadFail (m :: Type -> Type) where
+    fail :: String -> m a
+
+mapM_ :: (Foldable t, Monad m) => (a -> m b) -> t a -> m ()
+sequence_ :: (Foldable t, Monad m) => t (m a) -> m ()
+(=<<) :: Monad m => (a -> m b) -> m a -> m b infixr 1
+\end{minted}
+
+%

@@ -1,16 +1,6 @@
 %
 
 \subsubsection{Numeric type classes}
-
-% TODO
-% data Int A fixed-precision integer type with at least the range [-2^29 .. 2^29-1]. The exact range for a given implementation can be determined by using minBound and maxBound from the Bounded class.
-% data Integer
-% data Float Single-precision floating point numbers. It is desirable that this type be at least equal in range and precision to the IEEE single-precision type.
-% data Double Double-precision floating point numbers. It is desirable that this type be at least equal in range and precision to the IEEE double-precision type.
-% type Rational = Ratio Integer Arbitrary-precision rational numbers, represented as a ratio of two Integer values. A rational number may be constructed using the % operator.
-% data Word A Word is an unsigned integral type, with the same size as Int.
-
-%%% Numeric type classes
 \textbf{Num} is a basic numeric class.
 The Haskell Report defines no laws for Num.
 However, (+) and (*) are customarily expected to define a ring.
@@ -76,33 +66,57 @@ class Fractional a => Floating a where
 
 \textbf{RealFrac} extracts components of fractions (?).
 \begin{minted}{haskell}
-class (Real a, Fractional a) => RealFrac a where
-    properFraction :: Integral b => a -> (b, a)
-    truncate       :: Integral b => a -> b
-    round          :: Integral b => a -> b
-    ceiling        :: Integral b => a -> b
-    floor          :: Integral b => a -> b
+class (Real a, Fractional a) => RealFrac a
+where
+properFraction :: Integral b => a -> (b, a)
+    truncate   :: Integral b => a -> b
+    round      :: Integral b => a -> b
+    ceiling    :: Integral b => a -> b
+    floor      :: Integral b => a -> b
 \end{minted}
 
 \textbf{RealFloat} gives efficient, machine-independent access to the components of a floating-point number (?).
 \begin{minted}{haskell}
-class (RealFrac a, Floating a) => RealFloat a where
-    ?
+class (RealFrac a, Floating a) =>
+RealFloat a where
+    floatRadix
+    floatDigits
+    floatRange
+    decodeFloat
+    encodeFloat
+    exponent
+    significand
+    scaleFloat
+    isNaN, isInfinite, isIEEE,
+    isDenormalized, isNegativeZero
+    atan2
 \end{minted}
 
 \subsubsection{Numeric functions}
 \begin{minted}{haskell}
-subtract :: Num a => a -> a -> a
-even :: Integral a => a -> Bool
-odd :: Integral a => a -> Bool
-gcd :: Integral a => a -> a -> a
-lcm :: Integral a => a -> a -> a
-(^) :: (Num a, Integral b) => a -> b -> a infixr 8
-(^^) :: (Fractional a, Integral b) => a -> b -> a infixr 8
-fromIntegral :: (Integral a, Num b) => a -> b
-realToFrac :: (Real a, Fractional b) => a -> b
+-- n Num, i Integral, f Fractional, r Real
+subtract     :: n -> n -> n
+even         :: i -> Bool
+odd          :: i -> Bool
+gcd          :: i -> i -> i
+lcm          :: i -> i -> i
+(^)          :: n -> i -> n
+(^^)         :: f -> i -> f
+fromIntegral :: i -> n
+realToFrac   :: r -> f
 \end{minted}
-%%% Numeric functions
-% subtract even odd gcd lcm ^ ^^ fromIntegral realToFrac
+
+\subsubsection{Numeric types}
+\mintinline{haskell}{data Int} is a fixed precision integer type with at least he range $[-2^{29}, 2^{29}]$.
+
+\mintinline{haskell}{data Integer} :-)
+
+\mintinline{haskell}{data Float} is single-precision floating.
+
+\mintinline{haskell}{data Double} is double-precision floating.
+
+\mintinline{haskell}{type Rational} is arbitrary-prevision rational, represented as ratio of two integers.
+
+\mintinline{haskell}{data Word} is unsigned integral type, with the same size as \mintinline{haskell}{Int}.
 
 %
