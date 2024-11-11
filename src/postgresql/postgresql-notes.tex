@@ -1,5 +1,5 @@
 \documentclass{charun}
-\title{PostgreSQL 15.3 notes, version 0.3.3}
+\title{PostgreSQL 15.3 notes, version 0.3.4}
 \author{Leon Suwalski}
 
 \usepackage{xcolor}
@@ -94,18 +94,6 @@ $ sudo -u postgres psql
 
 \newpage
 \section{Old stuff}
-Only unique values:
-\begin{minted}{sql}
-SELECT DISTINCT name FROM customer;
-
-SELECT DISTINCT ON (column1) column_alias, column2
-FROM table_name ORDER BY column1, column2;
-\end{minted}
-
-It's a good idea to specify order when using DISTINCT ON.
-
-\hrule
-
 Concatenation of two strings:
 \begin{minted}{sql}
 SELECT name || ' ' || email FROM customer;

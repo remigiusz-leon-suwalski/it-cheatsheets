@@ -13,6 +13,12 @@ SELECT name, membercost FROM cd.facilities;
 SELECT DISTINCT surname FROM cd.members
 \end{minted}
 
+The DISTINCT clause is unpredictable unless ORDER BY is used too:
+\begin{minted}{sql}
+SELECT DISTINCT ON (firstname) firstname, surname
+FROM cd.members ORDER BY firstname;
+\end{minted}
+
 \textbf{AS} gives temporary aliases to the columns:
 \begin{minted}{sql}
 SELECT name AS facilityname FROM cd.facilities;
