@@ -1,0 +1,22 @@
+%
+
+\textbf{git rev-parse}'s \git{rev-parse} common usage is to print the SHA-1 hashes given a revision specifier (but there are other applications too).
+
+\begin{minted}{bash}
+git rev-parse HEAD
+# 98a3f0fef4962ed09fbe3a993d3e0c37cb42b68f
+git rev-parse master
+# 5bf76ec29370b0d9ccfbc9612640e0b01e2a3a7b
+git rev-parse --verify 5bf7
+# 5bf76ec29370b0d9ccfbc9612640e0b01e2a3a7b
+git rev-parse --verify 5bf8
+# fatal: Needed a single revision
+git rev-parse --git-dir
+# /Users/fechmistrz/github/it-cheatsheets/.git
+git rev-parse --is-bare-repository 
+# false
+\end{minted}
+
+The man page for git rev-parse is laughably incomprehensible.
+
+%

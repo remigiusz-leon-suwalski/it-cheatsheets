@@ -1,5 +1,5 @@
 \documentclass{charun}
-\title{Git notes, version 0.12.9}
+\title{Git notes, version 0.13.0}
 \author{Leon Suwalski}
 
 \usepackage{xcolor}
@@ -52,6 +52,7 @@
 \input{sections/git-log}
 \input{sections/git-shortlog}
 \input{sections/git-show}
+\input{sections/git-rev-parse}
 \input{sections/git-blame}
 \input{sections/git-diff}
 
@@ -69,6 +70,28 @@
 
 \section{Specifying revisions}
 \begin{minted}{bash}
+git show HEAD^  # (first) parent commit
+git show HEAD^^ # second parent, useful for merge commits
+git show HEAD^2 # second parent
+git show HEAD~  # (first) parent commit
+git show HEAD~~ # first parent of first parent
+git show HEAD~2 # first parent of first parent
+
+git log master..experiment
+# assuming experiment branched out from master,
+# this lists experiment commits that are not on master
+
+git log ^master experiment
+git log experiment --not master
+# same as above
+
+git log master...experiment
+# this lists commits present on one but not both branches
+
+git log --left-right master...experiment
+# shows < before master and > before experiment commits
+
+
 # @{u} refers to the upstream branch which the
 # current branch is tracking, for example:
 git merge @{u}
