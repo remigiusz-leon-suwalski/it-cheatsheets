@@ -1,96 +1,79 @@
 \section{Manage containers}
-\subsection{Running containers}
-Run a container with random name (an adjective with surname of a notable scientist or hacker):
-\begin{bashcode}
-$ docker run hello-world # = docker container run ...
-Unable to find image 'hello-world:latest' locally
-latest: Pulling from library/hello-world
-\end{bashcode}
 
-Assigns custom name to the container:
-\begin{bashcode}
-$ docker run --name='cobra' python
-\end{bashcode}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Useful switches include:
-\begin{bashcode}
-# -d   == --detach=true runs in the background
-# `docker container attach` attaches local stdin & stdout
-
-# -i   == --interactive keeps STDIN open
-# --rm == automatically removes the container when it exits
-# -t   == --tty allocaes a pseudo-TTY
-\end{bashcode}
-
-\subsection{Listing containers}
+\subsection{List containers}
 List running containers:
 \begin{bashcode}
-$ docker ps = # docker container ls
+$ docker ps
 CONTAINER ID IMAGE   COMMAND CREATED    STATUS    PORTS NAMES
-fdde5a2d9731 busybox "sh"    1 hour ago Up 1 hour       great_g
+fdde5a2d9731 busybox "sh"    1 hour ago Up 1 hour       silly_elion
 \end{bashcode}
 
 Useful switches include:
 \begin{bashcode}
-# -a == --all lists all, not just running containers
+# -a == --all   lists all, not just running containers
 # -q == --quiet lists only container IDs
-# -s == --size lists total file sizes
+# -s == --size  lists total file sizes
 \end{bashcode}
 
 List port mappings:
 \begin{bashcode}
-$ docker port static-site # = docker container port ...
+$ docker port static-site
+# TODO
 \end{bashcode}
 
 List logs of a container that was started with the json-file or journald logging driver:
 \begin{bashcode}
 $ docker run --name test -d busybox sh -c \
     "while true; do $(echo date); sleep 1; done"
-$ docker logs -f --until=2s test # = docker container logs ...
-# -f == --follow works like in `tail` command
-# --until only logs since timestamp (like 2013-01-02T13:23:37Z)
-#         or relative (like 42m),
-# --since only logs until a timestamp or relative (see above).
+
+$ docker logs --follow --until=2s test
+# --follow works like in `tail` command (same as -f)
+# --until  only logs until a timestamp (like 2013-01-02T13:23:37Z)
+#          or relative date (like 42m which is 42 minutes ago),
+# --since  only logs since a timestamp or relative date
 \end{bashcode}
 
-\subsection{Starting, pausing, stopping containers}
-Pause/unpause all processes within containers:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Create containers}
+{Create container} (don't start it yet), then start it:
 \begin{bashcode}
-$ docker pause cobra   # = docker container pause ...
-$ docker unpause cobra # = docker container unpause ...
+$ docker container create hello-world
+7839a444734b6825e7cf53787793724d74c100628b7db3a1c8ee7d84e94b1e4d
+
+$ docker container rename 7839a444 fluffy-octopus
+
+$ docker start 7839a444
+# do something
+$ docker stop 7839a444
+# 'docker stop --time 10 ...' waits 10 seconds to wait before stopping
+$ docker kill 7839a444
+$ docker kill $(docker ps -q) # kills all containers
 \end{bashcode}
 
-Start/stop/kill:
+\mintinline{bash}{docker stop} uses a SIGTERM followed by a SIGKILL if needed.
+\mintinline{bash}{docker kill} sends a SIGKILL immediately.
+
+Instead of stopping whole container, you can pause all processes within it.
+Pause on Linux uses freezer cgroup; process is unaware and unable to capture that it's being suspended.
 \begin{bashcode}
-$ docker start fdde5a2d9731 # = docker container start ...
-$ docker stop fdde5a2d9731  # = docker container stop ...
-# --time: seconds to wait before stopping
-$ docker kill fdde5a2d9731  # = docker container kill ...
+$ docker pause cobra
+$ docker unpause cobra
 \end{bashcode}
 
-\subsection{Running commands inside containers}
-Execute a command inside the container:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{bashcode}
-$ docker exec -it ubuntu bash # = docker container exec ...
-\end{bashcode}
-
-By default it's executed in the working directory that was set during container creation.
-Does not work for paused containers!
-Useful switches:
-\begin{bashcode}
-# --workdir: custom working directory inside the container.
-\end{bashcode}
-    
-\subsection{Removing containers}
+\subsection{Remove containers}
 Remove a stopped container:
 \begin{bashcode}
-$ docker rm fdde5a2d9731 # = docker container rm ...
+$ docker rm fdde5a2d9731
 \end{bashcode}
 
 Useful switches include:
 \begin{bashcode}
-# -f == --force forces the removal (uses SIGKILL).
+# -f == --force   forces the removal (uses SIGKILL).
 # -v == --volumes removes associated anonymous volumes
 \end{bashcode}
 
@@ -100,18 +83,48 @@ $ docker container prune                        # requires API >= 1.25
 $ docker rm $(docker ps -a -q -f status=exited) # does the same
 \end{bashcode}
 
-\subsection{Work in progress}
-\color{red}
-\important{Create container}, don't start it:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Run containers}
+Run a container with random name (an adjective with surname of a notable scientist or hacker):
 \begin{bashcode}
-$ docker container create ...
+$ docker run hello-world # = docker container run ...
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+
+# This is more or less equivalent to:
+$ docker pull hello-world
+$ docker start $(docker create hello-world)
 \end{bashcode}
 
-\important{Rename container}
+Useful switches include:
 \begin{bashcode}
-$ docker container rename ...
+# --detach=true == -d runs in the background
+# --interactive == -i keeps STDIN open
+# --name='...'        assigns a custom name
+# --rm                automatically removes the container after exit
+# --tty         == -t allocaes a pseudo-TTY
 \end{bashcode}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Run commands inside containers}
+Execute a command inside the container:
+
+\begin{bashcode}
+$ docker exec -it ubuntu bash
+\end{bashcode}
+
+By default it's executed in the working directory that was set during container creation.
+Does not work for paused containers!
+Useful switches:
+\begin{bashcode}
+# --workdir: custom working directory inside the container.
+\end{bashcode}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+\subsection{Monitor containers}
 Display running processes of a container:
 
 \begin{bashcode}
@@ -120,27 +133,21 @@ UID  PID   PPID  C STIME TTY   TIME     CMD
 root 16433 16412 0 00:42 pts/0 00:00:00 bash
 \end{bashcode}
 
-Fetch the logs of a container:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\important{Run a command} in a running container:
+\subsection{Aliases}
+
 \begin{bashcode}
-$ docker container exec -it bold_cerf bash
+docker container logs    = docker logs
+docker container ls      = docker ps
+docker container start   = docker start
+docker container stop    = docker stop
+docker container kill    = docker kill
+docker container rm      = docker rm
+docker container port    = docker port
+docker container pause   = docker pause
+docker container unpause = docker unpause
+docker container exec    = docker exec
 \end{bashcode}
-
-\important{Kill a cointainer}
-\begin{bashcode}
-$ docker container kill bold_cerf
-\end{bashcode}
-
-You can kill them all too:
-\begin{bashcode}
-$ docker kill $(docker ps -q)
-\end{bashcode}
-
-Useful switches:
-\begin{compactitem}
-    \item \mintinline{bash}{--force}: uses SIGKILL,
-\end{compactitem}
-\color{black}
 
 %
