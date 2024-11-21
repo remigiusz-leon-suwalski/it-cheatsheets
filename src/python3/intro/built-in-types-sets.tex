@@ -4,4 +4,39 @@
 A set object is an unordered collection of distinct hashable objects. 
 There are currently two built-in set types, set (mutable) and frozenset (immutable).
 
+\begin{minted}{python3}
+len(s)
+a.copy() # shallow copy
+
+x in s
+x not in s # tests for membership
+s1.isdisjoint(s2) # True if intersection of s1, s2 is empty
+
+# Comparison of a set and a frozenset is based on their members
+s1 <= s2 # same as s1.issubset(s2)
+s1 < s2
+s1 >= s2 # same as s1.issuperset(s2)
+s1 > s2
+
+# All return the same type as the first operand
+s1 | s2 | ... # same as s1.union([s2, ...])
+s1 & s2 & ... # same as s1.intersection([s2, ...])
+s1 - s2 - ... # same as s1.difference([s2, ...])
+s1 ^ s2       # same as s1.symmetric_difference(s2)
+\end{minted}
+
+The following table lists operations available for set that do not apply to immutable instances of frozenset:
+\begin{minted}{python3}
+s1 |= s2 | ... # same as s1.update([s2, ...])
+s1 &= s2 & ... # same as s1.intersection_update([s2, ...])
+s1 -= s2 | ... # same as s1.difference_update([s2, ...])
+s1 ^= s2       # same as s1.symmetric_difference_update(s2)
+
+s1.add(x)
+s1.remove(x)  # raises KeyError if x is not contained in the set.
+s1.discard(x) # removes x from the set if it is present.
+s1.pop()      # removes and returns an arbitrary element,
+              # raises KeyError if the set is empty.
+s1.clear()    # removes all elements from the set.
+\end{minted}
 %
