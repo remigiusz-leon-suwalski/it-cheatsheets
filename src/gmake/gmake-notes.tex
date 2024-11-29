@@ -1,5 +1,5 @@
 \documentclass{charun}
-\title{GNU Make 4.4.1 notes, version 0.2.0}
+\title{GNU Make 4.4.1 notes, version 0.3.0}
 \author{Leon Suwalski}
 
 \usepackage{xcolor}
@@ -10,6 +10,8 @@
 % copied from https://tex.stackexchange.com/questions/132849/how-can-i-change-the-font-size-of-the-number-in-minted-environment
 \BeforeBeginEnvironment{minted}{\begin{tcolorbox}[breakable,boxsep=5pt,left=0pt,right=0pt,top=0pt,bottom=0pt,boxrule=0.5pt,arc=0pt,outer arc=0pt,colback=pythoncolor,colframe=pythoncolor2]\small}%
 \AfterEndEnvironment{minted}{\end{tcolorbox}}%
+
+\setminted[]{fontfamily=lmtt}
 
 \begin{document}
 \begin{multicols*}{2}
@@ -22,143 +24,12 @@ Based on \url{www.gnu.org/software/make/manual/html_node/index.html}.
 
 \input{chapters/03-writing-makefiles}
 
-\color{gray}
-\section{NEEDS TO BE DONE: Writing Rules}
-Lorem ipsum...
-\color{black}
-
-
-\color{gray}
-\subsection{NEEDS TO BE DONE: Rule Example}
-Lorem ipsum...
-\color{black}
-
-\color{gray}
-\subsection{NEEDS TO BE DONE: Rule Syntax}
-Lorem ipsum...
-\color{black}
-
-\color{gray}
-\subsection{NEEDS TO BE DONE: Types of Prerequisites}
-Lorem ipsum...
-\color{black}
-
-\color{gray}
-\subsection{NEEDS TO BE DONE: Using Wildcard Characters in File Names}
-Lorem ipsum...
-\color{black}
-
-\color{gray}
-\subsubsection{NEEDS TO BE DONE: Wildcard Examples}
-Lorem ipsum...
-\color{black}
-
-\color{gray}
-\subsubsection{NEEDS TO BE DONE: Pitfalls of Using Wildcards}
-Lorem ipsum...
-\color{black}
-
-\color{gray}
-\subsubsection{NEEDS TO BE DONE: The Function wildcard}
-Lorem ipsum...
-\color{black}
-
-\color{gray}
-\subsection{NEEDS TO BE DONE: Searching Directories for Prerequisites}
-Lorem ipsum...
-\color{black}
-
-\color{gray}
-\subsubsection{NEEDS TO BE DONE: VPATH: Search Path for All Prerequisites}
-Lorem ipsum...
-\color{black}
-
-\color{gray}
-\subsubsection{NEEDS TO BE DONE: The vpath Directive}
-Lorem ipsum...
-\color{black}
-
-\color{gray}
-\subsubsection{NEEDS TO BE DONE: How Directory Searches are Performed}
-Lorem ipsum...
-\color{black}
-
-\color{gray}
-\subsubsection{NEEDS TO BE DONE: Writing Recipes with Directory Search}
-Lorem ipsum...
-\color{black}
-
-\color{gray}
-\subsubsection{NEEDS TO BE DONE: Directory Search and Implicit Rules}
-Lorem ipsum...
-\color{black}
-
-\color{gray}
-\subsubsection{NEEDS TO BE DONE: Directory Search for Link Libraries}
-Lorem ipsum...
-\color{black}
-
-\color{gray}
-\subsection{NEEDS TO BE DONE: Phony Targets}
-Lorem ipsum...
-\color{black}
-
-\color{gray}
-\subsection{NEEDS TO BE DONE: Rules without Recipes or Prerequisites}
-Lorem ipsum...
-\color{black}
-
-\color{gray}
-\subsection{NEEDS TO BE DONE: Empty Target Files to Record Events}
-Lorem ipsum...
-\color{black}
-
-\color{gray}
-\subsection{NEEDS TO BE DONE: Special Built-in Target Names}
-Lorem ipsum...
-\color{black}
-
-\color{gray}
-\subsection{NEEDS TO BE DONE: Multiple Targets in a Rule}
-Lorem ipsum...
-\color{black}
-
-\color{gray}
-\subsection{NEEDS TO BE DONE: Multiple Rules for One Target}
-Lorem ipsum...
-\color{black}
-
-\color{gray}
-\subsection{NEEDS TO BE DONE: Static Pattern Rules}
-Lorem ipsum...
-\color{black}
-
-\color{gray}
-\subsubsection{NEEDS TO BE DONE: Syntax of Static Pattern Rules}
-Lorem ipsum...
-\color{black}
-
-\color{gray}
-\subsubsection{NEEDS TO BE DONE: Static Pattern Rules versus Implicit Rules}
-Lorem ipsum...
-\color{black}
-
-\color{gray}
-\subsection{NEEDS TO BE DONE: Double-Colon Rules}
-Lorem ipsum...
-\color{black}
-
-\color{gray}
-\subsection{NEEDS TO BE DONE: Generating Prerequisites Automatically}
-Lorem ipsum...
-\color{black}
-
+\input{chapters/04-writing-rules}
 
 \color{gray}
 \section{NEEDS TO BE DONE: Writing Recipes in Rules}
 Lorem ipsum...
 \color{black}
-
 
 \color{gray}
 \subsection{NEEDS TO BE DONE: Recipe Syntax}

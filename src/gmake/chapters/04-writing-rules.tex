@@ -1,0 +1,236 @@
+
+\section{Writing Rules}
+\subsection{Rule syntax}
+In general, a rule looks like this:
+
+\begin{minted}{make}
+targets : prerequisites
+    recipe
+    …
+
+targets : prerequisites ; recipe
+    recipe
+    …
+\end{minted}
+
+The targets are file names, separated by spaces. Wildcard characters may be used and a name of the form \mintinline{make}{a(m)} represents member m in archive file a. Usually there is only one target per rule, but occasionally there is a reason to have more.
+
+The recipe lines start with a tab character (or the first character in the value of the \mintinline{make}{.RECIPEPREFIX} variable).
+
+Because dollar signs are used to start make variable references, if you really want a dollar sign in a target or prerequisite you must write two of them, \mintinline{make}{$$}. If you have enabled secondary expansion and you want a literal dollar sign in the prerequisites list, you must actually write four dollar signs: \mintinline{make}{$$$$}.
+
+You may split a long line by inserting a backslash followed by a newline, but this is not required, as make places no limit on the length of a line in a makefile.
+
+A rule tells make two things: when the targets are out of date, and how to update them when necessary.
+The criterion for being out of date is specified in terms of the prerequisites, which consist of file names separated by spaces.
+A target is out of date if it does not exist or if it is older than any of the prerequisites (by comparison of last-modification times).
+How to update is specified by a recipe. This is one or more lines to be executed by the shell (normally \mintinline{bash}{sh}), but with some extra features.
+
+\subsection{Types of Prerequisites}
+There are two different types of prerequisites understood by GNU make: normal prerequisites, described in the previous section, and order-only prerequisites. A normal prerequisite makes two statements: first, it imposes an order in which recipes will be invoked: the recipes for all prerequisites of a target will be completed before the recipe for the target is started. Second, it imposes a dependency relationship: if any prerequisite is newer than the target, then the target is considered out-of-date and must be rebuilt.
+
+Normally, this is exactly what you want: if a target’s prerequisite is updated, then the target should also be updated.
+
+Occasionally you may want to ensure that a prerequisite is built before a target, but without forcing the target to be updated if the prerequisite is updated. Order-only prerequisites are used to create this type of relationship. Order-only prerequisites can be specified by placing a pipe symbol (|) in the prerequisites list: any prerequisites to the left of the pipe symbol are normal; any prerequisites to the right are order-only:
+
+\begin{minted}{make}
+targets : normal-prerequisites | order-only-prerequisites
+\end{minted}
+The normal prerequisites section may of course be empty. Also, you may still declare multiple lines of prerequisites for the same target: they are appended appropriately (normal prerequisites are appended to the list of normal prerequisites; order-only prerequisites are appended to the list of order-only prerequisites). Note that if you declare the same file to be both a normal and an order-only prerequisite, the normal prerequisite takes precedence.
+
+Order-only prerequisites are never checked when determining if the target is out of date; even order-only prerequisites marked as phony will not cause the target to be rebuilt.
+
+Consider an example where your targets are to be placed in a separate directory, and that directory might not exist before make is run. In this situation, you want the directory to be created before any targets are placed into it but, because the timestamps on directories change whenever a file is added, removed, or renamed, we certainly don’t want to rebuild all the targets whenever the directory’s timestamp changes. One way to manage this is with order-only prerequisites: make the directory an order-only prerequisite on all the targets:
+
+\begin{minted}{make}
+OBJDIR := objdir
+OBJS := $(addprefix $(OBJDIR)/,foo.o bar.o baz.o)
+
+$(OBJDIR)/%.o : %.c
+    $(COMPILE.c) $(OUTPUT_OPTION) $<
+
+all: $(OBJS)
+
+$(OBJS): | $(OBJDIR)
+
+$(OBJDIR):
+    mkdir $(OBJDIR)
+\end{minted}
+Now the rule to create the objdir directory will be run, if needed, before any \mintinline{bash}{.o} is built, but no \mintinline{bash}{.o} will be built because the objdir directory timestamp changed.
+
+\subsection{Using wildcard characters in file names}
+A single file name can specify many files using wildcard characters. The wildcard characters in make are \mintinline{bash}{*}, \mintinline{bash}{?} and \mintinline{bash}{[…]}, the same as in the Bourne shell.
+
+If an expression matches multiple files then the results will be sorted.
+However multiple expressions will not be globally sorted. For example, \mintinline{bash}{*.c *.h} will list all the files whose names end in \mintinline{bash}{*.c}, sorted, followed by all the files whose names end in \mintinline{bash}{*.h}, sorted.
+
+The character \mintinline{bash}{~} at the beginning of a file name also has special significance. If alone, or followed by a slash, it represents your home directory. If the \mintinline{bash}{~} is followed by a word, the string represents the home directory of the user named by that word.
+On systems which don’t have a home directory for each user (such as MS-DOS or MS-Windows), this functionality can be simulated by setting the environment variable HOME.
+
+Wildcard expansion is performed by make automatically in targets and in prerequisites. In recipes, the shell is responsible for wildcard expansion. In other contexts, wildcard expansion happens only if you request it explicitly with the wildcard function.
+
+The special significance of a wildcard character can be turned off by preceding it with a backslash. Thus, \mintinline{bash}{foo\*bar} would refer to a specific file whose name consists of \mintinline{bash}{foo}, an asterisk, and \mintinline{bash}{bar}.
+
+\subsubsection{Wildcard example}
+
+Wildcards can be used in the recipe of a rule, where they are expanded by the shell. For example, here is a rule to delete all the object files:
+\begin{minted}{make}
+clean:
+    rm -f *.o
+\end{minted}
+
+Wildcards are also useful in the prerequisites of a rule. With the following rule in the makefile, \mintinline{bash}{make print} will print all the \mintinline{bash}{.c} files that have changed since the last time you printed them:
+\begin{minted}{make}
+print: *.c
+    lpr -p $?
+    touch print
+\end{minted}
+
+This rule uses print as an empty target file.
+(The automatic variable \mintinline{make}{$?} is used to print only those files that have changed).
+
+Wildcard expansion does not happen when you define a variable. Thus, if you write this: \mintinline{bash}{objects = *.o} then the value of the variable objects is the actual string \mintinline{bash}{*.o}. However, if you use the value of objects in a target or prerequisite, wildcard expansion will take place there. If you use the value of objects in a recipe, the shell may perform wildcard expansion when the recipe runs. To set objects to the expansion, instead use:
+
+\begin{minted}{make}
+    objects := $(wildcard *.o)
+\end{minted}
+
+\subsubsection{Pitfalls of using wildcards}
+Now here is an example of a naive way of using wildcard expansion, that does not do what you would intend. Suppose you would like to say that the executable file foo is made from all the object files in the directory, and you write this:
+\begin{minted}{make}
+objects = *.o
+
+foo : $(objects)
+    cc -o foo $(CFLAGS) $(objects)
+\end{minted}
+
+The value of objects is the actual string \mintinline{bash}{*.o}. Wildcard expansion happens in the rule for foo, so that each existing \mintinline{bash}{.o} file becomes a prerequisite of foo and will be recompiled if necessary.
+
+But what if you delete all the \mintinline{bash}{.o} files? When a wildcard matches no files, it is left as it is, so then foo will depend on the oddly-named file \mintinline{bash}{*.o}. Since no such file is likely to exist, make will give you an error saying it cannot figure out how to make \mintinline{bash}{*.o}. This is not what you want!
+
+Actually it is possible to obtain the desired result with wildcard expansion, but you need more sophisticated techniques, including the wildcard function and string substitution.
+
+Microsoft operating systems (MS-DOS and MS-Windows) use backslashes to separate directories in pathnames, like so: \mintinline{bash}{c:\foo\bar\baz.c}.
+
+This is equivalent to the Unix-style \mintinline{bash}{c:/foo/bar/baz.c}. When make runs on these systems, it supports backslashes as well as the Unix-style forward slashes in pathnames. However, this support does not include the wildcard expansion, where backslash is a quote character. Therefore, you must use Unix-style slashes in these cases.
+
+\subsubsection{The Function wildcard}
+Wildcard expansion happens automatically in rules. But wildcard expansion does not normally take place when a variable is set, or inside the arguments of a function. If you want to do wildcard expansion in such places, you need to use the wildcard function, like this:
+\begin{minted}{make}
+$(wildcard pattern…)
+\end{minted}
+
+This string, used anywhere in a makefile, is replaced by a space-separated list of names of existing files that match one of the given file name patterns. If no existing file name matches a pattern, then that pattern is omitted from the output of the wildcard function. Note that this is different from how unmatched wildcards behave in rules, where they are used verbatim rather than ignored.
+
+As with wildcard expansion in rules, the results of the wildcard function are sorted. But again, each individual expression is sorted separately, so \mintinline{make}{$(wildcard *.c *.h)} will expand to all files matching \mintinline{bash}{.c}, sorted, followed by all files matching \mintinline{bash}{.h}, sorted.
+
+One use of the wildcard function is to get a list of all the C source files in a directory, like this:
+\begin{minted}{make}
+$(wildcard *.c)
+\end{minted}
+
+We can change the list of C source files into a list of object files by replacing the \mintinline{bash}{.c} suffix with \mintinline{bash}{.o} in the result, like this:
+\begin{minted}{make}
+$(patsubst %.c,%.o,$(wildcard *.c))
+\end{minted}
+
+Thus, a makefile to compile all C source files in the directory and then link them together could be written as follows:
+
+\begin{minted}{make}
+objects := $(patsubst %.c,%.o,$(wildcard *.c))
+
+foo : $(objects)
+    cc -o foo $(objects)
+\end{minted}
+(This takes advantage of the implicit rule for compiling C programs, so there is no need to write explicit rules for compiling the files).
+
+\color{gray}
+\subsection{NEEDS TO BE DONE: Searching Directories for Prerequisites}
+Lorem ipsum...
+\color{black}
+
+\color{gray}
+\subsubsection{NEEDS TO BE DONE: VPATH: Search Path for All Prerequisites}
+Lorem ipsum...
+\color{black}
+
+\color{gray}
+\subsubsection{NEEDS TO BE DONE: The vpath Directive}
+Lorem ipsum...
+\color{black}
+
+\color{gray}
+\subsubsection{NEEDS TO BE DONE: How Directory Searches are Performed}
+Lorem ipsum...
+\color{black}
+
+\color{gray}
+\subsubsection{NEEDS TO BE DONE: Writing Recipes with Directory Search}
+Lorem ipsum...
+\color{black}
+
+\color{gray}
+\subsubsection{NEEDS TO BE DONE: Directory Search and Implicit Rules}
+Lorem ipsum...
+\color{black}
+
+\color{gray}
+\subsubsection{NEEDS TO BE DONE: Directory Search for Link Libraries}
+Lorem ipsum...
+\color{black}
+
+\color{gray}
+\subsection{NEEDS TO BE DONE: Phony Targets}
+Lorem ipsum...
+\color{black}
+
+\color{gray}
+\subsection{NEEDS TO BE DONE: Rules without Recipes or Prerequisites}
+Lorem ipsum...
+\color{black}
+
+\color{gray}
+\subsection{NEEDS TO BE DONE: Empty Target Files to Record Events}
+Lorem ipsum...
+\color{black}
+
+\color{gray}
+\subsection{NEEDS TO BE DONE: Special Built-in Target Names}
+Lorem ipsum...
+\color{black}
+
+\color{gray}
+\subsection{NEEDS TO BE DONE: Multiple Targets in a Rule}
+Lorem ipsum...
+\color{black}
+
+\color{gray}
+\subsection{NEEDS TO BE DONE: Multiple Rules for One Target}
+Lorem ipsum...
+\color{black}
+
+\color{gray}
+\subsection{NEEDS TO BE DONE: Static Pattern Rules}
+Lorem ipsum...
+\color{black}
+
+\color{gray}
+\subsubsection{NEEDS TO BE DONE: Syntax of Static Pattern Rules}
+Lorem ipsum...
+\color{black}
+
+\color{gray}
+\subsubsection{NEEDS TO BE DONE: Static Pattern Rules versus Implicit Rules}
+Lorem ipsum...
+\color{black}
+
+\color{gray}
+\subsection{NEEDS TO BE DONE: Double-Colon Rules}
+Lorem ipsum...
+\color{black}
+
+\color{gray}
+\subsection{NEEDS TO BE DONE: Generating Prerequisites Automatically}
+Lorem ipsum...
+\color{black}
+
