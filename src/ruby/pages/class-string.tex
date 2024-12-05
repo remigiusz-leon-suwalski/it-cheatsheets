@@ -1,0 +1,170 @@
+\subsection{class String}
+% https://ruby-doc.org/3.3.6/String.html#method-i-split
+A \mintinline{ruby}{String} object has an arbitrary sequence of bytes, typically representing text or binary data.
+Class \mintinline{ruby}{String} includes module \mintinline{ruby}{Comparable}.
+In general, if there exist both bang and non-bang version of method, the bang! mutates and the non-bang! does not. However, a method without a bang can also mutate, such as \mintinline{ruby}{String#replace}.
+\mintinline{ruby}{String} objects differ from \mintinline{ruby}{Symbol} objects in that Symbol objects are designed to be used as identifiers, instead of text or data.
+
+\subsubsection{Methods for converting to new String}
+Each of these methods returns a new String based on self, often just a modified copy of self.
+
+Extension
+
+*: Returns the concatenation of multiple copies of self,
+
++: Returns the concatenation of self and a given other string.
+
+center: Returns a copy of self centered between pad substring.
+
+concat: Returns the concatenation of self with given other strings.
+
+prepend: Returns the concatenation of a given other string with self.
+
+ljust: Returns a copy of self of a given length, right-padded with a given other string.
+
+rjust: Returns a copy of self of a given length, left-padded with a given other string.
+
+Encoding
+
+b: Returns a copy of self with ASCII-8BIT encoding.
+
+scrub: Returns a copy of self with each invalid byte replaced with a given character.
+
+unicode\_normalize: Returns a copy of self with each character Unicode-normalized.
+
+encode: Returns a copy of self with all characters transcoded from one given encoding into another.
+
+Substitution
+
+dump: Returns a copy of self with all non-printing characters replaced by xHH notation and all special characters escaped.
+
+undump: Returns a copy of self with all \\xNN notation replace by \\uNNNN notation and all escaped characters unescaped.
+
+sub: Returns a copy of self with the first substring matching a given pattern replaced with a given replacement string;.
+
+gsub: Returns a copy of self with each substring that matches a given pattern replaced with a given replacement string.
+
+succ, next: Returns the string that is the successor to self.
+
+reverse: Returns a copy of self with its characters in reverse order.
+
+tr: Returns a copy of self with specified characters replaced with specified replacement characters.
+
+tr\_s: Returns a copy of self with specified characters replaced with specified replacement characters, removing duplicates from the substrings that were modified.
+
+%: Returns the string resulting from formatting a given object into self
+
+Casing.
+\begin{minted}{ruby}
+'hello World!'.capitalize # => "Hello world!"
+'hello World!'.downcase   # => "hello world!"
+'hello World!'.upcase     # => "HELLO WORLD!"
+'hello World!'.swapcase   # => "HELLO wORLD!"
+\end{minted}
+
+Deletion
+
+delete: Returns a copy of self with characters removed
+
+delete\_prefix: Returns a copy of self with a given prefix removed.
+
+delete\_suffix: Returns a copy of self with a given suffix removed.
+
+lstrip: Returns a copy of self with leading whitespace removed.
+
+rstrip: Returns a copy of self with trailing whitespace removed.
+
+strip: Returns a copy of self with leading and trailing whitespace removed.
+
+chomp: Returns a copy of self with a trailing record separator removed, if found.
+
+chop: Returns a copy of self with trailing newline characters or the last character removed.
+
+squeeze: Returns a copy of self with contiguous duplicate characters removed.
+
+[], slice: Returns a substring determined by a given index, start/length, or range, or string.
+
+byteslice: Returns a substring determined by a given index, start/length, or range.
+
+chr: Returns the first character.
+
+Duplication
+
+to\_s, to\_str: If self is a subclass of String, returns self copied into a String; otherwise, returns self.
+
+
+\subsubsection{Methods for converting to non-String}
+Each of these methods converts the contents of self to a non-String.
+
+Characters, Bytes, and Clusters
+
+bytes: Returns an array of the bytes in self.
+
+chars: Returns an array of the characters in self.
+
+codepoints: Returns an array of the integer ordinals in self.
+
+getbyte: Returns an integer byte as determined by a given index.
+
+% grapheme_clusters: Returns an array of the grapheme clusters in self.
+
+lines: Returns an array of the lines in self, as determined by a given record separator.
+
+partition: Returns a 3-element array determined by the first substring that matches a given substring or regexp,
+
+rpartition: Returns a 3-element array determined by the last substring that matches a given substring or regexp,
+
+\textbf{split} returns an array of substrings determined by a given delimiter – regexp or string.
+\begin{minted}{ruby}
+'abc def ghi'.split(' ') # => ["abc", "def", "ghi"]
+"abc \n\tdef\t\n  ghi".split(' ') # => ["abc", "def", "ghi"]
+'abc  def   ghi'.split(' ') # => ["abc", "def", "ghi"]
+''.split(' ') # => []
+'abracadabra'.split('ab') # => ["", "racad", "ra"]
+'aaabcdaaa'.split('a') # => ["", "", "", "bcd"]
+''.split('a') # => []
+'3.14159'.split('1') # => ["3.", "4", "59"]
+'!@#$%^$&*($)_+'.split('$') # => ["!@#", "%^", "&*(", ")_+"]
+
+# regexp delimeter
+'abracadabra'.split(/ab/) # => ["", "racad", "ra"]
+'aaabcdaaa'.split(/a/) # => ["", "", "", "bcd"]
+'aaabcdaaa'.split(//) # => ["a", "a", "a", "b", "c", "d", "a", "a", "a"]
+'1 + 1 == 2'.split(/\W+/) # => ["1", "1", "2"]
+
+# with a limit - a positive integer
+'aaabcdaaa'.split('a', 1) # => ["aaabcdaaa"]
+'aaabcdaaa'.split('a', 2) # => ["", "aabcdaaa"]
+'aaabcdaaa'.split('a', 5) # => ["", "", "", "bcd", "aa"]
+'aaabcdaaa'.split('a', 7) # => ["", "", "", "bcd", "", "", ""]
+'aaabcdaaa'.split('a', 8) # => ["", "", "", "bcd", "", "", ""]
+
+# with a block
+'abc def ghi'.split(' ') {|substring| p substring }
+\end{minted}
+
+Matching
+
+scan: Returns an array of substrings matching a given regexp or string, or, if a block given, passes each matching substring to the block.
+
+unpack: Returns an array of substrings extracted from self according to a given format.
+
+unpack1: Returns the first substring extracted from self according to a given format.
+
+Numerics
+
+hex: Returns the integer value of the leading characters, interpreted as hexadecimal digits.
+
+oct: Returns the integer value of the leading characters, interpreted as octal digits.
+
+ord: Returns the integer ordinal of the first character in self.
+
+% to_i: Returns the integer value of leading characters, interpreted as an integer.
+
+% to_f: Returns the floating-point value of leading characters, interpreted as a floating-point number.
+
+Strings and Symbols
+
+inspect: Returns copy of self, enclosed in double-quotes, with special characters escaped.
+
+% to_sym, intern: Returns the symbol corresponding to self.

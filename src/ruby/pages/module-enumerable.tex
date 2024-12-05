@@ -1,0 +1,360 @@
+\subsection{module Enumerable}
+% https://ruby-doc.org/3.3.6/Enumerable.html#method-i-inject
+\mintinline{ruby}{ARGF}, \mintinline{ruby}{Array}, \mintinline{ruby}{Dir}, \mintinline{ruby}{Enumerator}, \mintinline{ruby}{ENV}, \mintinline{ruby}{Hash}, \mintinline{ruby}{IO}, \mintinline{ruby}{Range}, \mintinline{ruby}{Struct} core classes and \mintinline{ruby}{CSV}, \mintinline{ruby}{Set} standard library classes include or extend Enumerable.
+
+\mintinline{ruby}{all} (\mintinline{ruby}{any}) checks whether every (at least one) element is truthy:
+\begin{minted}{ruby}
+# no argument, no block
+(1..4).all? # => true
+(1..4).any? # => true
+%w[a b c d].all? # => true
+%w[a b c d].any? # => true
+[1, 2, nil].all?
+['a', 'b', false].all?
+[1, false, nil].any? # => true
+[].all? # => true
+[].any?
+
+# argument, no block
+(1..4).all?(Integer) # => true
+(1..4).all?(Numeric) # => true
+(1..4).all?(Float)
+[nil, false, 0].any?(Integer) # => true
+[nil, false, 0].any?(Numeric) # => true
+[nil, false, 0].any?(Float)
+%w[bar baz bat bam].all?(/ba/) # => true
+%w[bar baz bat bam].all?(/bar/)
+%w[bar baz bat bam].all?('ba')
+%w[bar baz bat bam].any?(/m/) # => true
+%w[bar baz bat bam].any?(/foo/)
+%w[bar baz bat bam].any?('ba')
+{foo: 0, bar: 1, baz: 2}.all?(Array) # => true
+{foo: 0, bar: 1, baz: 2}.all?(Hash)
+{foo: 0, bar: 1, baz: 2}.any?(Array) # => true
+{foo: 0, bar: 1, baz: 2}.any?(Hash)
+[].all?(Integer) # => true
+[].any?(Integer)
+
+# block
+(1..4).all? {|element| element < 5 } # => true
+(1..4).all? {|element| element < 4 }
+(1..4).any? {|element| element < 2 } # => true
+(1..4).any? {|element| element < 1 }
+{foo: 0, bar: 1, baz: 2}.all? {|key, value| value < 3 } # => true
+{foo: 0, bar: 1, baz: 2}.all? {|key, value| value < 2 }
+{foo: 0, bar: 1, baz: 2}.any? {|key, value| value < 1 } # => true
+{foo: 0, bar: 1, baz: 2}.any? {|key, value| value < 0 }
+\end{minted}
+
+none?: Returns true if no element meets a specified criterion; false otherwise.
+\begin{minted}{ruby}
+#none?
+\end{minted}
+
+one?: Returns true if exactly one element meets a specified criterion; false otherwise.
+\begin{minted}{ruby}
+#one?
+\end{minted}
+
+count: Returns the count of elements, based on an argument or block criterion, if given.
+\begin{minted}{ruby}
+#count
+\end{minted}
+
+tally: Returns a new Hash containing the counts of occurrences of each element.
+Method ...
+\begin{minted}{ruby}
+#tally
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#chain
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#chunk
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#chunk_while
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#collect
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#collect_concat
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#compact
+\end{minted}
+
+
+
+Method ...
+\begin{minted}{ruby}
+#cycle
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#detect
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#drop
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#drop_while
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#each_cons
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#each_entry
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#each_slice
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#each_with_index
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#each_with_object
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#entries
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#filter
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#filter_map
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#find
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#find_all
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#find_index
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#first
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#flat_map
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#grep
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#grep_v
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#group_by
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#include?
+\end{minted}
+
+
+Method ...
+\begin{minted}{ruby}
+#lazy
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#map
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#max
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#max_by
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#member?
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#min
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#min_by
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#minmax
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#minmax_by
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#partition
+\end{minted}
+
+
+Method ...
+\begin{minted}{ruby}
+#reject
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#reverse_each
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#select
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#slice_after
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#slice_before
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#slice_when
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#sort
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#sort_by
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#sum
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#take
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#take_while
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#to_a
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#to_h
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#to_set
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#uniq
+\end{minted}
+
+Method ...
+\begin{minted}{ruby}
+#zip
+\end{minted}
+
+\textbf{inject} returns the object formed by combining all elements.
+\textbf{reduce} is an alias.
+\begin{minted}{ruby}
+# with method-name argument
+(1..4).inject(:+) # => 10
+(1..4).inject(10, :+) # => 20
+
+# with a block
+(1..4).inject {|sum, n| sum + n*n } # => 30
+(1..4).inject(2) {|sum, n| sum + n*n } # => 32
+
+# with initial operand
+(1..4).inject(2, :+) # => 12
+(1..4).inject(2.0, :+) # => 12.0
+('a'..'d').inject('foo', :+) # => "fooabcd"
+%w[a b c].inject(['x'], :push) # => ["x", "a", "b", "c"]
+(1..4).inject(Complex(2, 2), :+) # => (12+2i)
+(1..4).inject do |memo, element|
+  p "Memo: #{memo}; element: #{element}"
+  memo + element
+end # => 10
+\end{minted}

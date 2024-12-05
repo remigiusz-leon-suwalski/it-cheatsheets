@@ -1,5 +1,5 @@
 \documentclass{a5charun}
-\title{Ruby 3.3.0 notes, version 0.1.0}
+\title{Ruby 3.3.0 notes, version 0.2.0}
 \author{Leon Suwalski}
 
 \setlength{\multicolsep}{6.0pt plus 1.0pt minus 1.0pt}% 50% of original values
@@ -15,6 +15,15 @@
 
 \begin{document}
 \maketitle
+
+\section{Modules}
+\input{pages/module-enumerable}
+
+\section{Classes}
+\input{pages/class-array}
+\input{pages/class-string}
+
+\newpage
 
 If you check the list of methods on our String above you see that in Ruby we can have methods that end with a question mark ?. What’s up with that?
 By convention, in Ruby, these methods return either true or false. For example, we can ask a number if it is even or odd:
@@ -34,12 +43,17 @@ Bang methods end with an exlamation mark, and often modify the object they are c
 \input{pages/require-sets}
 % DOES NOT REQUIRE! Math.sqrt(16)
 
-
 \section{Control flow}
 \input{pages/flow-conditionals}
 \input{pages/flow-loops}
 
-\end{document}
+
+
+\section{To be done later}
+\begin{minted}{ruby}
+[*1..n].inject(:*)
+(1..n).reduce(1,:*)
+
 
 return false if num <= 1 || num % 2 == 0 || num % 3 == 0 
 str1.chars.last(str2.size) == str2.chars
@@ -76,35 +90,6 @@ def consecutive_fibonacci_numbers
   end
 end
 
-\section{Built-in types}
-We start with common built-in data types.
-
-Comparison operators are \mintinline{ruby}{<}, \mintinline{ruby}{<=}, \mintinline{ruby}{<=>}, \mintinline{ruby}{==} (aliased as \mintinline{ruby}{===}), \mintinline{ruby}{>}, \mintinline{ruby}{>=}.
-
-\mintinline{ruby}{.ceil} and \mintinline{ruby}{.floor} are functions known in math as $\lfloor x \rfloor$ and $\lceil x \rceil$ respectively.
-There are \mintinline{ruby}{.round} and  \mintinline{ruby}{.truncate} as well.
-Both classes support \mintinline{ruby}{.divmod} (quotient and reminder), \mintinline{ruby}{.fdiv} (float result of division) and \mintinline{ruby}{%} (modulo).
-Only integers support \mintinline{ruby}{.div} and \mintinline{ruby}{remainder}.
-
-\mintinline{ruby}{.digits} is an array of (base-10, by default) digits of an Integer.
-\mintinline{ruby}{.odd?} and \mintinline{ruby}{.even?} are self explanatory.
-\mintinline{ruby}{.gcd} stands for greatest common divisor, \mintinline{ruby}{.lcm} for lowest common multiple (and there is \mintinline{ruby}{.gcdlcm} too).
-They are all Integer specific.
-
-\mintinline{ruby}{&}, \mintinline{ruby}{|}, \mintinline{ruby}{^} are bitwise AND, OR, XOR;
-\mintinline{ruby}{<<}, \mintinline{ruby}{>>} denote bit-shifts.
-
-\mintinline{ruby}{.size} gives the number of bytes in the machine representation, depends on the system and makes no sense for floats.
-
-It's possible to convert between types with \mintinline{ruby}{.to_i}, \mintinline{ruby}{.to_f}, \mintinline{ruby}{.to_s} (to string).
-
-\subsection{Numeric types -- rationals}
-To convert float, use \mintinline{ruby}{.to_r} method
-
-Assignment operators = and shorthand +=, -= *= /=.
-
-Variable names should always be lowercase, and multiple words that make up a variable name should be split by an underscore. This is known as snake case.
-
 print vs puts, gets, gets.chomp
 
 if, elsif, else
@@ -138,9 +123,46 @@ l.grep(Numeric) # I knew. :D http://ruby-doc.org/core-2.3.1/Enumerable.html#meth
 s[(s.size-1)/2..s.size/2] # same as length ?
 s.chars.map.with_index { |s, i| (s * (i+1)).capitalize}.join("-")
 
-\end{minted}
-\end{document}
+
+\section{Built-in types}
+We start with common built-in data types.
+
+Comparison operators are \mintinline{ruby}{<}, \mintinline{ruby}{<=}, \mintinline{ruby}{<=>}, \mintinline{ruby}{==} (aliased as \mintinline{ruby}{===}), \mintinline{ruby}{>}, \mintinline{ruby}{>=}.
+
+\mintinline{ruby}{.ceil} and \mintinline{ruby}{.floor} are functions known in math as $\lfloor x \rfloor$ and $\lceil x \rceil$ respectively.
+There are \mintinline{ruby}{.round} and  \mintinline{ruby}{.truncate} as well.
+Both classes support \mintinline{ruby}{.divmod} (quotient and reminder), \mintinline{ruby}{.fdiv} (float result of division) and \mintinline{ruby}{%} (modulo).
+Only integers support \mintinline{ruby}{.div} and \mintinline{ruby}{remainder}.
+
+\mintinline{ruby}{.digits} is an array of (base-10, by default) digits of an Integer.
+\mintinline{ruby}{.odd?} and \mintinline{ruby}{.even?} are self explanatory.
+\mintinline{ruby}{.gcd} stands for greatest common divisor, \mintinline{ruby}{.lcm} for lowest common multiple (and there is \mintinline{ruby}{.gcdlcm} too).
+They are all Integer specific.
+
+\mintinline{ruby}{&}, \mintinline{ruby}{|}, \mintinline{ruby}{^} are bitwise AND, OR, XOR;
+\mintinline{ruby}{<<}, \mintinline{ruby}{>>} denote bit-shifts.
+
+\mintinline{ruby}{.size} gives the number of bytes in the machine representation, depends on the system and makes no sense for floats.
+
+It's possible to convert between types with \mintinline{ruby}{.to_i}, \mintinline{ruby}{.to_f}, \mintinline{ruby}{.to_s} (to string).
+
+\subsection{Numeric types -- rationals}
+To convert float, use \mintinline{ruby}{.to_r} method
+
+Assignment operators = and shorthand +=, -= *= /=.
+
+Variable names should always be lowercase, and multiple words that make up a variable name should be split by an underscore. This is known as snake case.
 
 https://www.theodinproject.com/lessons/ruby-variables
 http://ruby-for-beginners.rubymonstas.org/writing_classes/attribute_readers.html
 https://launchschool.com/books/ruby/read/basics
+\end{minted}
+
+\end{document}
+
+
+
+
+\end{minted}
+\end{document}
+
