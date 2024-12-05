@@ -1,0 +1,42 @@
+\subsection{klasa Complex}
+Objekt tej klasy jest liczbą zespoloną we współrzędnych kartezjańskich lub biegunowych.
+Można je dodawać, odejmować, mnożyć, dzielić i potęgować i sprzęgać (\textbf{conj}, \textbf{conjugate}).
+Porównywanie (\mintinline{ruby}{<=>}) ma sens tylko, gdy obydwie liczby są rzeczywiste; w przeciwnym razie zwraca \mintinline{ruby}{nil}.
+Sprawdzanie równości (\mintinline{ruby}{==}) ma sens zawsze.
+\begin{minted}{ruby}
+3 + 4 * Complex::I
+Complex.rect(3, 4)
+3+4i # => (3+4i)
+
+Complex.polar(1, Math::PI/3) # => (0.5000000000000001+0.8660254037844386i)
+
+Complex.rect(1, 2).conj # => (1-2i)
+\end{minted}
+
+Liczby zespolone można zmieniać w zespolone (\textbf{to\_c}), rzeczywiste (\textbf{to\_f}), całkowite (\textbf{to\_i}), wymierne (\textbf{to\_r}) albo łańcuchy znaków (\textbf{to\_s}).
+
+\textbf{real}, \textbf{imag} (znane też jako \textbf{imaginary}) zwraca część rzeczywistą i urojoną.
+\textbf{rect} (znane też jako \textbf{rectangular}) zwraca obydwie części.
+\begin{minted}{ruby}
+Complex(9, -4).real # => 9
+Complex(9, -4).imag # => -4
+Complex(9, -4).rect # => [9, -4]
+\end{minted}
+
+\textbf{abs} (znane też jako \textbf{magnitude}) zwraca moduł, wartość bezwzględną; \textbf{abs2} zwraca jego kwadrat.
+\textbf{arg} (znane też jako \textbf{angle}, \textbf{phase}) zwraca argument (kąt) w radianach.
+\textbf{polar} zwraca moduł i argument.
+\begin{minted}{ruby}
+Complex.polar(3, Math::PI/2).abs  # => 3.0
+Complex.polar(3, Math::PI/2).arg  # => 1.57079632679489660
+\end{minted}
+
+% TODO * ** + - / <=> ==
+
+\textbf{Do zrobienia później}.
+denominator, numerator.
+fdiv.
+hash.
+finite?, infinite?
+inspect.
+rationalize.

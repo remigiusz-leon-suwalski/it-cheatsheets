@@ -1,10 +1,10 @@
-\subsection{module Enumerable}
+\subsection{moduł Enumerable}
 % https://ruby-doc.org/3.3.6/Enumerable.html#method-i-inject
-\mintinline{ruby}{ARGF}, \mintinline{ruby}{Array}, \mintinline{ruby}{Dir}, \mintinline{ruby}{Enumerator}, \mintinline{ruby}{ENV}, \mintinline{ruby}{Hash}, \mintinline{ruby}{IO}, \mintinline{ruby}{Range}, \mintinline{ruby}{Struct} core classes and \mintinline{ruby}{CSV}, \mintinline{ruby}{Set} standard library classes include or extend Enumerable.
+Rdzenne klasy \mintinline{ruby}{ARGF}, \mintinline{ruby}{Array}, \mintinline{ruby}{Dir}, \mintinline{ruby}{Enumerator}, \mintinline{ruby}{ENV}, \mintinline{ruby}{Hash}, \mintinline{ruby}{IO}, \mintinline{ruby}{Range}, \mintinline{ruby}{Struct} oraz klasy biblioteki podstawowej \mintinline{ruby}{CSV}, \mintinline{ruby}{Set} rozszerzają \mintinline{ruby}{Enumerable}.
 
-\mintinline{ruby}{all} (\mintinline{ruby}{any}) checks whether every (at least one) element is truthy:
+\mintinline{ruby}{all} (\mintinline{ruby}{any}) sprawdza, czy każdy (pewne) elementy są prawdziwe:
 \begin{minted}{ruby}
-# no argument, no block
+# bez argumentu, bez bloku
 (1..4).all? # => true
 (1..4).any? # => true
 %w[a b c d].all? # => true
@@ -15,7 +15,7 @@
 [].all? # => true
 [].any?
 
-# argument, no block
+# z argumentem
 (1..4).all?(Integer) # => true
 (1..4).all?(Numeric) # => true
 (1..4).all?(Float)
@@ -35,7 +35,7 @@
 [].all?(Integer) # => true
 [].any?(Integer)
 
-# block
+# z blokiem
 (1..4).all? {|element| element < 5 } # => true
 (1..4).all? {|element| element < 4 }
 (1..4).any? {|element| element < 2 } # => true

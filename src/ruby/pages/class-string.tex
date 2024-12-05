@@ -32,7 +32,6 @@ scrub: Returns a copy of self with each invalid byte replaced with a given chara
 
 unicode\_normalize: Returns a copy of self with each character Unicode-normalized.
 
-encode: Returns a copy of self with all characters transcoded from one given encoding into another.
 
 Substitution
 
@@ -46,7 +45,11 @@ gsub: Returns a copy of self with each substring that matches a given pattern re
 
 succ, next: Returns the string that is the successor to self.
 
-reverse: Returns a copy of self with its characters in reverse order.
+\textbf{reverse} zwraca wszystkie znaki od tyłu (podobnie jak dla tablic).
+Ma wersję z wykrzyknikiem.
+\begin{minted}{ruby}
+'stressed'.reverse # => "desserts"
+\end{minted}
 
 tr: Returns a copy of self with specified characters replaced with specified replacement characters.
 

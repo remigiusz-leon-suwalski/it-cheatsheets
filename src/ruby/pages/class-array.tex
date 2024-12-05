@@ -1,30 +1,101 @@
 \subsection{class Array}
+Array -- tablica.
 % https://ruby-doc.org/3.3.6/Array.html#method-i-join
 
-Methods for Converting
-map, collect: Returns an array containing the block return-value for each element.
+\subsubsection{Methods for Creating an Array}
+Tekst.
 
-map!, collect!: Replaces each element with a block return-value.
+\subsubsection{Methods for Querying}
+Tekst.
 
+\subsubsection{Methods for Comparing}
+Tekst.
+
+\subsubsection{Methods for Fetching}
+{\footnotesize
+[]: Returns one or more elements.
+fetch: Returns the element at a given offset.
+first: Returns one or more leading elements.
+last: Returns one or more trailing elements.
+}
+
+\textbf{max}, \textbf{min}, \textbf{minmax} zwracają najmniejszy i/lub największy element(y).
+\begin{minted}{ruby}
+[0, 1, 2].max # => 2
+[0, 1, 2, 3].max(3) # => [3, 2, 1]
+[0, 1, 2, 3].max(6) # => [3, 2, 1, 0]
+['2', '33', '000'].min {|a, b| a.size <=> b.size } # => "2"
+[0, 1, 2].minmax # => [0, 2]
+\end{minted}
+    
+{\footnotesize
+assoc: Returns the first element that is an array whose first element == a given object.
+rassoc: Returns the first element that is an array whose second element == a given object.
+at: Returns the element at a given offset.
+values\_at: Returns the elements at given offsets.
+dig: Returns the object in nested objects that is specified by a given index and additional arguments.
+drop: Returns trailing elements as determined by a given index.
+take: Returns leading elements as determined by a given index.
+drop\_while: Returns trailing elements as determined by a given block.
+take\_while: Returns leading elements as determined by a given block.
+slice: Returns consecutive elements as determined by a given argument.
+sort: Returns all elements in an order determined by <=> or a given block.
+}
+
+\textbf{reverse} zwraca wszystkie elementy od tyłu.
+Ma wersję z wykrzyknikiem.
+\begin{minted}{ruby}
+['foo', 'bar', 'two'].reverse # => ["two", "bar", "foo"]
+\end{minted}
+
+{\footnotesize
+compact: Returns an array containing all non-nil elements.
+select, filter: Returns an array containing elements selected by a given block.
+uniq: Returns an array containing non-duplicate elements.
+rotate: Returns all elements with some rotated from one end to the other.
+bsearch: Returns an element selected via a binary search as determined by a given block.
+bsearch\_index: Returns the index of an element selected via a binary search as determined by a given block.
+sample: Returns one or more random elements.
+shuffle: Returns elements in a random order.
+}
+
+\subsubsection{Methods for Assigning}
+Tekst.
+
+\subsubsection{Methods for Deleting}
+Tekst.
+
+\subsubsection{Methods for Combining}
+Tekst.
+
+\subsubsection{Methods for Iterating}
+Tekst.
+
+\subsubsection{Methods for Converting}
+\textbf{map}, \textbf{collect} zwraca nową tablicę wartości funkcji dla każdego elementu starej tablicy.
+\textbf{collect} jest aliasem.
+Obydwie metody mają swoje wersje z wykrzyknikiem (\textbf{map!}, \textbf{collect!}).
+\begin{minted}{ruby}
+a = [:foo, 'bar', 2].map { |element| element.class } # => [Symbol, String, Integer]
+\end{minted}
+
+{\footnotesize
 flatten: Returns an array that is a recursive flattening of self.
-
 flatten!: Replaces each nested array in self with the elements from that array.
-
 inspect, to\_s: Returns a new String containing the elements.
+}
 
-\textbf{join} returns a new String containing the elements joined by the field separator.
+\textbf{join} łączy argumenty (domyślnie: niczym) i zwraca nowy łańcuch znaków (String).
 \begin{minted}{ruby}
 [:foo, 'bar', 2].join # => "foobar2"
 [:foo, 'bar', 2].join(" ") # => "foo bar 2"
 [:foo, [:bar, [:baz, :bat]]].join # => "foobarbazbat"
 \end{minted}
 
+{\footnotesize
 to\_a: Returns self or a new array containing all elements.
-
 to\_ary: Returns self.
-
 to\_h: Returns a new hash formed from the elements.
-
 transpose: Transposes self, which must be an array of arrays.
-
 zip: Returns a new array of arrays containing self and given arrays; follow the link for details.
+}
