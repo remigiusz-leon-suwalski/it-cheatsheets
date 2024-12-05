@@ -1,9 +1,129 @@
-\subsection{class String}
+\subsection{klasa String}
 % https://ruby-doc.org/3.3.6/String.html#method-i-split
-A \mintinline{ruby}{String} object has an arbitrary sequence of bytes, typically representing text or binary data.
-Class \mintinline{ruby}{String} includes module \mintinline{ruby}{Comparable}.
-In general, if there exist both bang and non-bang version of method, the bang! mutates and the non-bang! does not. However, a method without a bang can also mutate, such as \mintinline{ruby}{String#replace}.
-\mintinline{ruby}{String} objects differ from \mintinline{ruby}{Symbol} objects in that Symbol objects are designed to be used as identifiers, instead of text or data.
+Obiekt tej klasy jest ciągiem znaków, zazwyczaj przedstawiającym tekst.
+Niektóre metody bez wykrzykników mutują argumenty, na przykład \mintinline{ruby}{String#replace}.
+Klasa \mintinline{ruby}{String} zawiera moduł \mintinline{ruby}{Comparable}.
+
+\subsubsection{Methods for Querying}
+\textbf{length} (znane też jako \textbf{size}) liczy znaki, nie bajty (porównaj z klasą \mintinline{ruby}{Enumerable}).
+
+empty?: Returns true if self.length is zero; false otherwise.
+
+bytesize: Returns the count of bytes.
+
+count: Returns the count of substrings matching given strings.
+
+Substrings
+
+% #=~: Returns the index of the first substring that matches a given Regexp or other object; returns nil if no match is found.
+
+index: Returns the index of the first occurrence of a given substring; returns nil if none found.
+
+rindex: Returns the index of the last occurrence of a given substring; returns nil if none found.
+
+include?: Returns true if the string contains a given substring; false otherwise.
+
+match: Returns a MatchData object if the string matches a given Regexp; nil otherwise.
+
+match?: Returns true if the string matches a given Regexp; false otherwise.
+
+\textbf{start\_with?} (\textbf{end\_with?}) zwraca, czy jeden łańcuch znaków zaczyna się (kończy się) pewnym innym łańcuchem.
+\begin{minted}{ruby}
+'hello'.start_with?('hell') # => true
+'hello'.start_with?(/H/i) # => true
+'hello'.start_with?('heaven', 'hell') # => true
+'hello'.start_with?('heaven', 'paradise')
+'hello'.end_with?('ello') # => true
+'hello'.end_with?('heaven', 'ello') # => true
+'hello'.end_with?('heaven', 'paradise')
+\end{minted}
+
+Encodings
+
+encoding: Returns the Encoding object that represents the encoding of the string.
+
+unicode\_normalized?: Returns true if the string is in Unicode normalized form; false otherwise.
+
+valid\_encoding?: Returns true if the string contains only characters that are valid for its encoding.
+
+ascii\_only?: Returns true if the string has only ASCII characters; false otherwise.
+
+Other
+
+sum: Returns a basic checksum for the string: the sum of each byte.
+
+hash: Returns the integer hash code.
+
+Methods for Comparing
+==, ===: Returns true if a given other string has the same content as self.
+
+eql?: Returns true if the content is the same as the given other string.
+
+% #<=>: Returns -1, 0, or 1 as a given other string is smaller than, equal to, or larger than self.
+
+casecmp: Ignoring case, returns -1, 0, or 1 as a given other string is smaller than, equal to, or larger than self.
+
+casecmp?: Returns true if the string is equal to a given string after Unicode case folding; false otherwise.
+
+Methods for Modifying a String
+Each of these methods modifies self.
+
+Insertion
+
+insert: Returns self with a given string inserted at a given offset.
+
+<<: Returns self concatenated with a given string or integer.
+
+Substitution
+
+sub!: Replaces the first substring that matches a given pattern with a given replacement string; returns self if any changes, nil otherwise.
+
+gsub!: Replaces each substring that matches a given pattern with a given replacement string; returns self if any changes, nil otherwise.
+
+succ!, next!: Returns self modified to become its own successor.
+
+replace: Returns self with its entire content replaced by a given string.
+
+reverse!: Returns self with its characters in reverse order.
+
+setbyte: Sets the byte at a given integer offset to a given value; returns the argument.
+
+tr!: Replaces specified characters in self with specified replacement characters; returns self if any changes, nil otherwise.
+
+tr\_s!: Replaces specified characters in self with specified replacement characters, removing duplicates from the substrings that were modified; returns self if any changes, nil otherwise.
+
+
+Encoding
+
+encode!: Returns self with all characters transcoded from one given encoding into another.
+
+unicode\_normalize!: Unicode-normalizes self; returns self.
+
+scrub!: Replaces each invalid byte with a given character; returns self.
+
+force\_encoding: Changes the encoding to a given encoding; returns self.
+
+Deletion
+
+clear: Removes all content, so that self is empty; returns self.
+
+slice!, []=: Removes a substring determined by a given index, start/length, range, regexp, or substring.
+
+squeeze!: Removes contiguous duplicate characters; returns self.
+
+delete!: Removes characters as determined by the intersection of substring arguments.
+
+lstrip!: Removes leading whitespace; returns self if any changes, nil otherwise.
+
+rstrip!: Removes trailing whitespace; returns self if any changes, nil otherwise.
+
+strip!: Removes leading and trailing whitespace; returns self if any changes, nil otherwise.
+
+chomp!: Removes trailing record separator, if found; returns self if any changes, nil otherwise.
+
+chop!: Removes trailing newline characters if found; otherwise removes the last character; returns self if any changes, nil otherwise.
+
+
 
 \subsubsection{Methods for converting to new String}
 Each of these methods returns a new String based on self, often just a modified copy of self.
@@ -57,7 +177,8 @@ tr\_s: Returns a copy of self with specified characters replaced with specified 
 
 %: Returns the string resulting from formatting a given object into self
 
-Casing.
+\textbf{capitalize}, \textbf{downcase}, \textbf{upcase}, \textbf{swapcase} zmieniają wielkość liter.
+Mają wersje z wykrzyknikiem.
 \begin{minted}{ruby}
 'hello World!'.capitalize # => "Hello world!"
 'hello World!'.downcase   # => "hello world!"
@@ -94,6 +215,8 @@ chr: Returns the first character.
 Duplication
 
 to\_s, to\_str: If self is a subclass of String, returns self copied into a String; otherwise, returns self.
+
+
 
 
 \subsubsection{Methods for converting to non-String}
@@ -171,3 +294,22 @@ Strings and Symbols
 inspect: Returns copy of self, enclosed in double-quotes, with special characters escaped.
 
 % to_sym, intern: Returns the symbol corresponding to self.
+
+
+
+
+Methods for Iterating
+each\_byte: Calls the given block with each successive byte in self.
+
+each\_char: Calls the given block with each successive character in self.
+
+each\_codepoint: Calls the given block with each successive integer codepoint in self.
+
+each\_grapheme\_cluster: Calls the given block with each successive grapheme cluster in self.
+
+each\_line: Calls the given block with each successive line in self, as determined by a given record separator.
+
+upto: Calls the given block with each string value returned by successive calls to succ.
+
+
+

@@ -6,8 +6,20 @@ Array -- tablica.
 Tekst.
 
 \subsubsection{Methods for Querying}
-Tekst.
+\textbf{length} (znane też jako \textbf{size}) zwraca liczbę elementów tablicy.
 
+
+include?: Returns whether any element == a given object.
+empty?: Returns whether there are no elements.
+all?: Returns whether all elements meet a given criterion.
+any?: Returns whether any element meets a given criterion.
+none?: Returns whether no element == a given object.
+one?: Returns whether exactly one element == a given object.
+count: Returns the count of elements that meet a given criterion.
+find\_index, index: Returns the index of the first element that meets a given criterion.
+rindex: Returns the index of the last element that meets a given criterion.
+
+hash: Returns the integer hash code.
 \subsubsection{Methods for Comparing}
 Tekst.
 
@@ -19,14 +31,7 @@ first: Returns one or more leading elements.
 last: Returns one or more trailing elements.
 }
 
-\textbf{max}, \textbf{min}, \textbf{minmax} zwracają najmniejszy i/lub największy element(y).
-\begin{minted}{ruby}
-[0, 1, 2].max # => 2
-[0, 1, 2, 3].max(3) # => [3, 2, 1]
-[0, 1, 2, 3].max(6) # => [3, 2, 1, 0]
-['2', '33', '000'].min {|a, b| a.size <=> b.size } # => "2"
-[0, 1, 2].minmax # => [0, 2]
-\end{minted}
+min, max, minmax zachowują się jak dla Enumerable.
     
 {\footnotesize
 assoc: Returns the first element that is an array whose first element == a given object.
@@ -50,7 +55,16 @@ Ma wersję z wykrzyknikiem.
 
 {\footnotesize
 compact: Returns an array containing all non-nil elements.
-select, filter: Returns an array containing elements selected by a given block.
+}
+
+\textbf{select} (znane też jako \textbf{filter}) zwraca te elementy tablicy, które spełniają dany warunek.
+Ma wersję z wykrzyknikiem.
+\begin{minted}{ruby}
+[:foo, 'bar', 2, :bam].select { |element| element.to_s.start_with?('b') } # => ["bar", :bam]
+[3, -14, 515].select(&:positive?) # => [3, 515]
+\end{minted}
+
+{\footnotesize
 uniq: Returns an array containing non-duplicate elements.
 rotate: Returns all elements with some rotated from one end to the other.
 bsearch: Returns an element selected via a binary search as determined by a given block.

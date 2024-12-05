@@ -1,0 +1,129 @@
+\subsection{klasa Integer}
+Obiekt tej klasy przedstawia liczbę całkowitą.
+Klasa dziedziczy z klasy \mintinline{ruby}{Numeric}.
+
+% Querying
+% allbits?: Returns whether all bits in self are set.
+% anybits?: Returns whether any bits in self are set.
+% nobits?: Returns whether no bits in self are set.
+
+% Comparing
+% #<: Returns whether self is less than the given value.
+% #<=: Returns whether self is less than or equal to the given value.
+% #<=>: Returns a number indicating whether self is less than, equal to, or greater than the given value.
+% == (aliased as ===): Returns whether self is equal to the given
+% value.
+% #>: Returns whether self is greater than the given value.
+% #>=: Returns whether self is greater than or equal to the given value.
+
+% Converting
+% ::sqrt: Returns the integer square root of the given value.
+% ::try_convert: Returns the given value converted to an Integer.
+% % (aliased as modulo): Returns self modulo the given value.
+% #&: Returns the bitwise AND of self and the given value.
+% *: Returns the product of self and the given value.
+% **: Returns the value of self raised to the power of the given value.
+% +: Returns the sum of self and the given value.
+% -: Returns the difference of self and the given value.
+% #/: Returns the quotient of self and the given value.
+% <<: Returns the value of self after a leftward bit-shift.
+% >>: Returns the value of self after a rightward bit-shift.
+% []: Returns a slice of bits from self.
+% #^: Returns the bitwise EXCLUSIVE OR of self and the given value.
+% ceil: Returns the smallest number greater than or equal to self.
+% chr: Returns a 1-character string containing the character represented by the value of self.
+
+\textbf{digits} zwraca tablicę cyfr, domyślnie przy podstawie 10.
+Nie ma sensu dla ujemnych liczb i podstaw mniejszych niż 2.
+\begin{minted}{ruby}
+12345.digits      # => [5, 4, 3, 2, 1]
+12345.digits(7)   # => [4, 6, 6, 0, 5]
+12345.digits(100) # => [45, 23, 1]
+\end{minted}
+
+% div: Returns the integer result of dividing self by the given value.
+% divmod: Returns a 2-element array containing the quotient and remainder results of dividing self by the given value.
+% fdiv: Returns the Float result of dividing self by the given value.
+% floor: Returns the greatest number smaller than or equal to self.
+% pow: Returns the modular exponentiation of self.
+% pred: Returns the integer predecessor of self.
+% remainder: Returns the remainder after dividing self by the given value.
+% round: Returns self rounded to the nearest value with the given precision.
+% succ (aliased as next): Returns the integer successor of self.
+% to_f: Returns self converted to a Float.
+% to_s (aliased as inspect): Returns a string containing the place-value representation of self in the given radix.
+% truncate: Returns self truncated to the given precision.
+% #|: Returns the bitwise OR of self and the given value.
+
+% Other
+% downto: Calls the given block with each integer value from self down to the given value.
+% times: Calls the given block self times with each integer in (0..self-1).
+% upto: Calls the given block with each integer value from self up to the given value.
+
+% ::sqrt
+% ::try_convert
+% #%
+% #&
+% #*
+% #**
+% #+
+% #-
+% #-@
+% #/
+% #<
+% #<<
+% #<=
+% #<=>
+% #==
+% #===
+% #>
+% #>=
+% #>>
+% #[]
+% #^
+% #abs
+% #allbits?
+% #anybits?
+% #bit_length
+% #ceil
+% #ceildiv
+% #chr
+% #coerce
+% #denominator
+% #digits
+% #div
+% #divmod
+% #downto
+% #even?
+% #fdiv
+% #floor
+% #gcd
+% #gcdlcm
+% #inspect
+% #integer?
+% #lcm
+% #magnitude
+% #modulo
+% #next
+% #nobits?
+% #numerator
+% #odd?
+% #ord
+% #pow
+% #pred
+% #rationalize
+% #remainder
+% #round
+% #size
+% #succ
+% #times
+% #to_f
+% #to_i
+% #to_int
+% #to_r
+% #to_s
+% #truncate
+% #upto
+% #zero?
+% #|
+% #~
