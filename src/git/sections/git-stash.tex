@@ -7,17 +7,20 @@ It's a bit differs a bit from other Git commands as it has no short options.
 # the same as 'git stash'
 git stash push
 
-# list the stash entries
-git stash list
-
 # inverse operation of 'git stash push':
 # remove a single stashed state,
 # apply it to the working tree.
 git stash pop
 
+# remove a single stash entry
+git stash drop
+
 # keep a single stashed state,
 # apply it to the working tree.
 git stash apply
+
+# list the stash entries
+git stash list
 \end{minted}
 
 %
